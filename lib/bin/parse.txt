@@ -1,0 +1,1779 @@
+{
+	"root": {
+		"type": "15",
+		"typeLabel": "CompilationUnit",
+		"pos": "0",
+		"length": "4568",
+		"children": [
+			{
+				"type": "35",
+				"typeLabel": "PackageDeclaration",
+				"pos": "0",
+				"length": "39",
+				"children": [
+					{
+						"type": "40",
+						"label": "com.bericotech.clavin.resolver",
+						"typeLabel": "QualifiedName",
+						"pos": "8",
+						"length": "30",
+						"children": []
+					}
+				]
+			},
+			{
+				"type": "26",
+				"typeLabel": "ImportDeclaration",
+				"pos": "41",
+				"length": "58",
+				"children": [
+					{
+						"type": "40",
+						"label": "com.bericotech.clavin.extractor.LocationOccurrence",
+						"typeLabel": "QualifiedName",
+						"pos": "48",
+						"length": "50",
+						"children": []
+					}
+				]
+			},
+			{
+				"type": "26",
+				"typeLabel": "ImportDeclaration",
+				"pos": "100",
+				"length": "43",
+				"children": [
+					{
+						"type": "40",
+						"label": "org.apache.lucene.document.Document",
+						"typeLabel": "QualifiedName",
+						"pos": "107",
+						"length": "35",
+						"children": []
+					}
+				]
+			},
+			{
+				"type": "26",
+				"typeLabel": "ImportDeclaration",
+				"pos": "145",
+				"length": "47",
+				"children": [
+					{
+						"type": "40",
+						"label": "com.bericotech.clavin.gazetteer.GeoName",
+						"typeLabel": "QualifiedName",
+						"pos": "152",
+						"length": "39",
+						"children": []
+					}
+				]
+			},
+			{
+				"type": "26",
+				"typeLabel": "ImportDeclaration",
+				"pos": "194",
+				"length": "102",
+				"children": [
+					{
+						"type": "40",
+						"label": "com.bericotech.clavin.util.DamerauLevenshtein.damerauLevenshteinDistanceCaseInsensitive",
+						"typeLabel": "QualifiedName",
+						"pos": "208",
+						"length": "87",
+						"children": []
+					}
+				]
+			},
+			{
+				"type": "55",
+				"typeLabel": "TypeDeclaration",
+				"pos": "1395",
+				"length": "3172",
+				"children": [
+					{
+						"type": "29",
+						"typeLabel": "Javadoc",
+						"pos": "1395",
+						"length": "294",
+						"children": [
+							{
+								"type": "65",
+								"typeLabel": "TagElement",
+								"pos": "1402",
+								"length": "280",
+								"children": [
+									{
+										"type": "66",
+										"label": "Object produced by resolving a location name against gazetteer",
+										"typeLabel": "TextElement",
+										"pos": "1402",
+										"length": "62",
+										"children": []
+									},
+									{
+										"type": "66",
+										"label": "records.",
+										"typeLabel": "TextElement",
+										"pos": "1468",
+										"length": "8",
+										"children": []
+									},
+									{
+										"type": "66",
+										"label": "Encapsulates a ",
+										"typeLabel": "TextElement",
+										"pos": "1484",
+										"length": "15",
+										"children": []
+									},
+									{
+										"type": "65",
+										"label": "@link",
+										"typeLabel": "TagElement",
+										"pos": "1499",
+										"length": "15",
+										"children": [
+											{
+												"type": "42",
+												"label": "GeoName",
+												"typeLabel": "SimpleName",
+												"pos": "1506",
+												"length": "7",
+												"children": []
+											}
+										]
+									},
+									{
+										"type": "66",
+										"label": " object representing the best match",
+										"typeLabel": "TextElement",
+										"pos": "1514",
+										"length": "35",
+										"children": []
+									},
+									{
+										"type": "66",
+										"label": "between a given location name and gazetter record, along with some",
+										"typeLabel": "TextElement",
+										"pos": "1553",
+										"length": "66",
+										"children": []
+									},
+									{
+										"type": "66",
+										"label": "information about the geographic entity resolution process.",
+										"typeLabel": "TextElement",
+										"pos": "1623",
+										"length": "59",
+										"children": []
+									}
+								]
+							}
+						]
+					},
+					{
+						"type": "83",
+						"label": "public",
+						"typeLabel": "Modifier",
+						"pos": "1690",
+						"length": "6",
+						"children": []
+					},
+					{
+						"type": "42",
+						"label": "ResolvedLocation",
+						"typeLabel": "SimpleName",
+						"pos": "1703",
+						"length": "16",
+						"children": []
+					},
+					{
+						"type": "23",
+						"typeLabel": "FieldDeclaration",
+						"pos": "1779",
+						"length": "23",
+						"children": [
+							{
+								"type": "83",
+								"label": "public",
+								"typeLabel": "Modifier",
+								"pos": "1779",
+								"length": "6",
+								"children": []
+							},
+							{
+								"type": "43",
+								"label": "GeoName",
+								"typeLabel": "SimpleType",
+								"pos": "1786",
+								"length": "7",
+								"children": [
+									{
+										"type": "42",
+										"label": "GeoName",
+										"typeLabel": "SimpleName",
+										"pos": "1786",
+										"length": "7",
+										"children": []
+									}
+								]
+							},
+							{
+								"type": "59",
+								"typeLabel": "VariableDeclarationFragment",
+								"pos": "1794",
+								"length": "7",
+								"children": [
+									{
+										"type": "42",
+										"label": "geoname",
+										"typeLabel": "SimpleName",
+										"pos": "1794",
+										"length": "7",
+										"children": []
+									}
+								]
+							}
+						]
+					},
+					{
+						"type": "23",
+						"typeLabel": "FieldDeclaration",
+						"pos": "1862",
+						"length": "35",
+						"children": [
+							{
+								"type": "83",
+								"label": "public",
+								"typeLabel": "Modifier",
+								"pos": "1862",
+								"length": "6",
+								"children": []
+							},
+							{
+								"type": "43",
+								"label": "LocationOccurrence",
+								"typeLabel": "SimpleType",
+								"pos": "1869",
+								"length": "18",
+								"children": [
+									{
+										"type": "42",
+										"label": "LocationOccurrence",
+										"typeLabel": "SimpleName",
+										"pos": "1869",
+										"length": "18",
+										"children": []
+									}
+								]
+							},
+							{
+								"type": "59",
+								"typeLabel": "VariableDeclarationFragment",
+								"pos": "1888",
+								"length": "8",
+								"children": [
+									{
+										"type": "42",
+										"label": "location",
+										"typeLabel": "SimpleName",
+										"pos": "1888",
+										"length": "8",
+										"children": []
+									}
+								]
+							}
+						]
+					},
+					{
+						"type": "23",
+						"typeLabel": "FieldDeclaration",
+						"pos": "1980",
+						"length": "26",
+						"children": [
+							{
+								"type": "83",
+								"label": "public",
+								"typeLabel": "Modifier",
+								"pos": "1980",
+								"length": "6",
+								"children": []
+							},
+							{
+								"type": "43",
+								"label": "String",
+								"typeLabel": "SimpleType",
+								"pos": "1987",
+								"length": "6",
+								"children": [
+									{
+										"type": "42",
+										"label": "String",
+										"typeLabel": "SimpleName",
+										"pos": "1987",
+										"length": "6",
+										"children": []
+									}
+								]
+							},
+							{
+								"type": "59",
+								"typeLabel": "VariableDeclarationFragment",
+								"pos": "1994",
+								"length": "11",
+								"children": [
+									{
+										"type": "42",
+										"label": "matchedName",
+										"typeLabel": "SimpleName",
+										"pos": "1994",
+										"length": "11",
+										"children": []
+									}
+								]
+							}
+						]
+					},
+					{
+						"type": "23",
+						"typeLabel": "FieldDeclaration",
+						"pos": "2055",
+						"length": "21",
+						"children": [
+							{
+								"type": "83",
+								"label": "public",
+								"typeLabel": "Modifier",
+								"pos": "2055",
+								"length": "6",
+								"children": []
+							},
+							{
+								"type": "39",
+								"label": "boolean",
+								"typeLabel": "PrimitiveType",
+								"pos": "2062",
+								"length": "7",
+								"children": []
+							},
+							{
+								"type": "59",
+								"typeLabel": "VariableDeclarationFragment",
+								"pos": "2070",
+								"length": "5",
+								"children": [
+									{
+										"type": "42",
+										"label": "fuzzy",
+										"typeLabel": "SimpleName",
+										"pos": "2070",
+										"length": "5",
+										"children": []
+									}
+								]
+							}
+						]
+					},
+					{
+						"type": "23",
+						"typeLabel": "FieldDeclaration",
+						"pos": "2125",
+						"length": "24",
+						"children": [
+							{
+								"type": "83",
+								"label": "public",
+								"typeLabel": "Modifier",
+								"pos": "2125",
+								"length": "6",
+								"children": []
+							},
+							{
+								"type": "39",
+								"label": "float",
+								"typeLabel": "PrimitiveType",
+								"pos": "2132",
+								"length": "5",
+								"children": []
+							},
+							{
+								"type": "59",
+								"typeLabel": "VariableDeclarationFragment",
+								"pos": "2138",
+								"length": "10",
+								"children": [
+									{
+										"type": "42",
+										"label": "confidence",
+										"typeLabel": "SimpleName",
+										"pos": "2138",
+										"length": "10",
+										"children": []
+									}
+								]
+							}
+						]
+					},
+					{
+						"type": "31",
+						"typeLabel": "MethodDeclaration",
+						"pos": "2159",
+						"length": "1198",
+						"children": [
+							{
+								"type": "29",
+								"typeLabel": "Javadoc",
+								"pos": "2159",
+								"length": "275",
+								"children": [
+									{
+										"type": "65",
+										"typeLabel": "TagElement",
+										"pos": "2170",
+										"length": "161",
+										"children": [
+											{
+												"type": "66",
+												"label": "Builds a ",
+												"typeLabel": "TextElement",
+												"pos": "2170",
+												"length": "9",
+												"children": []
+											},
+											{
+												"type": "65",
+												"label": "@link",
+												"typeLabel": "TagElement",
+												"pos": "2179",
+												"length": "24",
+												"children": [
+													{
+														"type": "42",
+														"label": "ResolvedLocation",
+														"typeLabel": "SimpleName",
+														"pos": "2186",
+														"length": "16",
+														"children": []
+													}
+												]
+											},
+											{
+												"type": "66",
+												"label": " from a document retrieved from",
+												"typeLabel": "TextElement",
+												"pos": "2203",
+												"length": "31",
+												"children": []
+											},
+											{
+												"type": "66",
+												"label": "the Lucene index representing the geographic entity resolved",
+												"typeLabel": "TextElement",
+												"pos": "2242",
+												"length": "60",
+												"children": []
+											},
+											{
+												"type": "66",
+												"label": "from a location name.",
+												"typeLabel": "TextElement",
+												"pos": "2310",
+												"length": "21",
+												"children": []
+											}
+										]
+									},
+									{
+										"type": "65",
+										"label": "@param",
+										"typeLabel": "TagElement",
+										"pos": "2347",
+										"length": "79",
+										"children": [
+											{
+												"type": "42",
+												"label": "luceneDoc",
+												"typeLabel": "SimpleName",
+												"pos": "2354",
+												"length": "9",
+												"children": []
+											},
+											{
+												"type": "66",
+												"label": "     document from Lucene index representing a gazetteer record",
+												"typeLabel": "TextElement",
+												"pos": "2363",
+												"length": "63",
+												"children": []
+											}
+										]
+									}
+								]
+							},
+							{
+								"type": "83",
+								"label": "public",
+								"typeLabel": "Modifier",
+								"pos": "2439",
+								"length": "6",
+								"children": []
+							},
+							{
+								"type": "42",
+								"label": "ResolvedLocation",
+								"typeLabel": "SimpleName",
+								"pos": "2446",
+								"length": "16",
+								"children": []
+							},
+							{
+								"type": "44",
+								"typeLabel": "SingleVariableDeclaration",
+								"pos": "2463",
+								"length": "18",
+								"children": [
+									{
+										"type": "43",
+										"label": "Document",
+										"typeLabel": "SimpleType",
+										"pos": "2463",
+										"length": "8",
+										"children": [
+											{
+												"type": "42",
+												"label": "Document",
+												"typeLabel": "SimpleName",
+												"pos": "2463",
+												"length": "8",
+												"children": []
+											}
+										]
+									},
+									{
+										"type": "42",
+										"label": "luceneDoc",
+										"typeLabel": "SimpleName",
+										"pos": "2472",
+										"length": "9",
+										"children": []
+									}
+								]
+							},
+							{
+								"type": "44",
+								"typeLabel": "SingleVariableDeclaration",
+								"pos": "2483",
+								"length": "27",
+								"children": [
+									{
+										"type": "43",
+										"label": "LocationOccurrence",
+										"typeLabel": "SimpleType",
+										"pos": "2483",
+										"length": "18",
+										"children": [
+											{
+												"type": "42",
+												"label": "LocationOccurrence",
+												"typeLabel": "SimpleName",
+												"pos": "2483",
+												"length": "18",
+												"children": []
+											}
+										]
+									},
+									{
+										"type": "42",
+										"label": "location",
+										"typeLabel": "SimpleName",
+										"pos": "2502",
+										"length": "8",
+										"children": []
+									}
+								]
+							},
+							{
+								"type": "44",
+								"typeLabel": "SingleVariableDeclaration",
+								"pos": "2512",
+								"length": "13",
+								"children": [
+									{
+										"type": "39",
+										"label": "boolean",
+										"typeLabel": "PrimitiveType",
+										"pos": "2512",
+										"length": "7",
+										"children": []
+									},
+									{
+										"type": "42",
+										"label": "fuzzy",
+										"typeLabel": "SimpleName",
+										"pos": "2520",
+										"length": "5",
+										"children": []
+									}
+								]
+							},
+							{
+								"type": "8",
+								"typeLabel": "Block",
+								"pos": "2527",
+								"length": "830",
+								"children": [
+									{
+										"type": "21",
+										"typeLabel": "ExpressionStatement",
+										"pos": "2603",
+										"length": "73",
+										"children": [
+											{
+												"type": "7",
+												"label": "=",
+												"typeLabel": "Assignment",
+												"pos": "2603",
+												"length": "72",
+												"children": [
+													{
+														"type": "22",
+														"typeLabel": "FieldAccess",
+														"pos": "2603",
+														"length": "12",
+														"children": [
+															{
+																"type": "52",
+																"typeLabel": "ThisExpression",
+																"pos": "2603",
+																"length": "4",
+																"children": []
+															},
+															{
+																"type": "42",
+																"label": "geoname",
+																"typeLabel": "SimpleName",
+																"pos": "2608",
+																"length": "7",
+																"children": []
+															}
+														]
+													},
+													{
+														"type": "32",
+														"typeLabel": "MethodInvocation",
+														"pos": "2618",
+														"length": "57",
+														"children": [
+															{
+																"type": "42",
+																"label": "GeoName",
+																"typeLabel": "SimpleName",
+																"pos": "2618",
+																"length": "7",
+																"children": []
+															},
+															{
+																"type": "42",
+																"label": "parseFromGeoNamesRecord",
+																"typeLabel": "SimpleName",
+																"pos": "2626",
+																"length": "23",
+																"children": []
+															},
+															{
+																"type": "32",
+																"typeLabel": "MethodInvocation",
+																"pos": "2650",
+																"length": "24",
+																"children": [
+																	{
+																		"type": "42",
+																		"label": "luceneDoc",
+																		"typeLabel": "SimpleName",
+																		"pos": "2650",
+																		"length": "9",
+																		"children": []
+																	},
+																	{
+																		"type": "42",
+																		"label": "get",
+																		"typeLabel": "SimpleName",
+																		"pos": "2660",
+																		"length": "3",
+																		"children": []
+																	},
+																	{
+																		"type": "45",
+																		"label": "\"geoname\"",
+																		"typeLabel": "StringLiteral",
+																		"pos": "2664",
+																		"length": "9",
+																		"children": []
+																	}
+																]
+															}
+														]
+													}
+												]
+											}
+										]
+									},
+									{
+										"type": "21",
+										"typeLabel": "ExpressionStatement",
+										"pos": "2694",
+										"length": "25",
+										"children": [
+											{
+												"type": "7",
+												"label": "=",
+												"typeLabel": "Assignment",
+												"pos": "2694",
+												"length": "24",
+												"children": [
+													{
+														"type": "22",
+														"typeLabel": "FieldAccess",
+														"pos": "2694",
+														"length": "13",
+														"children": [
+															{
+																"type": "52",
+																"typeLabel": "ThisExpression",
+																"pos": "2694",
+																"length": "4",
+																"children": []
+															},
+															{
+																"type": "42",
+																"label": "location",
+																"typeLabel": "SimpleName",
+																"pos": "2699",
+																"length": "8",
+																"children": []
+															}
+														]
+													},
+													{
+														"type": "42",
+														"label": "location",
+														"typeLabel": "SimpleName",
+														"pos": "2710",
+														"length": "8",
+														"children": []
+													}
+												]
+											}
+										]
+									},
+									{
+										"type": "21",
+										"typeLabel": "ExpressionStatement",
+										"pos": "2854",
+										"length": "46",
+										"children": [
+											{
+												"type": "7",
+												"label": "=",
+												"typeLabel": "Assignment",
+												"pos": "2854",
+												"length": "45",
+												"children": [
+													{
+														"type": "22",
+														"typeLabel": "FieldAccess",
+														"pos": "2854",
+														"length": "16",
+														"children": [
+															{
+																"type": "52",
+																"typeLabel": "ThisExpression",
+																"pos": "2854",
+																"length": "4",
+																"children": []
+															},
+															{
+																"type": "42",
+																"label": "matchedName",
+																"typeLabel": "SimpleName",
+																"pos": "2859",
+																"length": "11",
+																"children": []
+															}
+														]
+													},
+													{
+														"type": "32",
+														"typeLabel": "MethodInvocation",
+														"pos": "2873",
+														"length": "26",
+														"children": [
+															{
+																"type": "42",
+																"label": "luceneDoc",
+																"typeLabel": "SimpleName",
+																"pos": "2873",
+																"length": "9",
+																"children": []
+															},
+															{
+																"type": "42",
+																"label": "get",
+																"typeLabel": "SimpleName",
+																"pos": "2883",
+																"length": "3",
+																"children": []
+															},
+															{
+																"type": "45",
+																"label": "\"indexName\"",
+																"typeLabel": "StringLiteral",
+																"pos": "2887",
+																"length": "11",
+																"children": []
+															}
+														]
+													}
+												]
+											}
+										]
+									},
+									{
+										"type": "21",
+										"typeLabel": "ExpressionStatement",
+										"pos": "2918",
+										"length": "19",
+										"children": [
+											{
+												"type": "7",
+												"label": "=",
+												"typeLabel": "Assignment",
+												"pos": "2918",
+												"length": "18",
+												"children": [
+													{
+														"type": "22",
+														"typeLabel": "FieldAccess",
+														"pos": "2918",
+														"length": "10",
+														"children": [
+															{
+																"type": "52",
+																"typeLabel": "ThisExpression",
+																"pos": "2918",
+																"length": "4",
+																"children": []
+															},
+															{
+																"type": "42",
+																"label": "fuzzy",
+																"typeLabel": "SimpleName",
+																"pos": "2923",
+																"length": "5",
+																"children": []
+															}
+														]
+													},
+													{
+														"type": "42",
+														"label": "fuzzy",
+														"typeLabel": "SimpleName",
+														"pos": "2931",
+														"length": "5",
+														"children": []
+													}
+												]
+											}
+										]
+									},
+									{
+										"type": "25",
+										"typeLabel": "IfStatement",
+										"pos": "3090",
+										"length": "164",
+										"children": [
+											{
+												"type": "42",
+												"label": "fuzzy",
+												"typeLabel": "SimpleName",
+												"pos": "3094",
+												"length": "5",
+												"children": []
+											},
+											{
+												"type": "21",
+												"typeLabel": "ExpressionStatement",
+												"pos": "3113",
+												"length": "107",
+												"children": [
+													{
+														"type": "7",
+														"label": "=",
+														"typeLabel": "Assignment",
+														"pos": "3113",
+														"length": "106",
+														"children": [
+															{
+																"type": "22",
+																"typeLabel": "FieldAccess",
+																"pos": "3113",
+																"length": "15",
+																"children": [
+																	{
+																		"type": "52",
+																		"typeLabel": "ThisExpression",
+																		"pos": "3113",
+																		"length": "4",
+																		"children": []
+																	},
+																	{
+																		"type": "42",
+																		"label": "confidence",
+																		"typeLabel": "SimpleName",
+																		"pos": "3118",
+																		"length": "10",
+																		"children": []
+																	}
+																]
+															},
+															{
+																"type": "27",
+																"label": "/",
+																"typeLabel": "InfixExpression",
+																"pos": "3131",
+																"length": "88",
+																"children": [
+																	{
+																		"type": "34",
+																		"label": "1",
+																		"typeLabel": "NumberLiteral",
+																		"pos": "3131",
+																		"length": "1",
+																		"children": []
+																	},
+																	{
+																		"type": "36",
+																		"typeLabel": "ParenthesizedExpression",
+																		"pos": "3135",
+																		"length": "84",
+																		"children": [
+																			{
+																				"type": "27",
+																				"label": "+",
+																				"typeLabel": "InfixExpression",
+																				"pos": "3136",
+																				"length": "82",
+																				"children": [
+																					{
+																						"type": "32",
+																						"typeLabel": "MethodInvocation",
+																						"pos": "3136",
+																						"length": "69",
+																						"children": [
+																							{
+																								"type": "42",
+																								"label": "damerauLevenshteinDistanceCaseInsensitive",
+																								"typeLabel": "SimpleName",
+																								"pos": "3136",
+																								"length": "41",
+																								"children": []
+																							},
+																							{
+																								"type": "40",
+																								"label": "location.name",
+																								"typeLabel": "QualifiedName",
+																								"pos": "3178",
+																								"length": "13",
+																								"children": []
+																							},
+																							{
+																								"type": "42",
+																								"label": "matchedName",
+																								"typeLabel": "SimpleName",
+																								"pos": "3193",
+																								"length": "11",
+																								"children": []
+																							}
+																						]
+																					},
+																					{
+																						"type": "11",
+																						"typeLabel": "CastExpression",
+																						"pos": "3208",
+																						"length": "10",
+																						"children": [
+																							{
+																								"type": "39",
+																								"label": "float",
+																								"typeLabel": "PrimitiveType",
+																								"pos": "3209",
+																								"length": "5",
+																								"children": []
+																							},
+																							{
+																								"type": "34",
+																								"label": "0.5",
+																								"typeLabel": "NumberLiteral",
+																								"pos": "3215",
+																								"length": "3",
+																								"children": []
+																							}
+																						]
+																					}
+																				]
+																			}
+																		]
+																	}
+																]
+															}
+														]
+													}
+												]
+											},
+											{
+												"type": "21",
+												"typeLabel": "ExpressionStatement",
+												"pos": "3234",
+												"length": "20",
+												"children": [
+													{
+														"type": "7",
+														"label": "=",
+														"typeLabel": "Assignment",
+														"pos": "3234",
+														"length": "19",
+														"children": [
+															{
+																"type": "22",
+																"typeLabel": "FieldAccess",
+																"pos": "3234",
+																"length": "15",
+																"children": [
+																	{
+																		"type": "52",
+																		"typeLabel": "ThisExpression",
+																		"pos": "3234",
+																		"length": "4",
+																		"children": []
+																	},
+																	{
+																		"type": "42",
+																		"label": "confidence",
+																		"typeLabel": "SimpleName",
+																		"pos": "3239",
+																		"length": "10",
+																		"children": []
+																	}
+																]
+															},
+															{
+																"type": "34",
+																"label": "1",
+																"typeLabel": "NumberLiteral",
+																"pos": "3252",
+																"length": "1",
+																"children": []
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"type": "31",
+						"typeLabel": "MethodDeclaration",
+						"pos": "3367",
+						"length": "906",
+						"children": [
+							{
+								"type": "29",
+								"typeLabel": "Javadoc",
+								"pos": "3367",
+								"length": "146",
+								"children": [
+									{
+										"type": "65",
+										"typeLabel": "TagElement",
+										"pos": "3378",
+										"length": "59",
+										"children": [
+											{
+												"type": "66",
+												"label": "Tests equivalence between ",
+												"typeLabel": "TextElement",
+												"pos": "3378",
+												"length": "26",
+												"children": []
+											},
+											{
+												"type": "65",
+												"label": "@link",
+												"typeLabel": "TagElement",
+												"pos": "3404",
+												"length": "24",
+												"children": [
+													{
+														"type": "42",
+														"label": "ResolvedLocation",
+														"typeLabel": "SimpleName",
+														"pos": "3411",
+														"length": "16",
+														"children": []
+													}
+												]
+											},
+											{
+												"type": "66",
+												"label": " objects.",
+												"typeLabel": "TextElement",
+												"pos": "3428",
+												"length": "9",
+												"children": []
+											}
+										]
+									},
+									{
+										"type": "65",
+										"label": "@param",
+										"typeLabel": "TagElement",
+										"pos": "3453",
+										"length": "52",
+										"children": [
+											{
+												"type": "42",
+												"label": "obj",
+												"typeLabel": "SimpleName",
+												"pos": "3460",
+												"length": "3",
+												"children": []
+											},
+											{
+												"type": "66",
+												"label": "   the other object being compared against",
+												"typeLabel": "TextElement",
+												"pos": "3463",
+												"length": "42",
+												"children": []
+											}
+										]
+									}
+								]
+							},
+							{
+								"type": "78",
+								"typeLabel": "MarkerAnnotation",
+								"pos": "3518",
+								"length": "9",
+								"children": [
+									{
+										"type": "42",
+										"label": "Override",
+										"typeLabel": "SimpleName",
+										"pos": "3519",
+										"length": "8",
+										"children": []
+									}
+								]
+							},
+							{
+								"type": "83",
+								"label": "public",
+								"typeLabel": "Modifier",
+								"pos": "3532",
+								"length": "6",
+								"children": []
+							},
+							{
+								"type": "39",
+								"label": "boolean",
+								"typeLabel": "PrimitiveType",
+								"pos": "3539",
+								"length": "7",
+								"children": []
+							},
+							{
+								"type": "42",
+								"label": "equals",
+								"typeLabel": "SimpleName",
+								"pos": "3547",
+								"length": "6",
+								"children": []
+							},
+							{
+								"type": "44",
+								"typeLabel": "SingleVariableDeclaration",
+								"pos": "3554",
+								"length": "10",
+								"children": [
+									{
+										"type": "43",
+										"label": "Object",
+										"typeLabel": "SimpleType",
+										"pos": "3554",
+										"length": "6",
+										"children": [
+											{
+												"type": "42",
+												"label": "Object",
+												"typeLabel": "SimpleName",
+												"pos": "3554",
+												"length": "6",
+												"children": []
+											}
+										]
+									},
+									{
+										"type": "42",
+										"label": "obj",
+										"typeLabel": "SimpleName",
+										"pos": "3561",
+										"length": "3",
+										"children": []
+									}
+								]
+							},
+							{
+								"type": "8",
+								"typeLabel": "Block",
+								"pos": "3566",
+								"length": "707",
+								"children": [
+									{
+										"type": "25",
+										"typeLabel": "IfStatement",
+										"pos": "3576",
+										"length": "29",
+										"children": [
+											{
+												"type": "27",
+												"label": "==",
+												"typeLabel": "InfixExpression",
+												"pos": "3580",
+												"length": "11",
+												"children": [
+													{
+														"type": "42",
+														"label": "obj",
+														"typeLabel": "SimpleName",
+														"pos": "3580",
+														"length": "3",
+														"children": []
+													},
+													{
+														"type": "52",
+														"typeLabel": "ThisExpression",
+														"pos": "3587",
+														"length": "4",
+														"children": []
+													}
+												]
+											},
+											{
+												"type": "41",
+												"typeLabel": "ReturnStatement",
+												"pos": "3593",
+												"length": "12",
+												"children": [
+													{
+														"type": "9",
+														"label": "true",
+														"typeLabel": "BooleanLiteral",
+														"pos": "3600",
+														"length": "4",
+														"children": []
+													}
+												]
+											}
+										]
+									},
+									{
+										"type": "25",
+										"typeLabel": "IfStatement",
+										"pos": "3614",
+										"length": "30",
+										"children": [
+											{
+												"type": "27",
+												"label": "==",
+												"typeLabel": "InfixExpression",
+												"pos": "3618",
+												"length": "11",
+												"children": [
+													{
+														"type": "42",
+														"label": "obj",
+														"typeLabel": "SimpleName",
+														"pos": "3618",
+														"length": "3",
+														"children": []
+													},
+													{
+														"type": "33",
+														"typeLabel": "NullLiteral",
+														"pos": "3625",
+														"length": "4",
+														"children": []
+													}
+												]
+											},
+											{
+												"type": "41",
+												"typeLabel": "ReturnStatement",
+												"pos": "3631",
+												"length": "13",
+												"children": [
+													{
+														"type": "9",
+														"label": "false",
+														"typeLabel": "BooleanLiteral",
+														"pos": "3638",
+														"length": "5",
+														"children": []
+													}
+												]
+											}
+										]
+									},
+									{
+										"type": "25",
+										"typeLabel": "IfStatement",
+										"pos": "3726",
+										"length": "52",
+										"children": [
+											{
+												"type": "27",
+												"label": "!=",
+												"typeLabel": "InfixExpression",
+												"pos": "3730",
+												"length": "33",
+												"children": [
+													{
+														"type": "32",
+														"typeLabel": "MethodInvocation",
+														"pos": "3730",
+														"length": "15",
+														"children": [
+															{
+																"type": "52",
+																"typeLabel": "ThisExpression",
+																"pos": "3730",
+																"length": "4",
+																"children": []
+															},
+															{
+																"type": "42",
+																"label": "getClass",
+																"typeLabel": "SimpleName",
+																"pos": "3735",
+																"length": "8",
+																"children": []
+															}
+														]
+													},
+													{
+														"type": "32",
+														"typeLabel": "MethodInvocation",
+														"pos": "3749",
+														"length": "14",
+														"children": [
+															{
+																"type": "42",
+																"label": "obj",
+																"typeLabel": "SimpleName",
+																"pos": "3749",
+																"length": "3",
+																"children": []
+															},
+															{
+																"type": "42",
+																"label": "getClass",
+																"typeLabel": "SimpleName",
+																"pos": "3753",
+																"length": "8",
+																"children": []
+															}
+														]
+													}
+												]
+											},
+											{
+												"type": "41",
+												"typeLabel": "ReturnStatement",
+												"pos": "3765",
+												"length": "13",
+												"children": [
+													{
+														"type": "9",
+														"label": "false",
+														"typeLabel": "BooleanLiteral",
+														"pos": "3772",
+														"length": "5",
+														"children": []
+													}
+												]
+											}
+										]
+									},
+									{
+										"type": "60",
+										"typeLabel": "VariableDeclarationStatement",
+										"pos": "3897",
+										"length": "47",
+										"children": [
+											{
+												"type": "43",
+												"label": "ResolvedLocation",
+												"typeLabel": "SimpleType",
+												"pos": "3897",
+												"length": "16",
+												"children": [
+													{
+														"type": "42",
+														"label": "ResolvedLocation",
+														"typeLabel": "SimpleName",
+														"pos": "3897",
+														"length": "16",
+														"children": []
+													}
+												]
+											},
+											{
+												"type": "59",
+												"typeLabel": "VariableDeclarationFragment",
+												"pos": "3914",
+												"length": "29",
+												"children": [
+													{
+														"type": "42",
+														"label": "other",
+														"typeLabel": "SimpleName",
+														"pos": "3914",
+														"length": "5",
+														"children": []
+													},
+													{
+														"type": "11",
+														"typeLabel": "CastExpression",
+														"pos": "3922",
+														"length": "21",
+														"children": [
+															{
+																"type": "43",
+																"label": "ResolvedLocation",
+																"typeLabel": "SimpleType",
+																"pos": "3923",
+																"length": "16",
+																"children": [
+																	{
+																		"type": "42",
+																		"label": "ResolvedLocation",
+																		"typeLabel": "SimpleName",
+																		"pos": "3923",
+																		"length": "16",
+																		"children": []
+																	}
+																]
+															},
+															{
+																"type": "42",
+																"label": "obj",
+																"typeLabel": "SimpleName",
+																"pos": "3940",
+																"length": "3",
+																"children": []
+															}
+														]
+													}
+												]
+											}
+										]
+									},
+									{
+										"type": "41",
+										"typeLabel": "ReturnStatement",
+										"pos": "4208",
+										"length": "59",
+										"children": [
+											{
+												"type": "36",
+												"typeLabel": "ParenthesizedExpression",
+												"pos": "4215",
+												"length": "51",
+												"children": [
+													{
+														"type": "27",
+														"label": "==",
+														"typeLabel": "InfixExpression",
+														"pos": "4216",
+														"length": "49",
+														"children": [
+															{
+																"type": "22",
+																"typeLabel": "FieldAccess",
+																"pos": "4216",
+																"length": "22",
+																"children": [
+																	{
+																		"type": "22",
+																		"typeLabel": "FieldAccess",
+																		"pos": "4216",
+																		"length": "12",
+																		"children": [
+																			{
+																				"type": "52",
+																				"typeLabel": "ThisExpression",
+																				"pos": "4216",
+																				"length": "4",
+																				"children": []
+																			},
+																			{
+																				"type": "42",
+																				"label": "geoname",
+																				"typeLabel": "SimpleName",
+																				"pos": "4221",
+																				"length": "7",
+																				"children": []
+																			}
+																		]
+																	},
+																	{
+																		"type": "42",
+																		"label": "geonameID",
+																		"typeLabel": "SimpleName",
+																		"pos": "4229",
+																		"length": "9",
+																		"children": []
+																	}
+																]
+															},
+															{
+																"type": "40",
+																"label": "other.geoname.geonameID",
+																"typeLabel": "QualifiedName",
+																"pos": "4242",
+																"length": "23",
+																"children": []
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"type": "31",
+						"typeLabel": "MethodDeclaration",
+						"pos": "4283",
+						"length": "282",
+						"children": [
+							{
+								"type": "29",
+								"typeLabel": "Javadoc",
+								"pos": "4283",
+								"length": "47",
+								"children": [
+									{
+										"type": "65",
+										"typeLabel": "TagElement",
+										"pos": "4294",
+										"length": "20",
+										"children": [
+											{
+												"type": "66",
+												"label": "For pretty-printing.",
+												"typeLabel": "TextElement",
+												"pos": "4294",
+												"length": "20",
+												"children": []
+											}
+										]
+									}
+								]
+							},
+							{
+								"type": "78",
+								"typeLabel": "MarkerAnnotation",
+								"pos": "4335",
+								"length": "9",
+								"children": [
+									{
+										"type": "42",
+										"label": "Override",
+										"typeLabel": "SimpleName",
+										"pos": "4336",
+										"length": "8",
+										"children": []
+									}
+								]
+							},
+							{
+								"type": "83",
+								"label": "public",
+								"typeLabel": "Modifier",
+								"pos": "4349",
+								"length": "6",
+								"children": []
+							},
+							{
+								"type": "43",
+								"label": "String",
+								"typeLabel": "SimpleType",
+								"pos": "4356",
+								"length": "6",
+								"children": [
+									{
+										"type": "42",
+										"label": "String",
+										"typeLabel": "SimpleName",
+										"pos": "4356",
+										"length": "6",
+										"children": []
+									}
+								]
+							},
+							{
+								"type": "42",
+								"label": "toString",
+								"typeLabel": "SimpleName",
+								"pos": "4363",
+								"length": "8",
+								"children": []
+							},
+							{
+								"type": "8",
+								"typeLabel": "Block",
+								"pos": "4374",
+								"length": "191",
+								"children": [
+									{
+										"type": "41",
+										"typeLabel": "ReturnStatement",
+										"pos": "4384",
+										"length": "175",
+										"children": [
+											{
+												"type": "27",
+												"label": "+",
+												"typeLabel": "InfixExpression",
+												"pos": "4391",
+												"length": "167",
+												"children": [
+													{
+														"type": "45",
+														"label": "\"Resolved \\\"\"",
+														"typeLabel": "StringLiteral",
+														"pos": "4391",
+														"length": "13",
+														"children": []
+													},
+													{
+														"type": "40",
+														"label": "location.name",
+														"typeLabel": "QualifiedName",
+														"pos": "4407",
+														"length": "13",
+														"children": []
+													},
+													{
+														"type": "45",
+														"label": "\"\\\" as: \\\"\"",
+														"typeLabel": "StringLiteral",
+														"pos": "4423",
+														"length": "11",
+														"children": []
+													},
+													{
+														"type": "42",
+														"label": "matchedName",
+														"typeLabel": "SimpleName",
+														"pos": "4437",
+														"length": "11",
+														"children": []
+													},
+													{
+														"type": "45",
+														"label": "\"\\\" {\"",
+														"typeLabel": "StringLiteral",
+														"pos": "4451",
+														"length": "6",
+														"children": []
+													},
+													{
+														"type": "42",
+														"label": "geoname",
+														"typeLabel": "SimpleName",
+														"pos": "4460",
+														"length": "7",
+														"children": []
+													},
+													{
+														"type": "45",
+														"label": "\"}, position:\"",
+														"typeLabel": "StringLiteral",
+														"pos": "4470",
+														"length": "14",
+														"children": []
+													},
+													{
+														"type": "40",
+														"label": "location.position",
+														"typeLabel": "QualifiedName",
+														"pos": "4487",
+														"length": "17",
+														"children": []
+													},
+													{
+														"type": "45",
+														"label": "\", confidence: \"",
+														"typeLabel": "StringLiteral",
+														"pos": "4507",
+														"length": "16",
+														"children": []
+													},
+													{
+														"type": "42",
+														"label": "confidence",
+														"typeLabel": "SimpleName",
+														"pos": "4526",
+														"length": "10",
+														"children": []
+													},
+													{
+														"type": "45",
+														"label": "\", fuzzy: \"",
+														"typeLabel": "StringLiteral",
+														"pos": "4539",
+														"length": "11",
+														"children": []
+													},
+													{
+														"type": "42",
+														"label": "fuzzy",
+														"typeLabel": "SimpleName",
+														"pos": "4553",
+														"length": "5",
+														"children": []
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}
