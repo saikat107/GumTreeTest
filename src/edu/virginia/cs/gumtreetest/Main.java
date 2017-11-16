@@ -56,47 +56,40 @@ public class Main {
 					destCommonParent = parents;
 				}
 				else{
-					for(ITree parent : parents){
-						if(destCommonParent.contains(parent)){
-							destCommonParent = parent.getParents();
-							destCommonParent.add(0, parent);
-							//Util.logln(destCommonParent);
-							break;
-						}
-					}
+					destCommonParent = getCommonParents(destCommonParent, parents);
 				}
 			}
 			else if(action.getName() == "MOV"){
-				//Util.logln(parents);
+				/**
+				 * @TODO Along with the source version add the destination version information. 
+				 */
+				//Util.logln(action);
+				//Util.logln(action.getNode());
 				if (srcCommonParent == null){
 					srcCommonParent = parents;
 				}
 				else{
-					for(ITree parent : parents){
-						if(srcCommonParent.contains(parent)){
-							srcCommonParent = parent.getParents();
-							srcCommonParent.add(0, parent);
-							//Util.logln(srcCommonParent);
-							break;
-						}
-					}
+					srcCommonParent = getCommonParents(srcCommonParent, parents);
+				}
+				ITree destNode = store.getDst(action.getNode());
+				List<ITree> destParents = destNode.getParents();
+				destParents.add(0, destNode);
+				if (destCommonParent == null){
+					destCommonParent = destParents;
+				}
+				else{
+					destCommonParent = getCommonParents(destCommonParent, destParents);
 				}
 			}
 			else{
 				parents.add(0, action.getNode());
+				
 				//Util.logln(parents);
 				if (srcCommonParent == null){
 					srcCommonParent = parents;
 				}
 				else{
-					for(ITree parent : parents){
-						if(srcCommonParent.contains(parent)){
-							srcCommonParent = parent.getParents();
-							srcCommonParent.add(0, parent);
-							//Util.logln(srcCommonParent);
-							break;
-						}
-					}
+					srcCommonParent = getCommonParents(srcCommonParent, parents);
 				}
 			}
 		
@@ -138,14 +131,26 @@ public class Main {
 			}
 		}
 		Util.dfsPrint(cParentSrc);
-		cParentSrc.setMetadata("methodSig", "public void test()");
+		//cParentSrc.setMetadata("methodSig", "public void test()");
 		Util.dfsPrint(cParentDest);
-		Util.logln(cParentSrc.getClass());
+		//Util.logln(cParentSrc.getClass());
 		ITree t = new Tree(5, "jik");
 		t.setId(0);
 		t.addChild(new Tree(8, "djkdk"));
 		Util.dfsPrint(t);
-		Util.logln(cParentSrc.getMetadata("methodSig"));
+		//Util.logln(cParentSrc.getMetadata("methodSig"));
+	}
+
+	private static List<ITree> getCommonParents(List<ITree> commonParent, List<ITree> parents) {
+		for(ITree parent : parents){
+			if(commonParent.contains(parent)){
+				commonParent = parent.getParents();
+				commonParent.add(0, parent);
+				//Util.logln(destCommonParent);
+				break;
+			}
+		}
+		return commonParent;
 	}
 
 }

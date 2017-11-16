@@ -34,6 +34,9 @@ public class Util {
 	}
 
 	public static void dfsPrint(ITree root){
+		if(root == null){
+			return;
+		}
 		Stack<ITree> nodes = new Stack<>();
 		Stack<Integer> level = new Stack<>();
 		nodes.push(root);

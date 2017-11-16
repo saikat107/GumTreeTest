@@ -9,16 +9,19 @@ public class Parent {
 	
 	public void function1(int j){
 		int res = 0;
+		
+		
 		try{
-			System.out.println("Parent1.function1()");
-			res = res / n;
+			System.out.println("Parent.function1()");
+			res = res / n +1;
 		}catch(Exception ex){
 			
 		}
 		for(int i = 0; i < j; i++){
 			int k = 0;
+			res += n;
 			if(n%3 == 1){
-				res += n; /* sdssdfds */
+				 /* sdssdfds */
 			}
 			else if(n%3 == 2){
 				System.out.println();
