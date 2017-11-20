@@ -11,4 +11,10 @@ public class Config {
 	public static final int START_ID_OF_LEAF_NODE = 1;
 	public static final int START_ID_OF_NON_LEAF_NODE = 201;
 	public static final int INTERMEDIATE_NODE_TYPE = 300;
+	public static class METADATA_TAG{
+		static String HEIGHT = "height";
+		static String NUM_LEAF_NODE = "leaf";
+		static String DEPTH = "depth";
+	}
 }
+

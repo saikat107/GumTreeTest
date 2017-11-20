@@ -2,6 +2,7 @@ package edu.virginia.cs.gumtreetest;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,7 +24,7 @@ import com.github.gumtreediff.tree.ITree;
 import com.github.gumtreediff.tree.Tree;
 import com.github.gumtreediff.tree.TreeContext;
 
-public class DissParser {
+public class DiffParser {
 	
 	private static int nonLeafIdx = 200;
 	private static int currentIdx = 0;
@@ -37,16 +38,18 @@ public class DissParser {
 	ITree cParentDest = null;
 	private boolean alreadyParsed = false;
 	
-	public DissParser(String srcPath, String destPath) throws IOException{
+	public DiffParser(String srcPath, String destPath) throws IOException{
 		Run.initGenerators();
 		this.srcPath = srcPath;
 		this.destPath = destPath;
 		srcFileText = Util.readFile(this.srcPath);
 		destFileText = Util.readFile(this.destPath);
 		parseASTDiff();
-		
-		Util.printSourceTree(cParentSrc, System.out, System.out);
-		Util.printDestTree(cParentDest, System.out);
+	}
+	
+	public void writeDiffs(PrintStream srcDataWriter, PrintStream srcTreeWriter, PrintStream destGrammarWriter){
+		Util.printSourceTree(cParentSrc, srcDataWriter, srcTreeWriter);
+		Util.printDestTree(cParentDest, destGrammarWriter);
 	}
 	
 	public void parseASTDiff() throws IOException{
@@ -65,12 +68,58 @@ public class DissParser {
 		cParentSrc = binarizeAST(cParentSrc);
 		//cParentDest = binarizeAST(cParentDest); Destination AST is not needed to be binarized
 		setIndices(cParentSrc);	
+		setTreeMetadata(cParentSrc);
+		setTreeMetadata(cParentDest);
 		alreadyParsed = true;
 	}
 	
+	private void setTreeMetadata(ITree root){
+		setCountOfLeafNodes(root);
+		setTreeHeight(root);
+		setTreeDepth(root, 0);
+	}
+	
+	private void setTreeDepth(ITree root, int d){
+		root.setMetadata(Config.METADATA_TAG.DEPTH, d);
+		List<ITree> children = root.getChildren();
+		for(ITree child : children){
+			setTreeDepth(child, d + 1);
+		}
+	}
+	
+	private int setTreeHeight(ITree root){
+		List<ITree> children = root.getChildren();
+		int height = -1;
+		if(children.size() == 0){
+			height = 0;
+		}
+		else{
+			for(ITree child : children){
+				int h = 1 + setTreeHeight(child);
+				if(h > height){
+					height = h;
+				}
+			}
+		}
+		root.setMetadata(Config.METADATA_TAG.HEIGHT, height);
+		return height;
+	}
+	
+	private int setCountOfLeafNodes(ITree root){
+		int leaf = 1;
+		List<ITree> children = root.getChildren();
+		if (children.size() != 0){
+			leaf = 0;
+			for(ITree child : children){
+				leaf += setCountOfLeafNodes(child);
+			}
+		}
+		root.setMetadata(Config.METADATA_TAG.NUM_LEAF_NODE, leaf);
+		return leaf;
+	}
 	
 
-	public void setIndices(ITree root){
+	private void setIndices(ITree root){
 		if(root.getChildren().size() == 0){
 			root.setId(currentIdx);
 			currentIdx++;
@@ -82,7 +131,6 @@ public class DissParser {
 				setIndices(child);
 			}
 		}
-		
 	}
 	
 	private void fixAST(ITree root, String src) {
@@ -99,6 +147,7 @@ public class DissParser {
 					String leftOver = src.substring(bi, fi);
 					addNewNodeFromLeftOver(root, newChildren, leftOver);
 				}
+				child.setParent(root);
 				newChildren.add(child);
 				bi = child.getEndPos();
 			}
@@ -125,6 +174,7 @@ public class DissParser {
 				if(leftOver.length() != 0){
 					ITree child = new Tree(root.getType(), leftOver);
 					child.setId(3);
+					child.setParent(root);
 					newChildren.add(child);
 				}
 			}
@@ -252,7 +302,8 @@ public class DissParser {
 	}
 	
 	public static void main(String[] args) throws UnsupportedOperationException, IOException {
-		DissParser m = new DissParser("src/edu/virginia/cs/gumtreetest/Parent.java", "src/edu/virginia/cs/gumtreetest/Child.java");
+		DiffParser parser = new DiffParser("src/edu/virginia/cs/gumtreetest/Parent.java", "src/edu/virginia/cs/gumtreetest/Child.java");
+		parser.writeDiffs(System.out, System.out, System.out);
 	}
 
 	private static List<ITree> getCommonParents(List<ITree> commonParent, List<ITree> parents) {
