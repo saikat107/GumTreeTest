@@ -11,7 +11,7 @@ public class Parent {
 		int res = 0;
 		try{
 			System.out.println("Parent.function1()");
-			res = res / n +1;
+			res = res / n + 1;
 		}catch(Exception ex){
 			
 		}

@@ -1,6 +1,6 @@
 package edu.virginia.cs.gumtreetest;
 
-public class Parent {
+public class Child {
 	int n = 10;
 	
 	void test(){
@@ -9,19 +9,16 @@ public class Parent {
 	
 	public void function1(int j){
 		int res = 0;
-		
-		
 		try{
-			System.out.println("Parent.function1()");
-			res = res / n +1;
+			System.out.print("Parent.function1()");
+			res = res / n - 1;
 		}catch(Exception ex){
 			
 		}
 		for(int i = 0; i < j; i++){
 			int k = 0;
-			res += n;
 			if(n%3 == 1){
-				 /* sdssdfds */
+				res += n; /* sdssdfds */
 			}
 			else if(n%3 == 2){
 				System.out.println();
