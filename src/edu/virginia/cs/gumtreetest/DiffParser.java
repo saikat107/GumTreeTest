@@ -19,7 +19,7 @@ import com.github.gumtreediff.tree.TreeContext;
 
 public class DiffParser {
 	
-	public static int MAXIMUM_ALLOWED_NODE = 100;
+	public static int MAXIMUM_ALLOWED_NODE = 50;
 	public static int MINIMUM_ALLOWED_NODE = 3;
 	
 	private  int nonLeafIdx = 200;
