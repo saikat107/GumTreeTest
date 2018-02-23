@@ -3,7 +3,6 @@ package edu.virginia.cs.gumtreetest;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,12 +15,11 @@ import com.github.gumtreediff.matchers.MappingStore;
 import com.github.gumtreediff.matchers.Matcher;
 import com.github.gumtreediff.matchers.Matchers;
 import com.github.gumtreediff.tree.ITree;
-import com.github.gumtreediff.tree.Tree;
 import com.github.gumtreediff.tree.TreeContext;
 
 public class DiffParser {
 	
-	public static int MAXIMUM_ALLOWED_NODE = 2000;
+	public static int MAXIMUM_ALLOWED_NODE = 100;
 	public static int MINIMUM_ALLOWED_NODE = 3;
 	
 	private  int nonLeafIdx = 200;
@@ -47,6 +45,13 @@ public class DiffParser {
 		parseASTDiff();
 	}
 	
+	/**
+	 * @author saikat
+	 * @param srcDataWriter
+	 * @param srcTreeWriter
+	 * @param destCodeWriter
+	 * @param destTreeWriter
+	 */
 	public void writeDiffs(PrintStream srcDataWriter, PrintStream srcTreeWriter, PrintStream destCodeWriter, PrintStream destTreeWriter){
 		if(alreadyParsed){
 			Util.printSourceTree(cParentSrc, srcDataWriter, srcTreeWriter);
@@ -54,6 +59,11 @@ public class DiffParser {
 		}
 	}
 	
+	/**
+	 * @author saikat
+	 * @return
+	 * @throws IOException
+	 */
 	public boolean parseASTDiff() throws IOException{
 		TreeContext srcContext = new JdtTreeGenerator().generateFromFile(srcPath);
 		TreeContext destContext = new JdtTreeGenerator().generateFromFile(destPath);
@@ -62,21 +72,19 @@ public class DiffParser {
 		Matcher m = Matchers.getInstance().getMatcher(srcTree, destTree);
 		m.match();
 		MappingStore store = m.getMappings();
-		
 		extractCommonParentsChainFromActions(srcTree, destTree, store);
 		findCommonParentNode(srcCommonParent, destCommonParent, store);
 		if(cParentSrc == null || cParentDest == null){
 			return false;
 		}
-		fixAST(cParentSrc, srcFileText);
-		fixAST(cParentDest, destFileText); //Destination AST does not need to be fixed
-		removeEmptyNode(cParentDest);
-		
+		TreeUtil.fixAST(cParentSrc, srcFileText);
+		TreeUtil.fixAST(cParentDest, destFileText); //Destination AST does not need to be fixed
+		TreeUtil.removeEmptyNode(cParentDest);
 		try{
-			cParentSrc = binarizeAST(cParentSrc);
+			cParentSrc = TreeUtil.binarizeAST(cParentSrc);
 			setIndices(cParentSrc);	
-			setTreeMetadata(cParentSrc);
-			setTreeMetadata(cParentDest);
+			TreeUtil.setTreeMetadata(cParentSrc);
+			TreeUtil.setTreeMetadata(cParentDest);
 			int srcLeafNodeCount = currentIdx;
 			currentIdx = 0;
 			setIndices(cParentDest);
@@ -94,69 +102,10 @@ public class DiffParser {
 	}
 	
 	
-	private void setTreeMetadata(ITree root){
-		setCountOfLeafNodes(root);
-		int height = setTreeHeight(root);
-		setTreeDepth(root, 0);
-		if(height > 100){
-			throw new InternalError("Too long tree");
-		}
-	}
-	
-	
-	private void removeEmptyNode(ITree root){
-		if(Util.isLeafNode(root) && root.getLabel().trim().length() == 0){
-			root.setLabel("<EMPTY>");
-		}
-		else{
-			List<ITree> children = root.getChildren();
-			for(ITree child : children){
-				removeEmptyNode(child);
-			}
-		}
-	}
-	
-	
-	private void setTreeDepth(ITree root, int d){
-		root.setMetadata(Config.METADATA_TAG.DEPTH, d);
-		List<ITree> children = root.getChildren();
-		for(ITree child : children){
-			setTreeDepth(child, d + 1);
-		}
-	}
-	
-	private int setTreeHeight(ITree root){
-		List<ITree> children = root.getChildren();
-		int height = -1;
-		if(children.size() == 0){
-			height = 0;
-		}
-		else{
-			for(ITree child : children){
-				int h = 1 + setTreeHeight(child);
-				if(h > height){
-					height = h;
-				}
-			}
-		}
-		root.setMetadata(Config.METADATA_TAG.HEIGHT, height);
-		return height;
-	}
-	
-	private int setCountOfLeafNodes(ITree root){
-		int leaf = 1;
-		List<ITree> children = root.getChildren();
-		if (children.size() != 0){
-			leaf = 0;
-			for(ITree child : children){
-				leaf += setCountOfLeafNodes(child);
-			}
-		}
-		root.setMetadata(Config.METADATA_TAG.NUM_LEAF_NODE, leaf);
-		return leaf;
-	}
-	
-
+	/**
+	 * @author saikat
+	 * @param root
+	 */
 	private void setIndices(ITree root){
 		if(root.getChildren().size() == 0){
 			root.setId(currentIdx);
@@ -171,63 +120,12 @@ public class DiffParser {
 		}
 	}
 	
-	private void fixAST(ITree root, String src) {
-		int bi = root.getPos();
-		int fi = 0;
-		List<ITree> children = root.getChildren();
-		List<ITree> newChildren = new ArrayList<>();
-		int numChildren = children.size();
-		children = root.getChildren();
-		if(numChildren > 0){
-			for(int i = 0; i < numChildren; i++){
-				ITree child = children.get(i);
-				fi = child.getPos();
-				if(fi >= bi){
-					String leftOver = src.substring(bi, fi);
-					addNewNodeFromLeftOver(root, newChildren, leftOver);
-				}
-				child.setParent(root);
-				newChildren.add(child);
-				bi = child.getEndPos();
-			}
-			fi = root.getEndPos();
-			if(fi > bi){
-				String leftOver = src.substring(bi, fi);
-				addNewNodeFromLeftOver(root, newChildren, leftOver);
-			}
-			ITree child = null;
-			List<ITree> orgChildren = root.getChildren();
-			for(int i = 0; i < orgChildren.size(); i++){
-				child = orgChildren.get(i);
-				fixAST(child, src);
-			}
-		}
-		root.setChildren(newChildren);
-		if(root.getType() == 34){
-			root.setLabel("NUMBER_CONSTANT");
-		}
-		else if (root.getType() == 45){
-			root.setLabel("STRING_CONSTANT");
-		}
-	}
-	
-	private void addNewNodeFromLeftOver(ITree root, List<ITree> newChildren, String leftOver) {
-		if(leftOver != null){
-			leftOver = leftOver.trim();
-			if(leftOver.length() != 0){
-				leftOver = Util.removeComment(leftOver).trim();
-				if(leftOver.length() != 0){
-					int type = Util.getNodeTypeFromLeftOver(root, leftOver);
-//					Util.logln(type);
-					ITree child = new Tree(type, leftOver);
-					child.setId(3);
-					child.setParent(root);
-					newChildren.add(child);
-				}
-			}
-		}
-	}
-
+	/**
+	 * @author saikat
+	 * @param srcCommonParent
+	 * @param destCommonParent
+	 * @param store
+	 */
 	private void findCommonParentNode(List<ITree> srcCommonParent, List<ITree> destCommonParent, MappingStore store) {
 		if(srcCommonParent != null){
 			for(ITree cSrcParent : srcCommonParent){
@@ -236,8 +134,8 @@ public class DiffParser {
 					if(cDestParent != null){
 						cParentSrc = cSrcParent;
 						cParentDest = cDestParent;
-						int snc = countNumberOfNodes(cParentSrc.getParent());
-						int dnc = countNumberOfNodes(cParentDest.getParent());
+						int snc = TreeUtil.countNumberOfNodes(cParentSrc.getParent());
+						int dnc = TreeUtil.countNumberOfNodes(cParentDest.getParent());
 						Util.logln(snc + " " + dnc);
 						if(snc > MAXIMUM_ALLOWED_NODE || dnc >  MAXIMUM_ALLOWED_NODE){
 							break;
@@ -252,8 +150,8 @@ public class DiffParser {
 				else if (destCommonParent.contains(cDestParent)){
 					cParentSrc = cSrcParent;
 					cParentDest = cDestParent;
-					int snc = countNumberOfNodes(cParentSrc.getParent());
-					int dnc = countNumberOfNodes(cParentDest.getParent());
+					int snc = TreeUtil.countNumberOfNodes(cParentSrc.getParent());
+					int dnc = TreeUtil.countNumberOfNodes(cParentDest.getParent());
 					Util.logln(snc + " " + dnc);
 					if(snc > MAXIMUM_ALLOWED_NODE || dnc >  MAXIMUM_ALLOWED_NODE){
 						break;
@@ -273,8 +171,8 @@ public class DiffParser {
 					if(cSrcParent != null){
 						cParentSrc = cSrcParent;
 						cParentDest = cDestParent;
-						int snc = countNumberOfNodes(cParentSrc.getParent());
-						int dnc = countNumberOfNodes(cParentDest.getParent());
+						int snc = TreeUtil.countNumberOfNodes(cParentSrc.getParent());
+						int dnc = TreeUtil.countNumberOfNodes(cParentDest.getParent());
 						Util.logln(snc + " " + dnc);
 						if(snc > MAXIMUM_ALLOWED_NODE || dnc >  MAXIMUM_ALLOWED_NODE){
 							break;
@@ -289,8 +187,8 @@ public class DiffParser {
 				else if (srcCommonParent.contains(cSrcParent)){
 					cParentSrc = cSrcParent;
 					cParentDest = cDestParent;
-					int snc = countNumberOfNodes(cParentSrc.getParent());
-					int dnc = countNumberOfNodes(cParentDest.getParent());
+					int snc = TreeUtil.countNumberOfNodes(cParentSrc.getParent());
+					int dnc = TreeUtil.countNumberOfNodes(cParentDest.getParent());
 					Util.logln(snc + " " + dnc);
 					if(snc > MAXIMUM_ALLOWED_NODE || dnc >  MAXIMUM_ALLOWED_NODE){
 						break;
@@ -310,20 +208,12 @@ public class DiffParser {
 		}*/
 	}
 
-	private int countNumberOfNodes(ITree root) {
-		if(root == null){
-			return 0;
-		}
-		else{
-			List<ITree> children = root.getChildren();
-			int nodes = 1;
-			for(ITree child : children){
-				nodes += countNumberOfNodes(child);
-			}
-			return nodes;
-		}
-	}
-
+	/**
+	 * @author saikat
+	 * @param srcTree
+	 * @param destTree
+	 * @param store
+	 */
 	private void extractCommonParentsChainFromActions(ITree srcTree, ITree destTree, MappingStore store) {
 		ActionGenerator gen = new ActionGenerator(srcTree, destTree, store);
 		gen.generate();
@@ -333,12 +223,12 @@ public class DiffParser {
 			List<ITree> parents = incidentNode.getParents();
 			
 			if (action.getName() == "INS"){
-				parents.add(0, action.getNode());
+				parents.add(0, action.getNode().getParent());
 				if (destCommonParent == null){
 					destCommonParent = parents;
 				}
 				else{
-					destCommonParent = getCommonParents(destCommonParent, parents);
+					destCommonParent = Util.getCommonParents(destCommonParent, parents);
 				}
 			}
 			else if(action.getName() == "MOV"){
@@ -346,7 +236,7 @@ public class DiffParser {
 					srcCommonParent = parents;
 				}
 				else{
-					srcCommonParent = getCommonParents(srcCommonParent, parents);
+					srcCommonParent = Util.getCommonParents(srcCommonParent, parents);
 				}
 				ITree destNode = store.getDst(action.getNode());
 				List<ITree> destParents = destNode.getParents();
@@ -355,72 +245,34 @@ public class DiffParser {
 					destCommonParent = destParents;
 				}
 				else{
-					destCommonParent = getCommonParents(destCommonParent, destParents);
+					destCommonParent = Util.getCommonParents(destCommonParent, destParents);
 				}
 			}
 			else{
-				parents.add(0, action.getNode());
+				parents.add(0, action.getNode().getParent());
 				if (srcCommonParent == null){
 					srcCommonParent = parents;
 				}
 				else{
-					srcCommonParent = getCommonParents(srcCommonParent, parents);
+					srcCommonParent = Util.getCommonParents(srcCommonParent, parents);
 				}
 			}
 		}
 	}
 	
-	private ITree normalizeToSubTree(List<ITree> nodes) throws InternalError{
-		if(nodes.size() == 1){
-			return nodes.get(0);
-		}
-		else if(nodes.size() > 100){
-			throw new InternalError("Large number of nodes");
-		}
-		else{
-			List<ITree> binaryChildren = new ArrayList<ITree>();
-			ITree leftChild = nodes.get(0);
-			List<ITree> right = new ArrayList<ITree>();
-			for(int i = 1; i < nodes.size(); i++){
-				right.add(nodes.get(i));
-			}
-			ITree rightChild = normalizeToSubTree(right);
-			binaryChildren.add(leftChild);
-			binaryChildren.add(rightChild);
-			ITree head = new Tree(Config.INTERMEDIATE_NODE_TYPE , "");	
-			head.setChildren(binaryChildren);
-			return head;
-		}
-	}
 	
-	private ITree binarizeAST(ITree root) throws InternalError{
-		List<ITree> children = root.getChildren();
-		List<ITree> newChildren = new ArrayList<ITree>();
-		if(children.size() == 0){
-			return root;
-		}
-		else if(children.size() == 1){
-			return binarizeAST(children.get(0));
-		}
-		else{
-			for(ITree child : children){
-				newChildren.add(binarizeAST(child));
-			}
-			ITree secondRoot = normalizeToSubTree(newChildren);
-			root = secondRoot;
-		}
-		return root;
-	}
 	
 	public static void main(String[] args) throws UnsupportedOperationException, IOException {
-		if(args.length < 4){
-			Util.logln("java -jar DiffParser.jar <Parent file list> <child file list> <output dir> <Maximum allowed node>");
+		if(args.length < 3){
+			Util.logln("java -jar DiffParser.jar <Parent file list> <child file list> <output dir> [<Maximum allowed node>]");
 			System.exit(0);
 		}
 		String parentFileList = args[0];
 		String childlFileList = args[1];
 		String outputDir = args[2];
-		//MAXIMUM_ALLOWED_NODE = Integer.parseInt(args[3]);
+		if(args.length == 4){
+			MAXIMUM_ALLOWED_NODE = Integer.parseInt(args[3]);
+		}
 		Util.logln(parentFileList + " " + childlFileList + " " + outputDir + " " + MAXIMUM_ALLOWED_NODE);
 		Scanner parentScanner = new Scanner(new File(parentFileList));
 		Scanner childScanner = new Scanner(new File(childlFileList));
@@ -471,6 +323,10 @@ public class DiffParser {
 		childTree.close();
 	}
 
+	/**
+	 * @author saikat
+	 * @return
+	 */
 	private String getChildTreeString() {
 		if (!alreadyParsed) return null;
 		else{
@@ -478,6 +334,10 @@ public class DiffParser {
 		}
 	}
 
+	/**
+	 * @author saikat
+	 * @return
+	 */
 	private String getChildCodeString() {
 		if (!alreadyParsed) return null;
 		else{
@@ -485,6 +345,10 @@ public class DiffParser {
 		}
 	}
 
+	/**
+	 * @author saikat
+	 * @return
+	 */
 	private String getParentTreeString() {
 		if (!alreadyParsed) return null;
 		else{
@@ -492,23 +356,15 @@ public class DiffParser {
 		}
 	}
 
+	/**
+	 * @author saikat
+	 * @return
+	 */
 	private String getParentCodeString() {
 		if (!alreadyParsed) return null;
 		else{
 			return Util.getCodeRecusrsive(cParentSrc);
 		}
-	}
-
-	private static List<ITree> getCommonParents(List<ITree> commonParent, List<ITree> parents) {
-		for(ITree parent : parents){
-			if(commonParent.contains(parent)){
-				commonParent = parent.getParents();
-				commonParent.add(0, parent);
-				//Util.logln(destCommonParent);
-				break;
-			}
-		}
-		return commonParent;
 	}
 
 }

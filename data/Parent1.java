@@ -12,7 +12,6 @@ class A{
 				}
 				else if(token == 1){
 					int x = 0;
-					toString(x++);
 				}
 				else if(token == 2){
 					k--;

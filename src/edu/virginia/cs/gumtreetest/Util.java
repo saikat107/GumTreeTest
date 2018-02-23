@@ -20,6 +20,7 @@ import com.github.gumtreediff.tree.ITree;
 
 public class Util {
 	/**
+	 * @author saikat
 	 * This method is for logging and debugging.
 	 * @param message
 	 */
@@ -29,16 +30,30 @@ public class Util {
 		Util.println(message);
 	}
 	
+	
+	/**
+	 * @author saikat
+	 * @param message
+	 */
 	public static void log(Object message){
 		StackTraceElement caller = Thread.currentThread().getStackTrace()[2];
 		System.out.print(caller + "\t");
 		Util.print(message  + " ");
 	}
 	
+	/**
+	 * @author saikat
+	 * @param message
+	 */
 	public static void println(Object message){
 		Util.print(message);
 		System.out.println();
 	}
+	
+	/**
+	 * @author saikat
+	 * @param message
+	 */
 	public static void print(Object message){
 		if (message instanceof Collection) {
 			Collection msg = (Collection) message;
@@ -66,12 +81,25 @@ public class Util {
 	}
 	
 	
+	/**
+	 * @author saikat
+	 * @param basePath
+	 * @param childName
+	 * @return
+	 */
 	public static String joinPath(String basePath, String childName){
 		File baseFile = new File(basePath);
 		File childFile = new File(baseFile, childName);
 		return childFile.getPath();
 	}
 	
+	
+	/**
+	 * @author saikat
+	 * @param directory
+	 * @param absolutePath
+	 * @return
+	 */
 	public static List<String> getAllFiles(String directory, boolean absolutePath){
 		List<String>allFiles = new ArrayList<String>();
 		File baseDirectory = new File(directory);
@@ -103,15 +131,30 @@ public class Util {
 		return patchEntries;
 	}*/
 	
-	
+	/**
+	 * @author saikat
+	 * @param leftOver
+	 * @return
+	 */
 	public static boolean hasBlockComment(String leftOver){
 		return leftOver.contains("/*");
 	}
 	
+	/**
+	 * @author saikat
+	 * @param leftOver
+	 * @return
+	 */
 	public static boolean hasLineComment(String leftOver){
 		return leftOver.contains("//");
 	}
 	
+	
+	/**
+	 * @author saikat
+	 * @param leftOver
+	 * @return
+	 */
 	public static String removeComment(String leftOver) {
 		while(hasBlockComment(leftOver))
 			leftOver = removeBlockComment(leftOver);
@@ -120,6 +163,11 @@ public class Util {
 		return leftOver;
 	}
 
+	/**
+	 * @author saikat
+	 * @param leftOver
+	 * @return
+	 */
 	public static String removeBlockComment(String leftOver) {
 		int startCommentIdx = leftOver.indexOf("/*");
 		if(startCommentIdx == -1){
@@ -137,6 +185,12 @@ public class Util {
 		return leftOver.trim();
 	}
 	
+	
+	/**
+	 * @author saikat
+	 * @param leftOver
+	 * @return
+	 */
 	public static String removeLineComment(String leftOver) {
 		int startCommentIdx = leftOver.indexOf("//");
 		if(startCommentIdx == -1){
@@ -155,6 +209,10 @@ public class Util {
 	}
 	
 
+	/**
+	 * @author saikat
+	 * @param root
+	 */
 	public static void dfsPrint(ITree root){
 		if(root == null){
 			return;
@@ -180,6 +238,12 @@ public class Util {
 		}
 	}
 
+	/**
+	 * @author saikat
+	 * @param srcPath
+	 * @return
+	 * @throws IOException
+	 */
 	public static String readFile(String srcPath) throws IOException {
 		String text = "";
 		FileReader inputStrem = new FileReader(new File(srcPath));
@@ -191,6 +255,11 @@ public class Util {
 		return text;
 	}
 
+	/**
+	 * @author saikat
+	 * @param root
+	 * @param writer
+	 */
 	public static void writeDataRecusrsive(ITree root, PrintStream writer){
 		if(root.getChildren().size() == 0){
 			if(writer != null){
@@ -209,6 +278,11 @@ public class Util {
 	}
 	
 	
+	/**
+	 * @author saikat
+	 * @param root
+	 * @return
+	 */
 	public static String getCodeRecusrsive(ITree root){
 		if(root.getChildren().size() == 0){
 			return root.getLabel().trim() + " ";
@@ -222,7 +296,11 @@ public class Util {
 		}
 	}
 	
-	
+	/**
+	 * @author saikat
+	 * @param root
+	 * @param writer
+	 */
 	private static void writeTreeRecursive(ITree root, PrintStream writer){
 		if(root == null || root.getChildren().size() == 0){
 			return;
@@ -242,6 +320,11 @@ public class Util {
 		}
 	}
 	
+	/**
+	 * @author saikat
+	 * @param root
+	 * @return
+	 */
 	public static String getSourceTree(ITree root){
 		if(root == null || root.getChildren().size() == 0){
 			return "";
@@ -258,6 +341,12 @@ public class Util {
 		return null;
 	}
 	
+	/**
+	 * @author saikat
+	 * @param root
+	 * @param sourceDataFile
+	 * @param sourceTreeFile
+	 */
 	public static void printSourceTree(ITree root, PrintStream sourceDataFile, PrintStream sourceTreeFile) {
 		writeDataRecusrsive(root, sourceDataFile);	
 		sourceDataFile.println();
@@ -265,15 +354,30 @@ public class Util {
 		sourceTreeFile.println();
 	}
 
+	/**
+	 * @author saikat
+	 * @param root
+	 * @param destFile
+	 */
 	public static void printDestTree(ITree root, PrintStream destFile) {
 		destFile.print("AST_ROOT_SC2NF ");
 		Util.printRecuriveTree(root, destFile);
 	}
 	
+	/**
+	 * @author saikat
+	 * @param root
+	 * @return
+	 */
 	public static String getDestTree(ITree root){
 		return "AST_ROOT_SC2NF " + getDestTreeRecursive(root);
 	}
 
+	/**
+	 * @author saikat
+	 * @param root
+	 * @return
+	 */
 	private static String getDestTreeRecursive(ITree root) {
 		String returnStr = "";
 		List<ITree> children = root.getChildren();
@@ -290,6 +394,11 @@ public class Util {
 		return returnStr;
 	}
 
+	/**
+	 * @author saikat
+	 * @param root
+	 * @param file
+	 */
 	public static void writeRecursiveGrammar(ITree root, PrintStream file){
 		List<ITree> children = root.getChildren();
 		if(children.size() == 0){
@@ -307,11 +416,20 @@ public class Util {
 		}
 	}
 	
-	
+	/**
+	 * @author saikat
+	 * @param node
+	 * @return
+	 */
 	public static boolean isLeafNode(ITree node){
 		return node.getChildren().size()==0;
 	}
 	
+	/**
+	 * @author saikat
+	 * @param root
+	 * @param destFile
+	 */
 	private static void printRecuriveTree(ITree root, PrintStream destFile) {
 		List<ITree> children = root.getChildren();
 		destFile.print("` " + root.getType() + " ");
@@ -327,6 +445,12 @@ public class Util {
 		
 	}
 
+	/**
+	 * @author saikat
+	 * @param cParentDest
+	 * @param destCodeWriter
+	 * @param destTreeWriter
+	 */
 	public static void printDestCodeAndTree(ITree cParentDest, PrintStream destCodeWriter, PrintStream destTreeWriter) {
 		Util.writeDataRecusrsive(cParentDest, destCodeWriter);
 		destCodeWriter.println();
@@ -334,6 +458,12 @@ public class Util {
 		destTreeWriter.println();
 	}
 
+	/**
+	 * @author saikat
+	 * @param root
+	 * @param leftOver
+	 * @return
+	 */
 	public static int getNodeTypeFromLeftOver(ITree root, String leftOver) {
 		leftOver = leftOver.trim();
 		if(leftOver.compareTo("+") == 0){
@@ -496,6 +626,23 @@ public class Util {
 			return 252;
 		}
 		return root.getType();
+	}
+
+	/**
+	 * @author saikat
+	 * @param commonParent
+	 * @param parents
+	 * @return
+	 */
+	public static List<ITree> getCommonParents(List<ITree> commonParent, List<ITree> parents) {
+		for(ITree parent : parents){
+			if(commonParent.contains(parent)){
+				commonParent = parent.getParents();
+				commonParent.add(0, parent);
+				break;
+			}
+		}
+		return commonParent;
 	}
 
 }
