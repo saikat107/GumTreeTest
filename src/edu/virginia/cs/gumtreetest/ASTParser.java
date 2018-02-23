@@ -1,13 +1,12 @@
 package edu.virginia.cs.gumtreetest;
 
 import java.io.IOException;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
+
 import java.util.Set;
 import java.util.Stack;
 
@@ -18,11 +17,11 @@ import com.github.gumtreediff.tree.TreeContext;
 
 public class ASTParser {
 	
-	private String filePath;
+	//private String filePath;
 	ITree root;
 	
 	public ASTParser(String filePath) throws IOException{
-		this.filePath = filePath;
+		//this.filePath = filePath;
 		Run.initGenerators();
 		TreeContext fileContext = new JdtTreeGenerator().generateFromFile(filePath);
 		root = fileContext.getRoot();
@@ -33,7 +32,7 @@ public class ASTParser {
 	}
 	
 	public Map<String, Set<List<String>>> getGrammar(Map<String, Set<List<String>>> grammar){		
-		Stack<ITree> qu = new Stack();
+		Stack<ITree> qu = new Stack<ITree>();
 		qu.add(root);
 		while(!qu.isEmpty()){
 			ITree curr = qu.pop();

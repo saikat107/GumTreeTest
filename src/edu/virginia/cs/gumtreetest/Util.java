@@ -1,22 +1,19 @@
 package edu.virginia.cs.gumtreetest;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.io.PrintWriter;
+
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
+
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 
-import org.hamcrest.core.IsInstanceOf;
 
 import com.github.gumtreediff.tree.ITree;
 
@@ -194,7 +191,7 @@ public class Util {
 		return text;
 	}
 
-	private static void writeDataRecusrsive(ITree root, PrintStream writer){
+	public static void writeDataRecusrsive(ITree root, PrintStream writer){
 		if(root.getChildren().size() == 0){
 			if(writer != null){
 				writer.print(root.getLabel().trim() + " ");
@@ -210,6 +207,21 @@ public class Util {
 			}
 		}
 	}
+	
+	
+	public static String getCodeRecusrsive(ITree root){
+		if(root.getChildren().size() == 0){
+			return root.getLabel().trim() + " ";
+		}
+		else{
+			String code = "";
+			for(ITree child: root.getChildren()){
+				code += getCodeRecusrsive(child);
+			}
+			return code;
+		}
+	}
+	
 	
 	private static void writeTreeRecursive(ITree root, PrintStream writer){
 		if(root == null || root.getChildren().size() == 0){
@@ -230,6 +242,22 @@ public class Util {
 		}
 	}
 	
+	public static String getSourceTree(ITree root){
+		if(root == null || root.getChildren().size() == 0){
+			return "";
+		}
+		if(root.getChildren().size() == 2){
+			String treeStr = "";
+			ITree leftChild = root.getChildren().get(0);
+			ITree rightChild = root.getChildren().get(1);
+			treeStr += getSourceTree(leftChild);
+			treeStr += getSourceTree(rightChild);
+			treeStr += ("[" + leftChild.getId() + "," + rightChild.getId() + "," + root.getId() + "] ");
+			return treeStr;
+		}
+		return null;
+	}
+	
 	public static void printSourceTree(ITree root, PrintStream sourceDataFile, PrintStream sourceTreeFile) {
 		writeDataRecusrsive(root, sourceDataFile);	
 		sourceDataFile.println();
@@ -238,19 +266,236 @@ public class Util {
 	}
 
 	public static void printDestTree(ITree root, PrintStream destFile) {
-		destFile.print(root.getType() + " -> ");
+		destFile.print("AST_ROOT_SC2NF ");
+		Util.printRecuriveTree(root, destFile);
+	}
+	
+	public static String getDestTree(ITree root){
+		return "AST_ROOT_SC2NF " + getDestTreeRecursive(root);
+	}
+
+	private static String getDestTreeRecursive(ITree root) {
+		String returnStr = "";
+		List<ITree> children = root.getChildren();
+		returnStr += ("` " + root.getType() + " ");
+		if(children.size() == 0){
+			returnStr += ("` " + root.getLabel() + " `` `` ");
+		}
+		else{
+			for(ITree child : children){
+				returnStr += getDestTreeRecursive(child);
+			}
+			returnStr += " `` ";
+		}
+		return returnStr;
+	}
+
+	public static void writeRecursiveGrammar(ITree root, PrintStream file){
 		List<ITree> children = root.getChildren();
 		if(children.size() == 0){
-			destFile.println(root.getLabel());
-			return;
+			file.println(root.getType() + " -> " + root.getLabel());
 		}
-		for(ITree child : children){
-			destFile.print(child.getType() + " ");
+		else{
+			file.print(root.getType() + " -> ");
+			for(ITree child : children){
+				file.print(child.getType() + " ");
+			}
+			file.println();
+			for(ITree child : children){
+				writeRecursiveGrammar(child, file);
+			}
 		}
-		destFile.println();
-		for(ITree child : children){
-			printDestTree(child, destFile);
+	}
+	
+	
+	public static boolean isLeafNode(ITree node){
+		return node.getChildren().size()==0;
+	}
+	
+	private static void printRecuriveTree(ITree root, PrintStream destFile) {
+		List<ITree> children = root.getChildren();
+		destFile.print("` " + root.getType() + " ");
+		if(children.size() == 0){
+			destFile.print("` " + root.getLabel() + " `` ");
 		}
+		else{
+			for(ITree child : children){
+				printRecuriveTree(child, destFile);
+			}
+		}
+		destFile.print("`` ");
+		
+	}
+
+	public static void printDestCodeAndTree(ITree cParentDest, PrintStream destCodeWriter, PrintStream destTreeWriter) {
+		Util.writeDataRecusrsive(cParentDest, destCodeWriter);
+		destCodeWriter.println();
+		Util.printDestTree(cParentDest, destTreeWriter);
+		destTreeWriter.println();
+	}
+
+	public static int getNodeTypeFromLeftOver(ITree root, String leftOver) {
+		leftOver = leftOver.trim();
+		if(leftOver.compareTo("+") == 0){
+			return 200;
+		}
+		else if(leftOver.compareTo("-") == 0){
+			return 201;
+		}
+		else if(leftOver.compareTo("*") == 0){
+			return 202;
+		}
+		else if(leftOver.compareTo("/") == 0){
+			return 203;
+		}
+		else if(leftOver.compareTo("=") == 0){
+			return 204;
+		}
+		else if(leftOver.compareTo("~") == 0){
+			return 205;
+		}
+		else if(leftOver.compareTo("`") == 0){
+			return 206;
+		}
+		else if(leftOver.compareTo("!") == 0){
+			return 207;
+		}
+		else if(leftOver.compareTo("@") == 0){
+			return 208;
+		}
+		else if(leftOver.compareTo("#") == 0){
+			return 209;
+		}
+		else if(leftOver.compareTo("$") == 0){
+			return 210;
+		}
+		else if(leftOver.compareTo("%") == 0){
+			return 211;
+		}
+		else if(leftOver.compareTo("^") == 0){
+			return 212;
+		}
+		else if(leftOver.compareTo("&") == 0){
+			return 213;
+		}
+		else if(leftOver.compareTo("(") == 0){
+			return 214;
+		}
+		else if(leftOver.compareTo(")") == 0){
+			return 215;
+		}
+		else if(leftOver.compareTo("()") == 0){
+			return 216;
+		}
+		else if(leftOver.compareTo("_") == 0){
+			return 217;
+		}
+		else if(leftOver.compareTo("{") == 0){
+			return 218;
+		}
+		else if(leftOver.compareTo("}") == 0){
+			return 219;
+		}
+		else if(leftOver.compareTo("{}") == 0){
+			return 220;
+		}
+		else if(leftOver.compareTo("[") == 0){
+			return 221;
+		}
+		else if(leftOver.compareTo("]") == 0){
+			return 222;
+		}
+		else if(leftOver.compareTo("[]") == 0){
+			return 223;
+		}
+		else if(leftOver.compareTo("|") == 0){
+			return 224;
+		}
+		else if(leftOver.compareTo("\\") == 0){
+			return 225;
+		}
+		else if(leftOver.compareTo(":") == 0){
+			return 226;
+		}
+		else if(leftOver.compareTo(";") == 0){
+			return 227;
+		}
+		else if(leftOver.compareTo("\'") == 0){
+			return 228;
+		}
+		else if(leftOver.compareTo("\"") == 0){
+			return 229;
+		}
+		else if(leftOver.compareTo("<") == 0){
+			return 230;
+		}
+		else if(leftOver.compareTo(">") == 0){
+			return 231;
+		}
+		else if(leftOver.compareTo("<>") == 0){
+			return 232;
+		}
+		else if(leftOver.compareTo("?") == 0){
+			return 233;
+		}
+		else if(leftOver.compareTo(",") == 0){
+			return 235;
+		}
+		else if(leftOver.compareTo(".") == 0){
+			return 236;
+		}
+		else if(leftOver.compareTo("==") == 0){
+			return 236;
+		}
+		else if(leftOver.compareTo("+=") == 0){
+			return 237;
+		}
+		else if(leftOver.compareTo("-=") == 0){
+			return 238;
+		}
+		else if(leftOver.compareTo("*=") == 0){
+			return 239;
+		}
+		else if(leftOver.compareTo("/=") == 0){
+			return 240;
+		}
+		else if(leftOver.compareTo("%=") == 0){
+			return 241;
+		}
+		else if(leftOver.compareTo("!=") == 0){
+			return 242;
+		}
+		else if(leftOver.compareTo("&=") == 0){
+			return 243;
+		}
+		else if(leftOver.compareTo("|=") == 0){
+			return 244;
+		}
+		else if(leftOver.compareTo("^=") == 0){
+			return 245;
+		}
+		else if(leftOver.compareTo("~=") == 0){
+			return 246;
+		}
+		else if(leftOver.compareTo("++") == 0){
+			return 247;
+		}
+		else if(leftOver.compareTo("--") == 0){
+			return 248;
+		}
+		else if(leftOver.compareTo("public") == 0){
+			return 249;
+		}
+		else if(leftOver.compareTo("private") == 0){
+			return 250;
+		}
+		else if(leftOver.compareTo("protected") == 0){
+			return 251;
+		}
+		else if(leftOver.compareTo("final") == 0){
+			return 252;
+		}
+		return root.getType();
 	}
 
 }

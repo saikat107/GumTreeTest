@@ -3,20 +3,15 @@ package edu.virginia.cs.gumtreetest;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+import java.util.Scanner;
 
-import org.eclipse.jdt.core.dom.ASTNode;
 
 import com.github.gumtreediff.actions.ActionGenerator;
 import com.github.gumtreediff.actions.model.Action;
 import com.github.gumtreediff.client.Run;
 import com.github.gumtreediff.gen.jdt.JdtTreeGenerator;
-import com.github.gumtreediff.matchers.Mapping;
 import com.github.gumtreediff.matchers.MappingStore;
 import com.github.gumtreediff.matchers.Matcher;
 import com.github.gumtreediff.matchers.Matchers;
@@ -26,8 +21,11 @@ import com.github.gumtreediff.tree.TreeContext;
 
 public class DiffParser {
 	
-	private static int nonLeafIdx = 200;
-	private static int currentIdx = 0;
+	public static int MAXIMUM_ALLOWED_NODE = 2000;
+	public static int MINIMUM_ALLOWED_NODE = 3;
+	
+	private  int nonLeafIdx = 200;
+	private  int currentIdx = 0;
 	private String srcPath;
 	private String destPath;
 	private String srcFileText;
@@ -42,17 +40,21 @@ public class DiffParser {
 		Run.initGenerators();
 		this.srcPath = srcPath;
 		this.destPath = destPath;
+		currentIdx = 0;
+		nonLeafIdx = 200;
 		srcFileText = Util.readFile(this.srcPath);
 		destFileText = Util.readFile(this.destPath);
 		parseASTDiff();
 	}
 	
-	public void writeDiffs(PrintStream srcDataWriter, PrintStream srcTreeWriter, PrintStream destGrammarWriter){
-		Util.printSourceTree(cParentSrc, srcDataWriter, srcTreeWriter);
-		Util.printDestTree(cParentDest, destGrammarWriter);
+	public void writeDiffs(PrintStream srcDataWriter, PrintStream srcTreeWriter, PrintStream destCodeWriter, PrintStream destTreeWriter){
+		if(alreadyParsed){
+			Util.printSourceTree(cParentSrc, srcDataWriter, srcTreeWriter);
+			Util.printDestCodeAndTree(cParentDest, destCodeWriter, destTreeWriter);
+		}
 	}
 	
-	public void parseASTDiff() throws IOException{
+	public boolean parseASTDiff() throws IOException{
 		TreeContext srcContext = new JdtTreeGenerator().generateFromFile(srcPath);
 		TreeContext destContext = new JdtTreeGenerator().generateFromFile(destPath);
 		ITree srcTree = srcContext.getRoot();
@@ -63,21 +65,57 @@ public class DiffParser {
 		
 		extractCommonParentsChainFromActions(srcTree, destTree, store);
 		findCommonParentNode(srcCommonParent, destCommonParent, store);
+		if(cParentSrc == null || cParentDest == null){
+			return false;
+		}
 		fixAST(cParentSrc, srcFileText);
-		//fixAST(cParentDest, destFileText) Destination AST does not need to be fixed
-		cParentSrc = binarizeAST(cParentSrc);
-		//cParentDest = binarizeAST(cParentDest); Destination AST is not needed to be binarized
-		setIndices(cParentSrc);	
-		setTreeMetadata(cParentSrc);
-		setTreeMetadata(cParentDest);
-		alreadyParsed = true;
+		fixAST(cParentDest, destFileText); //Destination AST does not need to be fixed
+		removeEmptyNode(cParentDest);
+		
+		try{
+			cParentSrc = binarizeAST(cParentSrc);
+			setIndices(cParentSrc);	
+			setTreeMetadata(cParentSrc);
+			setTreeMetadata(cParentDest);
+			int srcLeafNodeCount = currentIdx;
+			currentIdx = 0;
+			setIndices(cParentDest);
+			if(srcLeafNodeCount > MAXIMUM_ALLOWED_NODE * 2){
+				alreadyParsed = false;
+			}
+			else{
+				alreadyParsed = true;
+			}
+		}catch(InternalError ex){
+			Util.logln(ex.getMessage() + " " + srcPath); 
+			alreadyParsed = false;
+		}
+		return true;
 	}
+	
 	
 	private void setTreeMetadata(ITree root){
 		setCountOfLeafNodes(root);
-		setTreeHeight(root);
+		int height = setTreeHeight(root);
 		setTreeDepth(root, 0);
+		if(height > 100){
+			throw new InternalError("Too long tree");
+		}
 	}
+	
+	
+	private void removeEmptyNode(ITree root){
+		if(Util.isLeafNode(root) && root.getLabel().trim().length() == 0){
+			root.setLabel("<EMPTY>");
+		}
+		else{
+			List<ITree> children = root.getChildren();
+			for(ITree child : children){
+				removeEmptyNode(child);
+			}
+		}
+	}
+	
 	
 	private void setTreeDepth(ITree root, int d){
 		root.setMetadata(Config.METADATA_TAG.DEPTH, d);
@@ -139,6 +177,7 @@ public class DiffParser {
 		List<ITree> children = root.getChildren();
 		List<ITree> newChildren = new ArrayList<>();
 		int numChildren = children.size();
+		children = root.getChildren();
 		if(numChildren > 0){
 			for(int i = 0; i < numChildren; i++){
 				ITree child = children.get(i);
@@ -164,6 +203,12 @@ public class DiffParser {
 			}
 		}
 		root.setChildren(newChildren);
+		if(root.getType() == 34){
+			root.setLabel("NUMBER_CONSTANT");
+		}
+		else if (root.getType() == 45){
+			root.setLabel("STRING_CONSTANT");
+		}
 	}
 	
 	private void addNewNodeFromLeftOver(ITree root, List<ITree> newChildren, String leftOver) {
@@ -172,7 +217,9 @@ public class DiffParser {
 			if(leftOver.length() != 0){
 				leftOver = Util.removeComment(leftOver).trim();
 				if(leftOver.length() != 0){
-					ITree child = new Tree(root.getType(), leftOver);
+					int type = Util.getNodeTypeFromLeftOver(root, leftOver);
+//					Util.logln(type);
+					ITree child = new Tree(type, leftOver);
 					child.setId(3);
 					child.setParent(root);
 					newChildren.add(child);
@@ -189,13 +236,33 @@ public class DiffParser {
 					if(cDestParent != null){
 						cParentSrc = cSrcParent;
 						cParentDest = cDestParent;
+						int snc = countNumberOfNodes(cParentSrc.getParent());
+						int dnc = countNumberOfNodes(cParentDest.getParent());
+						Util.logln(snc + " " + dnc);
+						if(snc > MAXIMUM_ALLOWED_NODE || dnc >  MAXIMUM_ALLOWED_NODE){
+							break;
+						}
+					}
+					if(cSrcParent.getParent() == null || cDestParent.getParent() == null){
+						cParentSrc = cSrcParent;
+						cParentDest = cDestParent;
 						break;
 					}
 				}
 				else if (destCommonParent.contains(cDestParent)){
 					cParentSrc = cSrcParent;
 					cParentDest = cDestParent;
-					break;
+					int snc = countNumberOfNodes(cParentSrc.getParent());
+					int dnc = countNumberOfNodes(cParentDest.getParent());
+					Util.logln(snc + " " + dnc);
+					if(snc > MAXIMUM_ALLOWED_NODE || dnc >  MAXIMUM_ALLOWED_NODE){
+						break;
+					}
+					if(cSrcParent.getParent() == null || cDestParent.getParent() == null){
+						cParentSrc = cSrcParent;
+						cParentDest = cDestParent;
+						break;
+					}
 				}
 			}
 		}
@@ -206,15 +273,54 @@ public class DiffParser {
 					if(cSrcParent != null){
 						cParentSrc = cSrcParent;
 						cParentDest = cDestParent;
+						int snc = countNumberOfNodes(cParentSrc.getParent());
+						int dnc = countNumberOfNodes(cParentDest.getParent());
+						Util.logln(snc + " " + dnc);
+						if(snc > MAXIMUM_ALLOWED_NODE || dnc >  MAXIMUM_ALLOWED_NODE){
+							break;
+						}
+					}
+					if(cSrcParent.getParent() == null || cDestParent.getParent() == null){
+						cParentSrc = cSrcParent;
+						cParentDest = cDestParent;
 						break;
 					}
 				}
 				else if (srcCommonParent.contains(cSrcParent)){
 					cParentSrc = cSrcParent;
 					cParentDest = cDestParent;
-					break;
+					int snc = countNumberOfNodes(cParentSrc.getParent());
+					int dnc = countNumberOfNodes(cParentDest.getParent());
+					Util.logln(snc + " " + dnc);
+					if(snc > MAXIMUM_ALLOWED_NODE || dnc >  MAXIMUM_ALLOWED_NODE){
+						break;
+					}
+					if(cSrcParent.getParent() == null || cDestParent.getParent() == null){
+						cParentSrc = cSrcParent;
+						cParentDest = cDestParent;
+						break;
+					}
 				}
+				
 			}
+		}
+		/*if(countNumberOfNodes(cParentSrc) > MAXIMUM_ALLOWED_NODE || countNumberOfNodes(cParentDest) > MAXIMUM_ALLOWED_NODE){
+			cParentSrc = null;
+			cParentDest = null;
+		}*/
+	}
+
+	private int countNumberOfNodes(ITree root) {
+		if(root == null){
+			return 0;
+		}
+		else{
+			List<ITree> children = root.getChildren();
+			int nodes = 1;
+			for(ITree child : children){
+				nodes += countNumberOfNodes(child);
+			}
+			return nodes;
 		}
 	}
 
@@ -223,7 +329,9 @@ public class DiffParser {
 		gen.generate();
 		List<Action> actions = gen.getActions();
 		for(Action action : actions){
-			List<ITree> parents = action.getNode().getParents();
+			ITree incidentNode = action.getNode();
+			List<ITree> parents = incidentNode.getParents();
+			
 			if (action.getName() == "INS"){
 				parents.add(0, action.getNode());
 				if (destCommonParent == null){
@@ -262,9 +370,12 @@ public class DiffParser {
 		}
 	}
 	
-	private ITree normalizeToSubTree(List<ITree> nodes){
+	private ITree normalizeToSubTree(List<ITree> nodes) throws InternalError{
 		if(nodes.size() == 1){
 			return nodes.get(0);
+		}
+		else if(nodes.size() > 100){
+			throw new InternalError("Large number of nodes");
 		}
 		else{
 			List<ITree> binaryChildren = new ArrayList<ITree>();
@@ -282,7 +393,7 @@ public class DiffParser {
 		}
 	}
 	
-	private ITree binarizeAST(ITree root) {
+	private ITree binarizeAST(ITree root) throws InternalError{
 		List<ITree> children = root.getChildren();
 		List<ITree> newChildren = new ArrayList<ITree>();
 		if(children.size() == 0){
@@ -302,8 +413,90 @@ public class DiffParser {
 	}
 	
 	public static void main(String[] args) throws UnsupportedOperationException, IOException {
-		DiffParser parser = new DiffParser("src/edu/virginia/cs/gumtreetest/Parent.java", "src/edu/virginia/cs/gumtreetest/Child.java");
-		parser.writeDiffs(System.out, System.out, System.out);
+		if(args.length < 4){
+			Util.logln("java -jar DiffParser.jar <Parent file list> <child file list> <output dir> <Maximum allowed node>");
+			System.exit(0);
+		}
+		String parentFileList = args[0];
+		String childlFileList = args[1];
+		String outputDir = args[2];
+		//MAXIMUM_ALLOWED_NODE = Integer.parseInt(args[3]);
+		Util.logln(parentFileList + " " + childlFileList + " " + outputDir + " " + MAXIMUM_ALLOWED_NODE);
+		Scanner parentScanner = new Scanner(new File(parentFileList));
+		Scanner childScanner = new Scanner(new File(childlFileList));
+		PrintStream parentCode = new PrintStream(outputDir + "/parent.code");
+		PrintStream parentTree = new PrintStream(outputDir + "/parent.tree");
+		PrintStream childCode = new PrintStream(outputDir + "/child.code");
+		PrintStream childTree = new PrintStream(outputDir + "/child.tree");
+		String parentFile = "";
+		String childFile = "";
+		while(parentScanner.hasNextLine()){
+			try{
+				parentFile = parentScanner.nextLine();
+				childFile = childScanner.nextLine();
+				DiffParser parser = new DiffParser(parentFile, childFile);	
+				String parentCodeString = parser.getParentCodeString().replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
+				String parentTreeString = parser.getParentTreeString().replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");;
+				String childCodeString = parser.getChildCodeString().replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");;
+				String childTreeString = parser.getChildTreeString().replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");;
+				if(parentCodeString!= null && parentTreeString!=null && childCodeString!= null && childTreeString!= null){
+					parentCode.println(parentCodeString);
+					parentTree.println(parentTreeString);
+					childCode.println(childCodeString);
+					childTree.println(childTreeString);
+					parentCode.flush();
+					parentTree.flush();
+					childCode.flush();
+					childTree.flush();
+					
+					Util.logln(parentCodeString);
+					Util.logln(parentTreeString);
+					Util.logln(childCodeString);
+					Util.logln(childTreeString);
+				}
+				else{
+					Util.logln("One of the String is null " + parentFile);
+				}
+			}catch(Exception ex){
+//				ex.printStackTrace();
+				Util.logln(ex.getMessage() + " " + parentFile);
+				continue;
+			}
+		}
+		parentScanner.close();
+		childScanner.close();
+		parentCode.close();
+		parentTree.close();
+		childCode.close();
+		childTree.close();
+	}
+
+	private String getChildTreeString() {
+		if (!alreadyParsed) return null;
+		else{
+			return Util.getDestTree(cParentDest);
+		}
+	}
+
+	private String getChildCodeString() {
+		if (!alreadyParsed) return null;
+		else{
+			return Util.getCodeRecusrsive(cParentDest);
+		}
+	}
+
+	private String getParentTreeString() {
+		if (!alreadyParsed) return null;
+		else{
+			return Util.getSourceTree(cParentSrc);
+		}
+	}
+
+	private String getParentCodeString() {
+		if (!alreadyParsed) return null;
+		else{
+			return Util.getCodeRecusrsive(cParentSrc);
+		}
 	}
 
 	private static List<ITree> getCommonParents(List<ITree> commonParent, List<ITree> parents) {
