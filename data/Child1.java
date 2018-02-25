@@ -1,22 +1,20 @@
 import java.util.Scanner;
 import java.io.File;
 class A{
-	public  void function1(int k){
+	public  void function2(int k){
 		for(int i = 0; i < 100; i++){
 			Scanner scan = new Scanner(new File(k + i + ".txt"));
 			while(scan.hasNext()){
 				String token = scan.next();
 				int tkn = Integer.parseInt(token);
 				if(token == 0){
-					int m = 0;
 					System.out.println("token 0");
 				}
-				else if(token == 1){
+				else if(token == 1){/**lkjl**/ //hello 
 					int x = 0;
-					toString(x++);
 				}
 				else if(token == 2){
-					k--;
+					/**adfs*/k--;//
 				}
 				else{
 					System.out.println("Error");

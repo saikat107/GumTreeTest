@@ -16,5 +16,39 @@ public class Config {
 		static String NUM_LEAF_NODE = "leaf";
 		static String DEPTH = "depth";
 	}
+	/*
+	 * if(leftOver.compareTo("+") == 0){
+			return 200;
+		}
+		else if(leftOver.compareTo("-") == 0){
+			return 201;
+		}
+		else if(leftOver.compareTo("*") == 0){
+			return 202;
+		}
+		else if(leftOver.compareTo("/") == 0){
+			return 203;
+		}
+		else if(leftOver.compareTo("=") == 0){
+			return 204;
+		}
+		else if(leftOver.compareTo("~") == 0){
+			return 205;
+		}
+		else if(leftOver.compareTo("`") == 0){
+			return 206;
+		}
+		else if(leftOver.compareTo("!") == 0){
+			return 207;
+		}
+		else if(leftOver.compareTo("@") == 0){
+			return 208;
+		}
+	 */
+	public static class ASTTYPE_TAG{
+		public static final int JAVADOC = 29;
+		public static final int NUMBER_CONSTANT = 34;
+		public static final int STRING_CONSTANT = 45;
+	}
 }
 

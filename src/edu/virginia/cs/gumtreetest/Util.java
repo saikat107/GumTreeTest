@@ -240,6 +240,37 @@ public class Util {
 
 	/**
 	 * @author saikat
+	 * @param root
+	 */
+	public static void nodePrint(ITree root){
+		if(root == null){
+			return;
+		}
+		Stack<ITree> nodes = new Stack<>();
+		Stack<Integer> level = new Stack<>();
+		nodes.push(root);
+		level.push(0);
+		while(!nodes.isEmpty()){
+			ITree curr = nodes.pop();
+			int l = level.pop();
+			for(int i = 0; i < l; i++){
+				System.out.print('\t');
+			}
+			List<ITree> children = curr.getChildren();
+			int cz = children.size();
+			if(cz == 0){
+				Util.logln(curr.getLabel() + " " + curr.getType());
+			}
+			for(int idx = cz-1;  idx >=0; idx --){
+				ITree child = children.get(idx);
+				nodes.push(child);
+				level.push(l+1);
+			}
+		}
+	}
+	
+	/**
+	 * @author saikat
 	 * @param srcPath
 	 * @return
 	 * @throws IOException

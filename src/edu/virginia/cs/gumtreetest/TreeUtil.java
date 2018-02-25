@@ -173,7 +173,9 @@ public class TreeUtil {
 					addNewNodeFromLeftOver(root, newChildren, leftOver);
 				}
 				child.setParent(root);
-				newChildren.add(child);
+				child.setLabel(child.getLabel().trim());
+				if(child.getType() != Config.ASTTYPE_TAG.JAVADOC)
+					newChildren.add(child);
 				bi = child.getEndPos();
 			}
 			fi = root.getEndPos();
@@ -189,10 +191,10 @@ public class TreeUtil {
 			}
 		}
 		root.setChildren(newChildren);
-		if(root.getType() == 34){
+		if(root.getType() == Config.ASTTYPE_TAG.NUMBER_CONSTANT){
 			root.setLabel("NUMBER_CONSTANT");
 		}
-		else if (root.getType() == 45){
+		else if (root.getType() == Config.ASTTYPE_TAG.STRING_CONSTANT){
 			root.setLabel("STRING_CONSTANT");
 		}
 	}

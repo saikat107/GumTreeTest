@@ -19,7 +19,7 @@ import com.github.gumtreediff.tree.TreeContext;
 
 public class DiffParser {
 	
-	public static int MAXIMUM_ALLOWED_NODE = 50;
+	public static int MAXIMUM_ALLOWED_NODE = 143;
 	public static int MINIMUM_ALLOWED_NODE = 3;
 	
 	private  int nonLeafIdx = 200;
@@ -80,6 +80,7 @@ public class DiffParser {
 		TreeUtil.fixAST(cParentSrc, srcFileText);
 		TreeUtil.fixAST(cParentDest, destFileText); //Destination AST does not need to be fixed
 		TreeUtil.removeEmptyNode(cParentDest);
+//		Util.dfsPrint(cParentSrc);
 		try{
 			cParentSrc = TreeUtil.binarizeAST(cParentSrc);
 			setIndices(cParentSrc);	

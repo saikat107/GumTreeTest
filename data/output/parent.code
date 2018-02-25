@@ -1,1 +1,1 @@
-if( token == NUMBER_CONSTANT ) { System.out . println ( STRING_CONSTANT ) ; } else if( token == NUMBER_CONSTANT ) { int x = NUMBER_CONSTANT ; } else if( token == NUMBER_CONSTANT ) { k -- ; } else { System.out . println ( STRING_CONSTANT ) ; } 
+import java.io.IOException ; class A { @ Override ( h = NUMBER_CONSTANT , expected = IOException ) public String toString () { return STRING_CONSTANT ; } } 
