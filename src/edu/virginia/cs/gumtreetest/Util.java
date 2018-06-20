@@ -5,10 +5,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,15 +18,19 @@ import java.util.Stack;
 
 
 import com.github.gumtreediff.tree.ITree;
+import com.github.gumtreediff.tree.Tree;
 
-
+@SuppressWarnings("unchecked")
 public class Util {
 	/**
 	 * @author saikat
 	 * This method is for logging and debugging.
 	 * @param message
 	 */
+	@SuppressWarnings("unused")
 	public static void logln(Object message){
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		Date date = new Date();
 		StackTraceElement caller = Thread.currentThread().getStackTrace()[2];
 		System.out.print(caller + "\t");
 		Util.println(message);
@@ -54,6 +60,7 @@ public class Util {
 	 * @author saikat
 	 * @param message
 	 */
+	@SuppressWarnings("rawtypes")
 	public static void print(Object message){
 		if (message instanceof Collection) {
 			Collection msg = (Collection) message;
@@ -72,6 +79,7 @@ public class Util {
 				Util.print(key);
 				System.out.print(" : ");
 				Util.print(map.get(key));
+				System.out.print("\n");
 			}
 			System.out.println("}");
 		}
@@ -214,6 +222,8 @@ public class Util {
 	 * @param root
 	 */
 	public static void dfsPrint(ITree root){
+		StackTraceElement caller = Thread.currentThread().getStackTrace()[2];
+		System.out.print(caller + "\n");
 		if(root == null){
 			return;
 		}
@@ -227,7 +237,7 @@ public class Util {
 			for(int i = 0; i < l; i++){
 				System.out.print('\t');
 			}
-			System.out.println(curr.getType() + " " + curr.getId() + " " + curr.getLabel());
+			System.out.println(curr.getLabel() + " " + curr.getMetadata("subs_name"));
 			List<ITree> children = curr.getChildren();
 			int cz = children.size();
 			for(int idx = cz-1;  idx >=0; idx --){
@@ -314,14 +324,42 @@ public class Util {
 	 * @param root
 	 * @return
 	 */
-	public static String getCodeRecusrsive(ITree root){
+	public static String getCodeRecusrsive(ITree root, boolean replace){
 		if(root.getChildren().size() == 0){
-			return root.getLabel().trim() + " ";
+			Object name = null;
+			if(replace){
+				name = root.getMetadata("subs_name");
+			}
+			if(name == null){
+				name = root.getLabel() ;
+			}
+//			Util.logln(name);
+			return  name.toString().trim() + " ";
+			//return root.getLabel().trim() + " ";
 		}
 		else{
 			String code = "";
 			for(ITree child: root.getChildren()){
-				code += getCodeRecusrsive(child);
+				code += getCodeRecusrsive(child, replace);
+			}
+			return code;
+		}
+	}
+	
+	
+	public static String getTypedCodeRecusrsive(ITree root){
+		if(root.getChildren().size() == 0){
+			Object name = null;
+			if(name == null){
+				String type = (String)root.getMetadata(Config.METADATA_TAG.DATA_TYPE);
+				name = type ;
+			}
+			return  name.toString().trim() + " ";
+		}
+		else{
+			String code = "";
+			for(ITree child: root.getChildren()){
+				code += getTypedCodeRecusrsive(child);
 			}
 			return code;
 		}
@@ -372,6 +410,7 @@ public class Util {
 		return null;
 	}
 	
+	
 	/**
 	 * @author saikat
 	 * @param root
@@ -400,8 +439,17 @@ public class Util {
 	 * @param root
 	 * @return
 	 */
-	public static String getDestTree(ITree root){
-		return "AST_ROOT_SC2NF " + getDestTreeRecursive(root);
+	public static String getDestTree(ITree root, boolean replace){
+		return "AST_ROOT_SC2NF " + getDestTreeRecursive(root, replace);
+	}
+	
+	/**
+	 * @author saikat
+	 * @param root
+	 * @return
+	 */
+	public static String getDestTypeTree(ITree root){
+		return "AST_ROOT_SC2NF " + getDestTypeTreeRecursive(root);
 	}
 
 	/**
@@ -409,16 +457,48 @@ public class Util {
 	 * @param root
 	 * @return
 	 */
-	private static String getDestTreeRecursive(ITree root) {
+	private static String getDestTreeRecursive(ITree root, boolean replace) {
 		String returnStr = "";
 		List<ITree> children = root.getChildren();
 		returnStr += ("` " + root.getType() + " ");
 		if(children.size() == 0){
-			returnStr += ("` " + root.getLabel() + " `` `` ");
+			Object name = null;
+			if(replace) {
+				name = root.getMetadata("subs_name");
+			}
+			if(name == null){
+				name = root.getLabel();
+			}
+			returnStr += ("` " + name + " `` `` ");
 		}
 		else{
 			for(ITree child : children){
-				returnStr += getDestTreeRecursive(child);
+				returnStr += getDestTreeRecursive(child, replace);
+			}
+			returnStr += " `` ";
+		}
+		return returnStr;
+	}
+	
+	/**
+	 * @author saikat
+	 * @param root
+	 * @return
+	 */
+	private static String getDestTypeTreeRecursive(ITree root) {
+		String returnStr = "";
+		List<ITree> children = root.getChildren();
+		returnStr += ("` " + root.getType() + " ");
+		if(children.size() == 0){
+			Object name = null;
+			if(name == null){
+				name = root.getMetadata(Config.METADATA_TAG.DATA_TYPE);
+			}
+			returnStr += ("` " + name + " `` `` ");
+		}
+		else{
+			for(ITree child : children){
+				returnStr += getDestTypeTreeRecursive(child);
 			}
 			returnStr += " `` ";
 		}
@@ -496,7 +576,7 @@ public class Util {
 	 * @return
 	 */
 	public static int getNodeTypeFromLeftOver(ITree root, String leftOver) {
-		leftOver = leftOver.trim();
+		
 		if(leftOver.compareTo("+") == 0){
 			return 200;
 		}
@@ -560,6 +640,9 @@ public class Util {
 		else if(leftOver.compareTo("{}") == 0){
 			return 220;
 		}
+		else if(leftOver.compareTo("{}") == 0){
+			return 220;
+		}
 		else if(leftOver.compareTo("[") == 0){
 			return 221;
 		}
@@ -600,10 +683,10 @@ public class Util {
 			return 233;
 		}
 		else if(leftOver.compareTo(",") == 0){
-			return 235;
+			return 234;
 		}
 		else if(leftOver.compareTo(".") == 0){
-			return 236;
+			return 235;
 		}
 		else if(leftOver.compareTo("==") == 0){
 			return 236;
@@ -644,19 +727,25 @@ public class Util {
 		else if(leftOver.compareTo("--") == 0){
 			return 248;
 		}
-		else if(leftOver.compareTo("public") == 0){
+		else if(leftOver.compareTo("&&") == 0){
 			return 249;
 		}
-		else if(leftOver.compareTo("private") == 0){
+		else if(leftOver.compareTo("||") == 0){
 			return 250;
 		}
-		else if(leftOver.compareTo("protected") == 0){
+		else if(leftOver.compareTo(">=") == 0){
 			return 251;
 		}
-		else if(leftOver.compareTo("final") == 0){
+		else if(leftOver.compareTo("<=") == 0){
 			return 252;
 		}
-		return root.getType();
+		else if(Config.JavaKeywords.isKeyWord(leftOver)){
+			return Config.JavaKeywords.getKeyWordType(leftOver);
+		}
+		else{
+			//Util.log(leftOver);
+			return Config.ASTTYPE_TAG.REST_OF_LEFTOVER;
+		}
 	}
 
 	/**
@@ -674,6 +763,153 @@ public class Util {
 			}
 		}
 		return commonParent;
+	}
+
+
+	public static void dfsPrintMetaData(ITree root, String metadata) {
+		if(root == null){
+			return;
+		}
+		Stack<ITree> nodes = new Stack<>();
+		Stack<Integer> level = new Stack<>();
+		nodes.push(root);
+		level.push(0);
+		while(!nodes.isEmpty()){
+			ITree curr = nodes.pop();
+			int l = level.pop();
+			for(int i = 0; i < l; i++){
+				System.out.print('\t');
+			}
+			System.out.print(curr.getType() + " ");
+			Object data = curr.getMetadata(metadata);
+			if(data!= null){
+				System.out.println(data);
+			}
+			else{
+				System.out.println();
+			}
+			List<ITree> children = curr.getChildren();
+			int cz = children.size();
+			for(int idx = cz-1;  idx >=0; idx --){
+				ITree child = children.get(idx);
+				nodes.push(child);
+				level.push(l+1);
+			}
+		}
+	}
+
+
+	public static List<ITree> getDecomposedLeftOver(ITree root, String leftOver, int position) {
+		List<ITree> nodes = new ArrayList<ITree>();
+		List<String> keywords = Config.JavaKeywords.keywordList;
+		for(String keyword : keywords){
+			if(leftOver.contains(keyword)){
+				int bi = 0;
+				int ki = leftOver.indexOf(keyword);
+				String firstStr = leftOver.substring(bi, ki);
+				String secondStr = leftOver.substring(ki, ki + keyword.length());
+				String thirdStr = leftOver.substring(ki + keyword.length());
+				List<ITree> firstNodes = Util.getDecomposedLeftOver(root, firstStr, position);
+				ITree kNode = new Tree(Util.getNodeTypeFromLeftOver(root, secondStr), secondStr);
+				kNode.setPos(position + ki);
+				List<ITree> thirdNodes = Util.getDecomposedLeftOver(root, thirdStr,position + ki + keyword.length());
+				nodes.addAll(firstNodes);
+				nodes.add(kNode);
+				nodes.addAll(thirdNodes);
+				for(ITree node:nodes){
+					node.setParent(root);
+				}
+				return nodes;
+			}
+		}
+		List<String> punctuations = Config.JavaKeywords.punctuationsList;
+		for(String punctuation : punctuations){
+			if(leftOver.contains(punctuation)){
+				int bi = 0;
+				int ki = leftOver.indexOf(punctuation);
+				String firstStr = leftOver.substring(bi, ki);
+				String secondStr = leftOver.substring(ki, ki + punctuation.length());
+				String thirdStr = leftOver.substring(ki + punctuation.length());
+				List<ITree> firstNodes = Util.getDecomposedLeftOver(root, firstStr, position);
+				ITree kNode = new Tree(Util.getNodeTypeFromLeftOver(root, secondStr), secondStr);
+				kNode.setPos(position + ki);
+				List<ITree> thirdNodes = Util.getDecomposedLeftOver(root, thirdStr,position + ki + punctuation.length());
+				nodes.addAll(firstNodes);
+				nodes.add(kNode);
+				nodes.addAll(thirdNodes);
+				for(ITree node:nodes){
+					node.setParent(root);
+				}
+				return nodes;
+			}
+		}
+		if(leftOver.trim().length() > 0){
+			ITree node = new Tree(Util.getNodeTypeFromLeftOver(root, leftOver.trim()), leftOver.trim());
+			node.setParent(root);
+			nodes.add(node);
+		}
+		return nodes;
+	}
+	
+//	public static void main(String[] args) {
+//		String test = ".this();";
+//		List<ITree> nodes = Util.getDecomposedLeftOver(null, test,0);
+//		for(ITree node : nodes){
+//			Util.logln(node.toTreeString());
+//		}
+//	}
+
+
+	public static boolean checkIfChangeBelongToAnyMethod(ITree cParentSrc, ITree cParentDest) {
+		List<ITree> sourceAncestors = cParentSrc.getParents();
+		List<ITree> destAncestors = cParentDest.getParents();
+		boolean ret = false;
+		for (ITree parent : sourceAncestors){
+			if(parent.getType() == Config.ASTTYPE_TAG.METHOD_DECLARATION){
+				ret = true;
+				break;
+			}
+		}
+		boolean ret2 = false;
+		for (ITree parent : destAncestors){
+			if(parent.getType() == Config.ASTTYPE_TAG.METHOD_DECLARATION){
+				ret2 = true;
+				break;
+			}
+		}
+		return ret && ret2;
+	}
+
+
+	/**
+	 * This method will extract all the variables and method name from the method the change is from 
+	 * @param root
+	 * @return A list of variable
+	 */
+	public static Set<String> extractAllVariablesInScope(ITree root) {
+		Set<String> variables = new HashSet<String>();
+		List<ITree> parents = root.getParents();
+		ITree methodNode = null;
+		for(ITree parent : parents){
+			if(parent.getType() == Config.ASTTYPE_TAG.METHOD_DECLARATION){
+				methodNode = parent;
+			}
+		}
+		if(methodNode != null){
+			Stack<ITree> st = new Stack<ITree>();
+			st.push(methodNode);
+			while(!st.isEmpty()){
+				ITree curr = st.pop();
+				if(curr.getType() == Config.ASTTYPE_TAG.SIMPLE_NAME || curr.getType() == Config.ASTTYPE_TAG.COMPLEX_NAME){
+					String var = curr.getLabel();
+					variables.add(var);
+				}
+				for(ITree child : curr.getChildren()){
+					st.push(child);
+				}
+			}
+		}
+		return variables;
 	}
 
 }

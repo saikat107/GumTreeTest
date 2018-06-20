@@ -1,38 +1,73 @@
+
 import java.util.Scanner;
 import java.io.File;
-class A{
-	public  void function2(int k){
-		for(int i = 0; i < 100; i++){
-			Scanner scan = new Scanner(new File(k + i + ".txt"));
-			while(scan.hasNext()){
-				String token = scan.next();
-				int tkn = Integer.parseInt(token);
-				if(token == 0){
-					System.out.println("token 0");
-				}
-				else if(token == 1){/**lkjl**/ //hello 
-					int x = 0;
-				}
-				else if(token == 2){
-					/**adfs*/k--;//
-				}
-				else{
-					System.out.println("Error");
-				}
-			}
-			scan.close();
-		}
+import java.io.IOException;
+class B{
+	
+	public int a = 0, b = 9;
+	private static double d = 0.4;
+	boolean p = true;
+	
+	static{
+		int l = 9;
+		System.out.print("");
+	}
+	/**
+	 *
+	 * @param k
+	 */
+	public  void function2(final int k, String jj, int m){
+		int i=2, j , k=5;
+		String a = "";
+		j = 9;
 	}
 	
 	
 	@Override
-	public String toString(){
-		return "";
+	public int toString(){
+		int i=2, j , k=5;
+		String a = "";
+		j = 9;
+		B x = new B();
+		x.toString();
+		getNum();
+		this.function2(a,a,k);
+		System.out.println(x);
+		return 0;
 	}
 	
+	public B getNum(){
+		return null;
+	}
+	
+	public static int n = 0, i = 5;
+	
 	public static void main(String[] args){
-		A a = new A();
-		a.function1(10);
-		System.out.print(a.toString());
+		
+		if(n > 10){
+			i--;
+		}
+		else if (n < 10){
+			try{
+				args = new String[4];
+				do{
+					i++;
+				}while(n < 100);
+			}catch(Exception ex){
+				args = null;
+			}
+			catch(IOException ex){
+				
+			}
+			finally{
+				args = null;
+			}
+		}
+		else{
+			i = 9;
+		}
+		
+		
 	}
 }
+

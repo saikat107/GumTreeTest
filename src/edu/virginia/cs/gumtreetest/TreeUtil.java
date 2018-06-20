@@ -170,18 +170,55 @@ public class TreeUtil {
 				fi = child.getPos();
 				if(fi >= bi){
 					String leftOver = src.substring(bi, fi);
-					addNewNodeFromLeftOver(root, newChildren, leftOver);
+					addNewNodeFromLeftOver(root, newChildren, leftOver, bi);
 				}
 				child.setParent(root);
 				child.setLabel(child.getLabel().trim());
-				if(child.getType() != Config.ASTTYPE_TAG.JAVADOC)
+				if(child.getLabel().equals("") && child.isLeaf()){
+					String leftOver = src.substring(child.getPos(), child.getEndPos()).trim();
+					if(child.getType() == Config.ASTTYPE_TAG.ARRAY_IDX){
+						leftOver = leftOver.replaceAll(" ", "").replaceAll("\t", "").replaceAll("\n", "").replaceAll("\r", "").replaceAll("[ ]+", " ");
+						if(leftOver.equals("[]")){
+							child.setLabel("[]");
+						}
+						else{
+							child.setLabel("[");
+							child.setType(221);
+						}
+					}
+					else if(child.getType() == Config.ASTTYPE_TAG.BODY){
+						child.setLabel("");
+						String l = "{}";
+						ITree t = child.deepCopy();
+						t.setLabel(l);
+						t.setType(Util.getNodeTypeFromLeftOver(child, l));
+						t.setParent(child);
+						t.setChildren(new ArrayList<ITree>());
+						child.addChild(t);
+					}
+					else{
+						if(leftOver.length() != 0){
+							leftOver = Util.removeComment(leftOver).trim();
+							if(leftOver.length() != 0){
+								leftOver = leftOver.trim();
+								leftOver = leftOver.replaceAll(" ", "").replaceAll("\t", "").replaceAll("\n", "").replaceAll("\r", "").replaceAll("[ ]+", " ");
+								int type = Util.getNodeTypeFromLeftOver(root, leftOver);
+								child.setType(type);
+								child.setLabel(leftOver);
+							}
+						}
+					}
+				}
+				if(child.getType() != Config.ASTTYPE_TAG.JAVADOC && 
+						root.getType() != Config.ASTTYPE_TAG.INSIDE_JAVADOC1 &&
+						root.getType() != Config.ASTTYPE_TAG.INSIDE_JAVADOC2)
 					newChildren.add(child);
 				bi = child.getEndPos();
 			}
 			fi = root.getEndPos();
 			if(fi > bi){
 				String leftOver = src.substring(bi, fi);
-				addNewNodeFromLeftOver(root, newChildren, leftOver);
+				addNewNodeFromLeftOver(root, newChildren, leftOver, bi);
 			}
 			ITree child = null;
 			List<ITree> orgChildren = root.getChildren();
@@ -197,6 +234,15 @@ public class TreeUtil {
 		else if (root.getType() == Config.ASTTYPE_TAG.STRING_CONSTANT){
 			root.setLabel("STRING_CONSTANT");
 		}
+		else if(root.getType() == Config.ASTTYPE_TAG.CHAR_CONST){
+			root.setLabel("CHAR_CONS");
+		}
+		else if(root.getType() == Config.ASTTYPE_TAG.JAVADOC ||
+				root.getType() == Config.ASTTYPE_TAG.INSIDE_JAVADOC1 ||
+				root.getType() == Config.ASTTYPE_TAG.INSIDE_JAVADOC2){
+			root.setChildren(new ArrayList<ITree>());
+			root.setLabel("JAVADOC");
+		}
 	}
 
 	
@@ -206,18 +252,28 @@ public class TreeUtil {
 	 * @param newChildren
 	 * @param leftOver
 	 */
-	public static void addNewNodeFromLeftOver(ITree root, List<ITree> newChildren, String leftOver) {
+	public static void addNewNodeFromLeftOver(ITree root, List<ITree> newChildren, String leftOver, int position) {
 		if(leftOver != null){
 			leftOver = leftOver.trim();
 			if(leftOver.length() != 0){
 				leftOver = Util.removeComment(leftOver).trim();
 				if(leftOver.length() != 0){
+					leftOver = leftOver.trim();
+					leftOver = leftOver.replaceAll(" ", "").replaceAll("\t", "").replaceAll("\n", "").replaceAll("\r", "");
 					int type = Util.getNodeTypeFromLeftOver(root, leftOver);
-//					Util.logln(type);
-					ITree child = new Tree(type, leftOver);
-					child.setId(3);
-					child.setParent(root);
-					newChildren.add(child);
+					if(type == Config.ASTTYPE_TAG.REST_OF_LEFTOVER){
+						List<ITree> nodes = Util.getDecomposedLeftOver(root, leftOver, position);
+						for(ITree node : nodes){
+							newChildren.add(node);
+						}
+					}
+					else{	
+						ITree child = new Tree(type, leftOver);
+						child.setId(3);
+						child.setParent(root);
+						newChildren.add(child);
+						child.setPos(position);
+					}
 				}
 			}
 		}
@@ -240,6 +296,17 @@ public class TreeUtil {
 				nodes += countNumberOfNodes(child);
 			}
 			return nodes;
+		}
+	}
+
+
+	public static void discoverMethodNames(ITree srcTree, boolean partOfMethod) {
+		if(srcTree.getType() == Config.ASTTYPE_TAG.METHOD_DECLARATION){
+			partOfMethod = true;
+		}
+		srcTree.setMetadata("method", partOfMethod);
+		for(ITree child : srcTree.getChildren()){
+			discoverMethodNames(child, partOfMethod);
 		}
 	}
 }
