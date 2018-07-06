@@ -1,8 +1,1 @@
-AST_ROOT_SC2NF ` 19 ` 8 ` 21 ` 7 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  ``  `` ` 27 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  `` 
-AST_ROOT_SC2NF ` 19 ` 8 ` 21 ` 7 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  ``  `` ` 27 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  `` 
-AST_ROOT_SC2NF ` 19 ` 8 ` 21 ` 7 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  ``  `` ` 27 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  `` 
-AST_ROOT_SC2NF ` 19 ` 8 ` 21 ` 7 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  ``  `` ` 27 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  `` 
-AST_ROOT_SC2NF ` 19 ` 8 ` 21 ` 7 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  ``  `` ` 27 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  `` 
-AST_ROOT_SC2NF ` 19 ` 8 ` 21 ` 7 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  ``  `` ` 27 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  `` 
-AST_ROOT_SC2NF ` 19 ` 8 ` 21 ` 7 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  ``  `` ` 27 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  `` 
-AST_ROOT_SC2NF ` 19 ` 8 ` 21 ` 7 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  ``  `` ` 27 ` 42 ` int_VAR `` `` ` 34 ` NUMBER_CONSTANT `` ``  ``  `` 
+AST_ROOT_SC2NF ` 60 ` 43 ` 42 ` String `` ``  `` ` 59 ` 42 ` java.lang.String_VAR `` `` ` 204 ` = `` `` ` 45 ` STRING_CONSTANT `` ``  `` ` 227 ` ; `` ``  `` 

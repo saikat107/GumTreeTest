@@ -52,14 +52,15 @@ public class DiffParser {
 	private String childTypeTreeString = null;
 	private String parentOriginalTypeTreeString = null;
 	
-	public DiffParser(String srcPath, String destPath) throws IOException{
+	public DiffParser(String srcPath, String destPath, String srcText, String destText) throws IOException{
 		Run.initGenerators();
 		this.srcPath = srcPath;
 		this.destPath = destPath;
 		currentIdx = 0;
 		nonLeafIdx = 200;
-		srcFileText = Util.readFile(this.srcPath);
-		destFileText = Util.readFile(this.destPath);
+		srcFileText = srcText;
+		destFileText = destText;
+		
 //		parseASTDiff();
 	}
 	
@@ -77,22 +78,36 @@ public class DiffParser {
 		}
 	}
 	
+	
+	public static List<ITree> getMethodNodes(ITree root){
+		List<ITree> methods = new ArrayList<ITree>();
+		Stack<ITree> st = new Stack<ITree>();
+		st.push(root);
+		while(!st.isEmpty()){
+			ITree curr = st.pop();
+			if(curr.getType() == Config.ASTTYPE_TAG.METHOD_DECLARATION){
+				methods.add(curr);
+			}
+			else{
+				for(ITree child : curr.getChildren()){
+					st.add(child);
+				}
+			}
+		}
+		return methods;
+	}
+	
 	/**
 	 * @author saikat
 	 * @return
 	 * @throws IOException
 	 */
-	public boolean parseASTDiff() throws IOException{
+	public boolean parseASTDiff(ITree srcTree, ITree destTree) throws IOException{
 		//# FIXME Extract all the variable that is in scope and and save a list along with the data 
-		TreeContext srcContext = new JdtTreeGenerator().generateFromFile(srcPath);
-		TreeContext destContext = new JdtTreeGenerator().generateFromFile(destPath);
-		ITree srcTree = srcContext.getRoot();
-		ITree destTree = destContext.getRoot();
 		
 		Matcher m = Matchers.getInstance().getMatcher(srcTree, destTree);
 		m.match();
-		MappingStore store = m.getMappings();
-		
+		MappingStore store = m.getMappings();		
 		extractCommonParentsChainFromActions(srcTree, destTree, store);
 		
 		findCommonParentRoots(srcCommonParent, destCommonParent, store);
@@ -397,10 +412,19 @@ public class DiffParser {
 				String []filePathParts = bothPath.split("\t");
 				String parentFile = filePathParts[0];
 				String childFile = filePathParts[1];
-				DiffParser parser = new DiffParser(parentFile, childFile);
-				boolean successfullyParsed = parser.checkSuccessFullParse(arg.replace(), arg.excludeStringChange());
-				if(successfullyParsed){
-					parserList.add(parser);
+				String srcText = Util.readFile(parentFile);
+				String destText = Util.readFile(childFile);
+				TreeContext srcContext = new JdtTreeGenerator().generateFromFile(parentFile);
+				TreeContext destContext = new JdtTreeGenerator().generateFromFile(childFile);
+				ITree srcTree = srcContext.getRoot();
+				ITree destTree = destContext.getRoot();
+				List<NodePair> methodPairs = getMethodPairs(srcTree, destTree, srcText, destText);
+				for(NodePair pair : methodPairs){
+					DiffParser parser = new DiffParser(parentFile, childFile, srcText, destText);
+					boolean successfullyParsed = parser.checkSuccessFullParse(pair.srcNode, pair.tgtNode, arg.replace(), arg.excludeStringChange());
+					if(successfullyParsed){
+						parserList.add(parser);
+					}
 				}
 			}
 			filePathScanner.close();
@@ -410,6 +434,29 @@ public class DiffParser {
 		printTrainAndTestData(allParsedResults);
 	}
 	
+
+	private static List<NodePair> getMethodPairs(ITree srcTree, ITree destTree, String srcText, String destText) {
+		Matcher m = Matchers.getInstance().getMatcher(srcTree, destTree);
+		m.match();
+		MappingStore store = m.getMappings();
+		
+		List<ITree> methodNodes = getMethodNodes(srcTree);
+		
+		List<NodePair> methods = new ArrayList<NodePair>();
+		
+		for(ITree method : methodNodes){
+			ITree dest = store.getDst(method);
+			if(dest != null){
+				methods.add(new NodePair(method, dest, srcText, destText));
+			}
+		}	
+		/*for(NodePair pair : methods){
+			Util.println("----------------------- SRC Tree ------------------------\n" + pair.srcNode.toTreeString() + 
+					"\n----------------------- Dest Tree ------------------------\n" + pair.tgtNode.toTreeString() 
+					 + "---------------------------------------------------------------");
+		}*/
+		return methods;
+	}
 
 	private static void printTrainAndTestData(Map<String, List<DiffParser>> allParsedResults) {
 		String trainDirectory = arg.outputFilePath() + "/train";
@@ -467,11 +514,11 @@ public class DiffParser {
 				tokenMasks.println(parser.allowedTokensString);
 				flushAllPrintStreams(parentCode, parentTree, childCode, childTree, parentOrgTree,
 						parentTypeCode, childTypeCode, parentTypeTree, childTypeTree, tokenMasks);
-				/*Util.logln("\n" + parser.parentCodeString + "\n" + parser.parentOrgTreeString + "\n" + parser.childCodeString + "\n" + parser.childTreeString);
+				Util.logln("\n" + parser.parentCodeString + "\n" + parser.parentOrgTreeString + "\n" + parser.childCodeString + "\n" + parser.childTreeString);
 				Util.logln(parser.parentTypeCodeString);
 				Util.logln(parser.childTypeCodeString);
 				Util.logln(parser.parentOriginalTypeTreeString);
-				Util.logln(parser.childTypeTreeString);*/
+				Util.logln(parser.childTypeTreeString);
 			}
 			closeAllPrintStreams(parentCode, parentTree, childCode, childTree, parentOrgTree, parentTypeCode, childTypeCode,
 					parentTypeTree, childTypeTree, tokenMasks);
@@ -480,9 +527,10 @@ public class DiffParser {
 		}		
 	}
 
-	private boolean checkSuccessFullParse(boolean replace, boolean excludeStringChange) {
+	private boolean checkSuccessFullParse(ITree srcNode, ITree destNode, boolean replace, boolean excludeStringChange) {
 		try{
-			boolean success = this.parseASTDiff();
+			
+			boolean success = this.parseASTDiff(srcNode, destNode);
 			if(! success) return false;
 			parentCodeString = this.getParentCodeString(arg.replace()).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
 			parentTreeString = this.getParentTreeString(arg.replace()).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
@@ -612,4 +660,17 @@ public class DiffParser {
 		}
 	}
 
+}
+
+class NodePair{
+	ITree srcNode;
+	ITree tgtNode;
+	String srcText;
+	String tgtText;
+	public NodePair(ITree s, ITree d, String sText, String dText){
+		this.srcNode = s;
+		this.tgtNode = d;
+		this.srcText = sText;
+		this.tgtText = dText;
+	}
 }

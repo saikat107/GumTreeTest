@@ -18,7 +18,7 @@ class B{
 	 */
 	public  void function2(final int k, String jj, int m){
 		int i=2, j , k=5;
-		String a = "";
+		String a = "hello";
 		j = 9;
 	}
 	
@@ -31,13 +31,13 @@ class B{
 		B x = new B();
 		x.toString();
 		getNum();
-		this.function2(a,a,k);
+		this.function2(a,1,k);
 		System.out.println(x);
 		return 0;
 	}
 	
 	public B getNum(){
-		return null;
+		return new B();
 	}
 	
 	public static int n = 0, i = 5;
@@ -45,13 +45,13 @@ class B{
 	public static void main(String[] args){
 		
 		if(n > 10){
-			i--;
+			i++;
 		}
 		else if (n < 10){
 			try{
 				args = new String[4];
 				do{
-					i+=1;
+					i--;
 				}while(n < 100);
 			}catch(Exception ex){
 				args = null;
@@ -66,8 +66,7 @@ class B{
 		else{
 			i = 9;
 		}
-		
-		
+	
 	}
 }
 
