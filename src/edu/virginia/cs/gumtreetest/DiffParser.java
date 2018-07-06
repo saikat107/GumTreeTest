@@ -125,7 +125,7 @@ public class DiffParser {
 		}
 		int snc = TreeUtil.countNumberOfNodes(cParentSrc);
 		int dnc = TreeUtil.countNumberOfNodes(cParentDest);
-		Util.logln("Src Node : " + snc + " Dest Node : " + dnc);
+		//Util.logln("Src Node : " + snc + " Dest Node : " + dnc);
 		if(snc > arg.maxChangeSize() || dnc > arg.maxChangeSize()){
 			alreadyParsed = false;
 			return false;
@@ -407,11 +407,13 @@ public class DiffParser {
 			String filePath = allFilePathsScanner.nextLine().trim();
 			Scanner filePathScanner = new Scanner(new File(filePath));
 			List<DiffParser> parserList = new ArrayList<DiffParser>();
+			// #TODO Print after every project is finished. 
 			while(filePathScanner.hasNextLine()){
 				String bothPath = filePathScanner.nextLine().trim();
 				String []filePathParts = bothPath.split("\t");
 				String parentFile = filePathParts[0];
 				String childFile = filePathParts[1];
+				// Util.logln(parentFile);
 				String srcText = Util.readFile(parentFile);
 				String destText = Util.readFile(childFile);
 				TreeContext srcContext = new JdtTreeGenerator().generateFromFile(parentFile);
@@ -423,6 +425,7 @@ public class DiffParser {
 					DiffParser parser = new DiffParser(parentFile, childFile, srcText, destText);
 					boolean successfullyParsed = parser.checkSuccessFullParse(pair.srcNode, pair.tgtNode, arg.replace(), arg.excludeStringChange());
 					if(successfullyParsed){
+						Util.logln(parser.parentCodeString);
 						parserList.add(parser);
 					}
 				}
@@ -485,6 +488,7 @@ public class DiffParser {
 	
 
 	private static void printDataToDirectory(String baseDir, List<DiffParser> parsers) {
+		// #TODO Append the files
 		Util.logln(baseDir + " " + parsers.size());
 		try {
 			File baseDirFile = new File(baseDir);
