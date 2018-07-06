@@ -51,7 +51,7 @@ class B{
 			try{
 				args = new String[4];
 				do{
-					i++;
+					i+=1;
 				}while(n < 100);
 			}catch(Exception ex){
 				args = null;

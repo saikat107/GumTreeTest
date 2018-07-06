@@ -1,1 +1,0 @@
-try { t1 = new t7 [ NUMBER_CONSTANT ] ; do { t6 -- ; } while ( t5 < NUMBER_CONSTANT ) ; } catch ( t4 t2 ) { t1 = null ; } catch ( t3 t2 ) {} finally { t1 = null ; } 

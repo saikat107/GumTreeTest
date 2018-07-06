@@ -157,7 +157,7 @@ public class TreeUtil {
 	 * @param root
 	 * @param src
 	 */
-	public static void fixAST(ITree root, String src) {
+	public static void fixAST(ITree root, String src, boolean astOnly) {
 		int bi = root.getPos();
 		int fi = 0;
 		List<ITree> children = root.getChildren();
@@ -170,41 +170,45 @@ public class TreeUtil {
 				fi = child.getPos();
 				if(fi >= bi){
 					String leftOver = src.substring(bi, fi);
-					addNewNodeFromLeftOver(root, newChildren, leftOver, bi);
+					if(!astOnly){
+						addNewNodeFromLeftOver(root, newChildren, leftOver, bi);
+					}
 				}
 				child.setParent(root);
 				child.setLabel(child.getLabel().trim());
-				if(child.getLabel().equals("") && child.isLeaf()){
-					String leftOver = src.substring(child.getPos(), child.getEndPos()).trim();
-					if(child.getType() == Config.ASTTYPE_TAG.ARRAY_IDX){
-						leftOver = leftOver.replaceAll(" ", "").replaceAll("\t", "").replaceAll("\n", "").replaceAll("\r", "").replaceAll("[ ]+", " ");
-						if(leftOver.equals("[]")){
-							child.setLabel("[]");
+				if(!astOnly){
+					if(child.getLabel().equals("") && child.isLeaf()){
+						String leftOver = src.substring(child.getPos(), child.getEndPos()).trim();
+						if(child.getType() == Config.ASTTYPE_TAG.ARRAY_IDX){
+							leftOver = leftOver.replaceAll(" ", "").replaceAll("\t", "").replaceAll("\n", "").replaceAll("\r", "").replaceAll("[ ]+", " ");
+							if(leftOver.equals("[]")){
+								child.setLabel("[]");
+							}
+							else{
+								child.setLabel("[");
+								child.setType(221);
+							}
+						}
+						else if(child.getType() == Config.ASTTYPE_TAG.BODY){
+							child.setLabel("");
+							String l = "{}";
+							ITree t = child.deepCopy();
+							t.setLabel(l);
+							t.setType(Util.getNodeTypeFromLeftOver(child, l));
+							t.setParent(child);
+							t.setChildren(new ArrayList<ITree>());
+							child.addChild(t);
 						}
 						else{
-							child.setLabel("[");
-							child.setType(221);
-						}
-					}
-					else if(child.getType() == Config.ASTTYPE_TAG.BODY){
-						child.setLabel("");
-						String l = "{}";
-						ITree t = child.deepCopy();
-						t.setLabel(l);
-						t.setType(Util.getNodeTypeFromLeftOver(child, l));
-						t.setParent(child);
-						t.setChildren(new ArrayList<ITree>());
-						child.addChild(t);
-					}
-					else{
-						if(leftOver.length() != 0){
-							leftOver = Util.removeComment(leftOver).trim();
 							if(leftOver.length() != 0){
-								leftOver = leftOver.trim();
-								leftOver = leftOver.replaceAll(" ", "").replaceAll("\t", "").replaceAll("\n", "").replaceAll("\r", "").replaceAll("[ ]+", " ");
-								int type = Util.getNodeTypeFromLeftOver(root, leftOver);
-								child.setType(type);
-								child.setLabel(leftOver);
+								leftOver = Util.removeComment(leftOver).trim();
+								if(leftOver.length() != 0){
+									leftOver = leftOver.trim();
+									leftOver = leftOver.replaceAll(" ", "").replaceAll("\t", "").replaceAll("\n", "").replaceAll("\r", "").replaceAll("[ ]+", " ");
+									int type = Util.getNodeTypeFromLeftOver(root, leftOver);
+									child.setType(type);
+									child.setLabel(leftOver);
+								}
 							}
 						}
 					}
@@ -218,13 +222,13 @@ public class TreeUtil {
 			fi = root.getEndPos();
 			if(fi > bi){
 				String leftOver = src.substring(bi, fi);
-				addNewNodeFromLeftOver(root, newChildren, leftOver, bi);
+				if(!astOnly) addNewNodeFromLeftOver(root, newChildren, leftOver, bi);
 			}
 			ITree child = null;
 			List<ITree> orgChildren = root.getChildren();
 			for(int i = 0; i < orgChildren.size(); i++){
 				child = orgChildren.get(i);
-				fixAST(child, src);
+				fixAST(child, src, astOnly);
 			}
 		}
 		root.setChildren(newChildren);

@@ -5,6 +5,7 @@ package edu.virginia.cs.gumtreetest;
 //import java.util.List;
 
 public class Argument {
+	private String allPathsFile = null;
 	private String sFilePath = null;
 	private String dFilePath = null;
 	private String oPath = null;
@@ -15,6 +16,11 @@ public class Argument {
 	private boolean r = false;
 	private boolean onlyMethod = false;
 	private boolean exclStringChg = false;
+	private boolean astOnly = false;
+	
+	public String allPathsFile(){
+		return this.allPathsFile;
+	}
 	
 	public String srcFilePath(){
 		return this.sFilePath;
@@ -48,14 +54,18 @@ public class Argument {
 		return this.exclStringChg;
 	}
 	
+	public boolean astOnly(){
+		return this.astOnly;
+	}
+	
 	public String toString(){
-		return "SrcFile\t: " + this.sFilePath + "\n"
-				+ "Dest File\t: " + this.dFilePath + "\n"
+		return "SrcFile\t: " + this.allPathsFile + "\n"
 				+ "Out Folder\t: " + this.oPath + "\n"
 				+ "Replace Var\t: " + this.r + "\n"
 				+ "Max Change\t: " + this.maxChangeSize() + "\n"
 				+ "Max Tree\t: " + this.maxTreeSize() + "\n" 
-				+ "Method Change Only\t:" + this.onlyMethodChange();
+				+ "Method Change Only\t:" + this.onlyMethodChange() + "\n"
+				+ "AST Only Change\t:" + this.astOnly();
 				
 	}
 	
@@ -70,16 +80,10 @@ public class Argument {
 			case "--exlude_string_change":
 			case "-esc":
 				arg.exclStringChg = true;
-				i++;
 				break;
-			case "--src":
-			case "-s":
-				arg.sFilePath = args[i+1];
-				i++;
-				break;
-			case "--dest":
-			case "-d":
-				arg.dFilePath = args[i+1];
+			case "--all":
+			case "-a":
+				arg.allPathsFile = args[i+1];
 				i++;
 				break;
 			case "--out":
@@ -101,6 +105,10 @@ public class Argument {
 				}
 				i++;
 				break;
+			case "--ast_only":
+			case "-ast":
+				arg.astOnly = true;
+				break;
 			case "--maxtree":
 			case "-mt":
 				arg.mTreeSize = Integer.parseInt(args[i+1]);
@@ -114,7 +122,6 @@ public class Argument {
 			case "--method_only":
 			case "-mo":
 				arg.onlyMethod = true;
-				i++;
 				break;
 			default:
 				System.out.println("Invalid Command Line Argument : " + command);

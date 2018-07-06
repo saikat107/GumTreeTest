@@ -1,1 +1,0 @@
-try { java.lang.String[]_VAR = new String [ NUMBER_CONSTANT ] ; do { int_VAR ++ ; } while ( int_VAR < NUMBER_CONSTANT ) ; } catch ( Exception java.lang.Exception_VAR ) { java.lang.String[]_VAR = null ; } catch ( IOException java.io.IOException_VAR ) {} finally { java.lang.String[]_VAR = null ; } 
