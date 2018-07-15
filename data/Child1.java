@@ -37,7 +37,7 @@ class B{
 	}
 	
 	public B getNum(){
-		return new B();
+		return null;
 	}
 	
 	public static int n = 0, i = 5;
@@ -51,7 +51,7 @@ class B{
 			try{
 				args = new String[4];
 				do{
-					i--;
+					i++;
 				}while(n < 100);
 			}catch(Exception ex){
 				args = null;

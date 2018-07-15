@@ -1,0 +1,2 @@
+do { i ++ ; } while ( n < NUMBER_CONSTANT ) ; 
+do { i -- ; } while ( n < NUMBER_CONSTANT ) ; 

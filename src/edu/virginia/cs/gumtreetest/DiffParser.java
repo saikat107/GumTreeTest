@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -414,6 +415,11 @@ public class DiffParser {
 			Util.deleteDirectory(outputFile);
 		}
 		outputFile.mkdir();
+		String allFileDirectory = arg.outputFilePath() + "/all";
+		File allFile = new File(allFileDirectory);
+		if(!allFile.exists()) {
+			allFile.mkdir();
+		}
 		
 		Scanner allFilePathsScanner = new Scanner(new File(arg.allPathsFile()));
 		Map<String, List<DiffParser>> allParsedResults = new HashMap<String, List<DiffParser>>();
@@ -437,12 +443,11 @@ public class DiffParser {
 				List<NodePair> methodPairs = getMethodPairs(srcTree, destTree, srcText, destText);
 				for(NodePair pair : methodPairs){
 					DiffParser parser = new DiffParser(parentFile, childFile, srcText, destText);
-					//Util.logln(pair.srcNode.toTreeString());
-					//Util.logln(pair.tgtNode.toTreeString());
-					boolean successfullyParsed = parser.checkSuccessFullParse(pair.srcNode, pair.tgtNode, arg.replace(), arg.excludeStringChange());
+					boolean successfullyParsed = parser.checkSuccessFullParse(
+							pair.srcNode, pair.tgtNode, arg.replace(), arg.excludeStringChange());
 					if(successfullyParsed){
-						//Util.logln(parentFile + "\n" + parser.parentCodeString);
 						parserList.add(parser);
+						printDataToDirectory(allFileDirectory, Arrays.asList(parser));
 					}
 				}
 			}
