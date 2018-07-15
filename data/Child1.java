@@ -18,7 +18,7 @@ class B{
 	 */
 	public  void function2(final int k, String jj, int m){
 		int i=2, j , k=5;
-		String a = "hello";
+		String a = "";
 		j = 9;
 	}
 	
@@ -31,7 +31,7 @@ class B{
 		B x = new B();
 		x.toString();
 		getNum();
-		this.function2(a,1,k);
+		this.function2(a,a,k);
 		System.out.println(x);
 		return 0;
 	}
@@ -45,7 +45,7 @@ class B{
 	public static void main(String[] args){
 		
 		if(n > 10){
-			i++;
+			i--;
 		}
 		else if (n < 10){
 			try{

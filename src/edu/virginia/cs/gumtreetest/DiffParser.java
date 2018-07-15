@@ -2,6 +2,7 @@ package edu.virginia.cs.gumtreetest;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class DiffParser {
 	private String srcFileText;
 	private String destFileText;
 	private String allowedTokensString = "";
-	private static double testPercentage = 0.05;
+	private static double testPercentage = 0.20;
 	List<ITree> srcCommonParent = null;
 	List<ITree> destCommonParent = null;
 	ITree cParentSrc = null;
@@ -102,9 +103,11 @@ public class DiffParser {
 	 * @return
 	 * @throws IOException
 	 */
-	public boolean parseASTDiff(ITree srcTree, ITree destTree) throws IOException{
+	public boolean parseASTDiff(ITree srcTree, ITree destTree) throws Exception{
 		//# FIXME Extract all the variable that is in scope and and save a list along with the data 
-		
+		/*Util.dfsPrint(srcTree);
+		Util.dfsPrint(destTree);
+		Util.logln("\n\n\n");*/
 		Matcher m = Matchers.getInstance().getMatcher(srcTree, destTree);
 		m.match();
 		MappingStore store = m.getMappings();		
@@ -130,10 +133,10 @@ public class DiffParser {
 			alreadyParsed = false;
 			return false;
 		}	
-		if(arg.onlyMethodChange() && !Util.checkIfChangeBelongToAnyMethod(cParentSrc, cParentDest)){
+		/*if(arg.onlyMethodChange() && !Util.checkIfChangeBelongToAnyMethod(cParentSrc, cParentDest)){
 			alreadyParsed = false;
 			return false;
-		}
+		}*/
 		
 		alreadyParsed = true;
 		findCommonParentNode(srcCommonParent, destCommonParent, store);
@@ -165,9 +168,10 @@ public class DiffParser {
 			DataTypeVisitor.setDataTypes(cParentSrc, srcPath);
 			DataTypeVisitor.setDataTypes(cParentDest, destPath);
 			DataTypeVisitor.setDataTypes(cParentOrg, srcPath);
-		}catch(InternalError ex){
+		}catch(Exception ex){
 			Util.logln(ex.getMessage() + " " + srcPath); 
 			alreadyParsed = false;
+			return false;
 		}
 		return true;
 	}
@@ -260,6 +264,9 @@ public class DiffParser {
 		if(srcCommonParent != null){
 			for(ITree cSrcParent : srcCommonParent){
 				ITree cDestParent = store.getDst(cSrcParent);
+				if(cDestParent == null){
+					continue;
+				}
 				if(destCommonParent == null){
 					if(cDestParent != null){
 						cParentSrc = cSrcParent;
@@ -297,6 +304,9 @@ public class DiffParser {
 		else if(destCommonParent != null){
 			for(ITree cDestParent : destCommonParent){
 				ITree cSrcParent = store.getSrc(cDestParent);
+				if(cSrcParent == null){
+					continue;
+				}
 				if(srcCommonParent == null){
 					if(cSrcParent != null){
 						cParentSrc = cSrcParent;
@@ -345,7 +355,7 @@ public class DiffParser {
 	 * @param destTree
 	 * @param store
 	 */
-	private void extractCommonParentsChainFromActions(ITree srcTree, ITree destTree, MappingStore store) {
+	private void extractCommonParentsChainFromActions(ITree srcTree, ITree destTree, MappingStore store) throws Exception{
 		ActionGenerator gen = new ActionGenerator(srcTree, destTree, store);
 		gen.generate();
 		List<Action> actions = gen.getActions();
@@ -370,6 +380,9 @@ public class DiffParser {
 					srcCommonParent = Util.getCommonParents(srcCommonParent, parents);
 				}
 				ITree destNode = store.getDst(action.getNode());
+				if(destNode == null){
+					continue;
+				}
 				List<ITree> destParents = destNode.getParents();
 				destParents.add(0, destNode);
 				if (destCommonParent == null){
@@ -397,9 +410,10 @@ public class DiffParser {
 		arg = Argument.preprocessArgument(args);
 		Util.logln(arg);
 		File outputFile = new File(arg.outputFilePath());
-		if(!outputFile.exists()){
-			outputFile.mkdir();
+		if(outputFile.exists()){
+			Util.deleteDirectory(outputFile);
 		}
+		outputFile.mkdir();
 		
 		Scanner allFilePathsScanner = new Scanner(new File(arg.allPathsFile()));
 		Map<String, List<DiffParser>> allParsedResults = new HashMap<String, List<DiffParser>>();
@@ -413,7 +427,7 @@ public class DiffParser {
 				String []filePathParts = bothPath.split("\t");
 				String parentFile = filePathParts[0];
 				String childFile = filePathParts[1];
-				// Util.logln(parentFile);
+				//Util.logln(parentFile);
 				String srcText = Util.readFile(parentFile);
 				String destText = Util.readFile(childFile);
 				TreeContext srcContext = new JdtTreeGenerator().generateFromFile(parentFile);
@@ -423,18 +437,22 @@ public class DiffParser {
 				List<NodePair> methodPairs = getMethodPairs(srcTree, destTree, srcText, destText);
 				for(NodePair pair : methodPairs){
 					DiffParser parser = new DiffParser(parentFile, childFile, srcText, destText);
+					//Util.logln(pair.srcNode.toTreeString());
+					//Util.logln(pair.tgtNode.toTreeString());
 					boolean successfullyParsed = parser.checkSuccessFullParse(pair.srcNode, pair.tgtNode, arg.replace(), arg.excludeStringChange());
 					if(successfullyParsed){
-						Util.logln(parser.parentCodeString);
+						//Util.logln(parentFile + "\n" + parser.parentCodeString);
 						parserList.add(parser);
 					}
 				}
 			}
+			Util.logln(filePath);
+			printTrainAndTestData(parserList);
 			filePathScanner.close();
 			allParsedResults.put(filePath, parserList);
 		}
 		allFilePathsScanner.close();
-		printTrainAndTestData(allParsedResults);
+//		printTrainAndTestData(allParsedResults);
 	}
 	
 
@@ -485,6 +503,25 @@ public class DiffParser {
 		printDataToDirectory(testDirectory, testParsers);
 	}
 
+	private static void printTrainAndTestData(List<DiffParser> parsers) {
+		String trainDirectory = arg.outputFilePath() + "/train";
+		String testDirectory = arg.outputFilePath() + "/test";
+		List<DiffParser> trainParsers = new ArrayList<DiffParser>();
+		List<DiffParser> testParsers = new ArrayList<DiffParser>();
+		int totalNumber = parsers.size();
+		int testNumber = (int)Math.ceil(totalNumber * testPercentage);
+		int trainNumber = totalNumber - testNumber;
+		for(int i = 0 ; i < totalNumber; i++){
+			if(i < trainNumber){
+				trainParsers.add(parsers.get(i));
+			}
+			else{
+				testParsers.add(parsers.get(i));
+			}
+		}
+		printDataToDirectory(trainDirectory, trainParsers);
+		printDataToDirectory(testDirectory, testParsers);
+	}
 	
 
 	private static void printDataToDirectory(String baseDir, List<DiffParser> parsers) {
@@ -495,16 +532,16 @@ public class DiffParser {
 			if(!baseDirFile.exists()){
 				baseDirFile.mkdir();
 			}
-			PrintStream parentCode = new PrintStream(baseDir + "/parent.code");
-			PrintStream parentTree = new PrintStream(baseDir + "/parent.tree");
-			PrintStream childCode = new PrintStream(baseDir + "/child.code");
-			PrintStream childTree = new PrintStream(baseDir + "/child.tree");
-			PrintStream parentOrgTree = new PrintStream(baseDir + "/parent.org.tree");
-			PrintStream parentTypeCode = new PrintStream(baseDir + "/parent.type.code");
-			PrintStream childTypeCode = new PrintStream(baseDir + "/child.type.code");
-			PrintStream parentTypeTree = new PrintStream(baseDir + "/parent.org.type.tree");
-			PrintStream childTypeTree = new PrintStream(baseDir + "/child.type.tree");
-			PrintStream tokenMasks = new PrintStream(baseDir + "/allowed.tokens");
+			PrintStream parentCode = new PrintStream(new FileOutputStream(baseDir + "/parent.code", true));
+			PrintStream parentTree = new PrintStream(new FileOutputStream(baseDir + "/parent.tree", true));
+			PrintStream childCode = new PrintStream(new FileOutputStream(baseDir + "/child.code", true));
+			PrintStream childTree = new PrintStream(new FileOutputStream(baseDir + "/child.tree", true));
+			PrintStream parentOrgTree = new PrintStream(new FileOutputStream(baseDir + "/parent.org.tree", true));
+			PrintStream parentTypeCode = new PrintStream(new FileOutputStream(baseDir + "/parent.type.code", true));
+			PrintStream childTypeCode = new PrintStream(new FileOutputStream(baseDir + "/child.type.code", true));
+			PrintStream parentTypeTree = new PrintStream(new FileOutputStream(baseDir + "/parent.org.type.tree", true));
+			PrintStream childTypeTree = new PrintStream(new FileOutputStream(baseDir + "/child.type.tree", true));
+			PrintStream tokenMasks = new PrintStream(new FileOutputStream(baseDir + "/allowed.tokens", true));
 			for(DiffParser parser : parsers){
 				parentCode.println(parser.parentCodeString);
 				parentTree.println(parser.parentTreeString);
@@ -518,11 +555,11 @@ public class DiffParser {
 				tokenMasks.println(parser.allowedTokensString);
 				flushAllPrintStreams(parentCode, parentTree, childCode, childTree, parentOrgTree,
 						parentTypeCode, childTypeCode, parentTypeTree, childTypeTree, tokenMasks);
-				Util.logln("\n" + parser.parentCodeString + "\n" + parser.parentOrgTreeString + "\n" + parser.childCodeString + "\n" + parser.childTreeString);
+				/*Util.logln("\n" + parser.parentCodeString + "\n" + parser.parentOrgTreeString + "\n" + parser.childCodeString + "\n" + parser.childTreeString);
 				Util.logln(parser.parentTypeCodeString);
 				Util.logln(parser.childTypeCodeString);
 				Util.logln(parser.parentOriginalTypeTreeString);
-				Util.logln(parser.childTypeTreeString);
+				Util.logln(parser.childTypeTreeString);*/
 			}
 			closeAllPrintStreams(parentCode, parentTree, childCode, childTree, parentOrgTree, parentTypeCode, childTypeCode,
 					parentTypeTree, childTypeTree, tokenMasks);
@@ -552,7 +589,7 @@ public class DiffParser {
 			if(excludeStringChange && (parentCodeString.compareTo(childCodeString)==0)){
 				return false;
 			}
-		}catch(IOException ex){
+		}catch(Exception ex){
 			return false;
 		}
 		return true;	
