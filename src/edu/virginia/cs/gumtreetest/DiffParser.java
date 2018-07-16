@@ -314,7 +314,7 @@ public class DiffParser {
 						cParentDest = cDestParent;
 						int snc = TreeUtil.countNumberOfNodes(cParentSrc.getParent());
 						int dnc = TreeUtil.countNumberOfNodes(cParentDest.getParent());
-						Util.logln(snc + " " + dnc);
+						//Util.logln(snc + " " + dnc);
 						if(snc > arg.maxTreeSize() || dnc >  arg.maxTreeSize()){
 							break;
 						}
@@ -408,6 +408,7 @@ public class DiffParser {
 	
 	
 	public static void main(String[] args) throws UnsupportedOperationException, IOException {
+		int numberOfAllFile = 0;
 		arg = Argument.preprocessArgument(args);
 		Util.logln(arg);
 		File outputFile = new File(arg.outputFilePath());
@@ -447,7 +448,9 @@ public class DiffParser {
 							pair.srcNode, pair.tgtNode, arg.replace(), arg.excludeStringChange());
 					if(successfullyParsed){
 						parserList.add(parser);
+						numberOfAllFile++;
 						printDataToDirectory(allFileDirectory, Arrays.asList(parser));
+						Util.logln(numberOfAllFile);
 					}
 				}
 			}
@@ -531,7 +534,7 @@ public class DiffParser {
 
 	private static void printDataToDirectory(String baseDir, List<DiffParser> parsers) {
 		// #TODO Append the files
-		Util.logln(baseDir + " " + parsers.size());
+		//Util.logln(baseDir + " " + parsers.size());
 		try {
 			File baseDirFile = new File(baseDir);
 			if(!baseDirFile.exists()){
