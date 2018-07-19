@@ -415,7 +415,8 @@ public class DiffParser {
 		if(outputFile.exists()){
 			Util.deleteDirectory(outputFile);
 		}
-		PrintStream debugStream = new PrintStream(new File("debug.txt"));
+		PrintStream debugStream = new PrintStream(new File("debug-" + arg.maxChangeSize() + "-" + 
+							arg.maxTreeSize() + "-" + arg.replace() + "-" + arg.astOnly() + ".txt"));
 		outputFile.mkdir();
 		String allFileDirectory = arg.outputFilePath() + "/all";
 		File allFile = new File(allFileDirectory);
