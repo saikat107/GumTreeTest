@@ -415,6 +415,7 @@ public class DiffParser {
 		if(outputFile.exists()){
 			Util.deleteDirectory(outputFile);
 		}
+		PrintStream debugStream = new PrintStream(new File("debug.txt"));
 		outputFile.mkdir();
 		String allFileDirectory = arg.outputFilePath() + "/all";
 		File allFile = new File(allFileDirectory);
@@ -454,12 +455,15 @@ public class DiffParser {
 					}
 				}
 			}
+			debugStream.println(filePath + " " + parserList.size());
+			debugStream.flush();
 			Util.logln(filePath);
 			printTrainAndTestData(parserList);
 			filePathScanner.close();
 			allParsedResults.put(filePath, parserList);
 		}
 		allFilePathsScanner.close();
+		debugStream.close();
 //		printTrainAndTestData(allParsedResults);
 	}
 	
@@ -550,6 +554,7 @@ public class DiffParser {
 			PrintStream parentTypeTree = new PrintStream(new FileOutputStream(baseDir + "/parent.org.type.tree", true));
 			PrintStream childTypeTree = new PrintStream(new FileOutputStream(baseDir + "/child.type.tree", true));
 			PrintStream tokenMasks = new PrintStream(new FileOutputStream(baseDir + "/allowed.tokens", true));
+			PrintStream fileNames = new PrintStream(new FileOutputStream(baseDir + "/files.txt", true));
 			for(DiffParser parser : parsers){
 				parentCode.println(parser.parentCodeString);
 				parentTree.println(parser.parentTreeString);
@@ -561,8 +566,10 @@ public class DiffParser {
 				parentTypeTree.println(parser.parentOriginalTypeTreeString);
 				childTypeTree.println(parser.childTypeTreeString);
 				tokenMasks.println(parser.allowedTokensString);
+				fileNames.println(parser.srcPath);
 				flushAllPrintStreams(parentCode, parentTree, childCode, childTree, parentOrgTree,
 						parentTypeCode, childTypeCode, parentTypeTree, childTypeTree, tokenMasks);
+				fileNames.flush();
 				/*Util.logln("\n" + parser.parentCodeString + "\n" + parser.parentOrgTreeString + "\n" + parser.childCodeString + "\n" + parser.childTreeString);
 				Util.logln(parser.parentTypeCodeString);
 				Util.logln(parser.childTypeCodeString);
@@ -571,6 +578,7 @@ public class DiffParser {
 			}
 			closeAllPrintStreams(parentCode, parentTree, childCode, childTree, parentOrgTree, parentTypeCode, childTypeCode,
 					parentTypeTree, childTypeTree, tokenMasks);
+			fileNames.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}		
