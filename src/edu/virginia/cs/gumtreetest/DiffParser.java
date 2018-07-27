@@ -418,12 +418,14 @@ public class DiffParser {
 		if(outputFile.exists()){
 			Util.deleteDirectory(outputFile);
 		}
+		outputFile.mkdir();
+		
 		DateFormat fmt = new SimpleDateFormat();
 		Date d = new Date();
 		PrintStream debugStream = new PrintStream(new File("debug-" + arg.maxChangeSize() + "-" + 
 							arg.maxTreeSize() + "-" + arg.replace() + "-" + arg.astOnly() + "-" +
 							fmt.format(d) + ".txt"));
-		outputFile.mkdir();
+		
 		String allFileDirectory = arg.outputFilePath() + "/all";
 		File allFile = new File(allFileDirectory);
 		if(!allFile.exists()) {
