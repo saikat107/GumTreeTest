@@ -5,8 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -330,7 +331,7 @@ public class DiffParser {
 					cParentDest = cDestParent;
 					int snc = TreeUtil.countNumberOfNodes(cParentSrc.getParent());
 					int dnc = TreeUtil.countNumberOfNodes(cParentDest.getParent());
-					Util.logln(snc + " " + dnc);
+					//Util.logln(snc + " " + dnc);
 					if(snc > arg.maxTreeSize() || dnc >  arg.maxTreeSize()){
 						break;
 					}
@@ -408,7 +409,6 @@ public class DiffParser {
 	
 	
 	public static void main(String[] args) throws UnsupportedOperationException, IOException {
-		int numberOfAllFile = 0;
 		arg = Argument.preprocessArgument(args);
 		Util.logln(arg);
 		File outputFile = new File(arg.outputFilePath());
@@ -416,12 +416,12 @@ public class DiffParser {
 			Util.deleteDirectory(outputFile);
 		}
 		outputFile.mkdir();
-		String allFileDirectory = arg.outputFilePath() + "/all";
-		File allFile = new File(allFileDirectory);
-		if(!allFile.exists()) {
-			allFile.mkdir();
-		}
+		SimpleDateFormat fmt = new SimpleDateFormat("HH-mm-ss");
+		Date d = new Date();
+		PrintStream debugStream = new PrintStream(new File("debug-" + arg.maxChangeSize() + "-" + 
+		arg.maxTreeSize() + "-" + arg.astOnly() + "-" + arg.replace() + "-" + fmt.format(d) + "'.txt"));
 		
+		int totalFileCount = 0;
 		Scanner allFilePathsScanner = new Scanner(new File(arg.allPathsFile()));
 		Map<String, List<DiffParser>> allParsedResults = new HashMap<String, List<DiffParser>>();
 		while(allFilePathsScanner.hasNextLine()){
@@ -444,17 +444,18 @@ public class DiffParser {
 				List<NodePair> methodPairs = getMethodPairs(srcTree, destTree, srcText, destText);
 				for(NodePair pair : methodPairs){
 					DiffParser parser = new DiffParser(parentFile, childFile, srcText, destText);
-					boolean successfullyParsed = parser.checkSuccessFullParse(
-							pair.srcNode, pair.tgtNode, arg.replace(), arg.excludeStringChange());
+					//Util.logln(pair.srcNode.toTreeString());
+					//Util.logln(pair.tgtNode.toTreeString());
+					boolean successfullyParsed = parser.checkSuccessFullParse(pair.srcNode, pair.tgtNode, arg.replace(), arg.excludeStringChange());
 					if(successfullyParsed){
+						Util.logln(totalFileCount);
+						totalFileCount++;
 						parserList.add(parser);
-						numberOfAllFile++;
-						printDataToDirectory(allFileDirectory, Arrays.asList(parser));
-						Util.logln(numberOfAllFile);
 					}
 				}
 			}
 			Util.logln(filePath);
+			debugStream.println(filePath + " " + parserList.size());
 			printTrainAndTestData(parserList);
 			filePathScanner.close();
 			allParsedResults.put(filePath, parserList);
@@ -534,7 +535,7 @@ public class DiffParser {
 
 	private static void printDataToDirectory(String baseDir, List<DiffParser> parsers) {
 		// #TODO Append the files
-		//Util.logln(baseDir + " " + parsers.size());
+		Util.logln(baseDir + " " + parsers.size());
 		try {
 			File baseDirFile = new File(baseDir);
 			if(!baseDirFile.exists()){
