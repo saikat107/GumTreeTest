@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -415,8 +418,11 @@ public class DiffParser {
 		if(outputFile.exists()){
 			Util.deleteDirectory(outputFile);
 		}
+		DateFormat fmt = new SimpleDateFormat();
+		Date d = new Date();
 		PrintStream debugStream = new PrintStream(new File("debug-" + arg.maxChangeSize() + "-" + 
-							arg.maxTreeSize() + "-" + arg.replace() + "-" + arg.astOnly() + ".txt"));
+							arg.maxTreeSize() + "-" + arg.replace() + "-" + arg.astOnly() + "-" +
+							fmt.format(d) + ".txt"));
 		outputFile.mkdir();
 		String allFileDirectory = arg.outputFilePath() + "/all";
 		File allFile = new File(allFileDirectory);
