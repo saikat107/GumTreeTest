@@ -418,7 +418,7 @@ public class DiffParser {
 		}
 		outputFile.mkdir();
 
-		DateFormat fmt = new SimpleDateFormat();
+		DateFormat fmt = new SimpleDateFormat("HH-mm-ss");
 		Date d = new Date();
 		PrintStream debugStream = new PrintStream(new File("debug-" + arg.maxChangeSize() + "-" + 
 							arg.maxTreeSize() + "-" + arg.replace() + "-" + arg.astOnly() + "-" +
