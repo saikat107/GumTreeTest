@@ -9,6 +9,7 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -409,7 +410,10 @@ public class DiffParser {
 	
 	
 	
-	public static void main(String[] args) throws UnsupportedOperationException, IOException {
+	public static void main(String[] args) throws FileNotFoundException {
+		DateFormat stfmt = new SimpleDateFormat("MM/dd/yy hh:mm:ss");
+		Date start = new Date();
+		String startTime = stfmt.format(start);
 		arg = Argument.preprocessArgument(args);
 		Util.logln(arg);
 		File outputFile = new File(arg.outputFilePath());
@@ -435,41 +439,52 @@ public class DiffParser {
 		Scanner allFilePathsScanner = new Scanner(new File(arg.allPathsFile()));
 		Map<String, List<DiffParser>> allParsedResults = new HashMap<String, List<DiffParser>>();
 		while(allFilePathsScanner.hasNextLine()){
-			String filePath = allFilePathsScanner.nextLine().trim();
-			Scanner filePathScanner = new Scanner(new File(filePath));
-			List<DiffParser> parserList = new ArrayList<DiffParser>();
-			// #TODO Print after every project is finished. 
-			while(filePathScanner.hasNextLine()){
-				String bothPath = filePathScanner.nextLine().trim();
-				String []filePathParts = bothPath.split("\t");
-				String parentFile = filePathParts[0];
-				String childFile = filePathParts[1];
-				//Util.logln(parentFile);
-				String srcText = Util.readFile(parentFile);
-				String destText = Util.readFile(childFile);
-				TreeContext srcContext = new JdtTreeGenerator().generateFromFile(parentFile);
-				TreeContext destContext = new JdtTreeGenerator().generateFromFile(childFile);
-				ITree srcTree = srcContext.getRoot();
-				ITree destTree = destContext.getRoot();
-				List<NodePair> methodPairs = getMethodPairs(srcTree, destTree, srcText, destText);
-				for(NodePair pair : methodPairs){
-					DiffParser parser = new DiffParser(parentFile, childFile, srcText, destText);
-					//Util.logln(pair.srcNode.toTreeString());
-					//Util.logln(pair.tgtNode.toTreeString());
-					boolean successfullyParsed = parser.checkSuccessFullParse(pair.srcNode, pair.tgtNode, arg.replace(), arg.excludeStringChange());
-					if(successfullyParsed){
-						Util.logln(totalFileCount);
-						totalFileCount++;
-						parserList.add(parser);
+			try{
+				String filePath = allFilePathsScanner.nextLine().trim();
+				Scanner filePathScanner = new Scanner(new File(filePath));
+				List<DiffParser> parserList = new ArrayList<DiffParser>();
+				// #TODO Print after every project is finished. 
+				while(filePathScanner.hasNextLine()){
+					try{
+						String bothPath = filePathScanner.nextLine().trim();
+						String []filePathParts = bothPath.split("\t");
+						String parentFile = filePathParts[0];
+						String childFile = filePathParts[1];
+						//Util.logln(parentFile);
+						String srcText = Util.readFile(parentFile);
+						String destText = Util.readFile(childFile);
+						TreeContext srcContext = new JdtTreeGenerator().generateFromFile(parentFile);
+						TreeContext destContext = new JdtTreeGenerator().generateFromFile(childFile);
+						ITree srcTree = srcContext.getRoot();
+						ITree destTree = destContext.getRoot();
+						List<NodePair> methodPairs = getMethodPairs(srcTree, destTree, srcText, destText);
+						for(NodePair pair : methodPairs){
+							DiffParser parser = new DiffParser(parentFile, childFile, srcText, destText);
+							//Util.logln(pair.srcNode.toTreeString());
+							//Util.logln(pair.tgtNode.toTreeString());
+							boolean successfullyParsed = parser.checkSuccessFullParse(pair.srcNode, pair.tgtNode, arg.replace(), arg.excludeStringChange());
+							if(successfullyParsed){
+								Date current = new Date();
+								String cTime = stfmt.format(current);
+								Util.logln(startTime  + " -> " + cTime + "\t" + totalFileCount);
+								printDataToDirectory(allFileDirectory, Arrays.asList(parser));
+								totalFileCount++;
+								parserList.add(parser);
+							}
+						}
+					}catch(Exception ex){
+						
 					}
 				}
+				debugStream.println(filePath + " " + parserList.size());
+				debugStream.flush();
+				Util.logln(filePath);
+				printTrainAndTestData(parserList);
+				filePathScanner.close();
+				allParsedResults.put(filePath, parserList);
+			}catch(Exception ex){
+				
 			}
-			debugStream.println(filePath + " " + parserList.size());
-			debugStream.flush();
-			Util.logln(filePath);
-			printTrainAndTestData(parserList);
-			filePathScanner.close();
-			allParsedResults.put(filePath, parserList);
 		}
 		allFilePathsScanner.close();
 		debugStream.close();
