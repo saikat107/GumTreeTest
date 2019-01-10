@@ -922,5 +922,74 @@ public class Util {
 		}
 		return variables;
 	}
+	
+	
+	private static final String[] PUNCTUATIONS = { "~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "+", "=", 
+			    "|", "\"", "'", ";", ":", "<", ">", ",", ".", "?", "/" };
+	private static final String[] REGEXES = { "~", "`", "!", "@", "#", "\\$", "%", "\\^", "&", "\\*", "\\(", "\\)", "\\-", "\\+", "\\=", 
+			    "\\|", "\"", "'", ";", ":", "\\<", "\\>", ",", "\\.", "\\?", "/" };
+			  
+	public static String getFormattedCode(ITree root){
+		String code = getRunnableCodeRecusrsive(root);
+		for (int i = 0; i < PUNCTUATIONS.length; i++) {
+			String punc = PUNCTUATIONS[i];
+			String rges = REGEXES[i];
+			String fStr = " " + punc;
+			String rFStre = " " + rges;
+			if (code.contains(fStr)) {
+				code = code.replaceAll(rFStre, punc);
+			}
+			String sStr = punc + " ";
+			String rSStre = rges + " ";
+			if (code.contains(sStr)) {
+				code = code.replaceAll(rSStre, punc);
+			}
+		}
+		if (code.contains("{")) {
+			code = code.replaceAll("\\{", "{\n\t");
+		}
+		if (code.contains("}")) {
+			code = code.replaceAll("}", "}\n");
+		}
+		if (code.contains(";")) {
+			code = code.replaceAll(";", ";\n");
+		}
+		if (code.contains("[ ")) {
+			code = code.replaceAll("\\[ ", "[");
+		}
+		if (code.contains(" [")) {
+			code = code.replaceAll(" \\[", "[");
+		}
+		if (code.contains(" [ ")) {
+			code = code.replaceAll(" \\[ ", "[");
+		}
+		if (code.contains(" [")) {
+			code = code.replaceAll(" \\]", "]");
+		}
+		return code;
+	}
+			  
+	private static String getRunnableCodeRecusrsive(ITree root) {
+		if (root.getChildren().size() == 0) {
+			Object name = null;
+			if (name == null) {
+				name = root.getLabel();
+			}
+			String token = name.toString().trim();
+			if (token.equalsIgnoreCase("STRING_CONSTANT")) {
+				token = "\"\"";
+			} else if (token.equalsIgnoreCase("NUMBER_CONSTANT")) {
+				token = "0";
+			} else if (token.equalsIgnoreCase("NUMBER_CONSTANT")) {
+				token = "'\n'";
+			}
+			return token + " ";
+		}
+		String code = "";
+		for (ITree child : root.getChildren()) {
+			code = code + getRunnableCodeRecusrsive(child);
+		}
+		return code;
+	}
 
 }
