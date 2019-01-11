@@ -5,12 +5,12 @@ package edu.virginia.cs.gumtreetest;
 //import java.util.List;
 
 public class Argument {
-	private String allPathsFile = null;
+	private String allPathsFile = "data/all_paths.txt";
 	private String sFilePath = null;
 	private String dFilePath = null;
-	private String oPath = null;
-	private int mChangeSize = -1;
-	private int mTreeSize = -1;
+	private String oPath = "data/out.txt";
+	private int mChangeSize = 200;
+	private int mTreeSize = 500;
 	private int defaultMc = 20;
 	private int defaultMt = 50;
 	private boolean r = false;
