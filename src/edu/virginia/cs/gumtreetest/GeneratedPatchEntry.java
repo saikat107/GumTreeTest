@@ -2,6 +2,7 @@ package edu.virginia.cs.gumtreetest;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,11 +17,12 @@ public class GeneratedPatchEntry{
 	public String childFilePath;
 	public List<String> generatedCodes;
 	public String treeEditDistStr;
-	public String verdict;
+	public int verdict;
 	public String javaChildFilePath;
 	public String project;
 	public String bugId;
 	public String filePathFormatted;
+	public String checkedOutProjectDirectory;
 
 	public GeneratedPatchEntry(){
 		  this.generatedCodes = new ArrayList<>();
@@ -36,7 +38,8 @@ public class GeneratedPatchEntry{
 		String filePath = parts[3];
 		this.filePathFormatted = filePath.replaceAll("_", "/");
 		this.childFilePath = (prefix + this.project + "/" + this.bugId + "/child/" + filePath);
-		this.javaChildFilePath = (checkedOutDirectory + this.project + "/" + this.bugId + "-fixed/" + this.filePathFormatted);
+		this.checkedOutProjectDirectory = checkedOutDirectory + this.project + "/" + this.bugId + "-fixed/";
+		this.javaChildFilePath = checkedOutProjectDirectory + this.filePathFormatted;
 	}
   
 	public static List<GeneratedPatchEntry> parsePatchResults(
@@ -62,7 +65,13 @@ public class GeneratedPatchEntry{
 			skipLine(patchScanner, 2);
 			example.treeEditDistStr = patchScanner.nextLine().trim();
 			skipLine(patchScanner, 2);
-			example.verdict = patchScanner.nextLine().trim();
+			String verdict = patchScanner.nextLine().trim();
+			if(verdict.equalsIgnoreCase("Correct")) {
+				example.verdict = 1;
+			}
+			else {
+				example.verdict = 0;
+			}
 			skipLine(patchScanner, 1);
 			for (int i = 0; i < beamSize; i++){
 				skipLine(patchScanner, 2);
@@ -85,16 +94,43 @@ public class GeneratedPatchEntry{
   
 	public static void main(String[] args) throws IOException{
 		String parseFilePath = args[0];
+		String outputPath = args[1];
+		PrintWriter out = new PrintWriter(new File(outputPath));
 		List<GeneratedPatchEntry> patches = parsePatchResults(parseFilePath, 200);
 		int i = 0;
 		for (GeneratedPatchEntry en : patches){
+			//if(en.verdict != 1) continue;
 			String childFilePath = en.childFilePath;
 			String chidlTreeStr = en.childTreeStr;
 			chidlTreeStr = TreeUtil.reFormatTreeStr(chidlTreeStr);
 			List<String> patchCodes = en.generatedCodes;
-			List<String> modifiedCodes = TreeUtil.getPatchedFileFromChildFile(childFilePath, chidlTreeStr, patchCodes);
-			Util.logln(en.verdict + " " + modifiedCodes.size() + " " + i);
+			List<String> modifiedCodes = 
+					TreeUtil.getPatchedFileFromChildFile(
+							childFilePath, chidlTreeStr, patchCodes);
+			String originalFileText = Util.readFile(en.javaChildFilePath);
+			String output = en.project + "\t" + en.bugId ;
+			int k = 0;
+			Util.logln(en.project + " " + en.bugId);
+			for(String newCode: modifiedCodes) {
+				k++;
+				boolean successfullyWritten = Util.writeFile(en.javaChildFilePath, newCode);
+				String status = Util.executeProgram(en.project, en.bugId, en.checkedOutProjectDirectory);
+				output += ("\t" + status);
+				System.out.print(status + " ");
+			}
+			output += "\n";
+			Util.writeFile(en.javaChildFilePath, originalFileText);
 			i++;
+			Util.logln("\n" + output);
+			out.println(output);
 		}
+		out.close();
+		/*String command = "PATH=$PATH:$D4J_HOME/framework/bin";
+		Process p1 = Runtime.getRuntime().exec(command);*/
+		
+		//String command = "/home/sc2nf/defects4j/framework/bin/defects4j compile -w /home/sc2nf/Desktop/Math1f";
+		//System.out.println(Util.getCommandExecutionResult(command));
+		
+				
 	}
 }

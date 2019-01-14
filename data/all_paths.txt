@@ -1,2 +1,1 @@
-data/paths.txt
-data/paths2.txt
+/home/sc2nf/Desktop/icse/all/50/eval-files.txt

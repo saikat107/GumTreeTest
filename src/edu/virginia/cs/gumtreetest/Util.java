@@ -1,10 +1,13 @@
 package edu.virginia.cs.gumtreetest;
 
+import java.io.BufferedReader;
 import java.io.File;
-
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +25,65 @@ import com.github.gumtreediff.tree.Tree;
 
 @SuppressWarnings("unchecked")
 public class Util {
+	
+	public static String getCommandExecutionResult(String command) {
+		String result = "";
+		try {
+			Process p = Runtime.getRuntime().exec(command);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			while(true) {
+				String line = reader.readLine();
+				if(line == null) break;
+				result += (line.trim() + "\n");
+			}
+			reader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+			while(true) {
+				String line = reader.readLine();
+				if(line == null) break;
+				result += (line.trim() + "\n");
+			}
+		}catch(IOException ex) {
+			result = "EXCEPTION RUNNING THE COMMAND";
+		}
+		return result;
+	}
+	
+	public static String executeProgram(String project, String bugId, String projectPath) {
+		//Util.logln("Executing  :" + projectPath);
+		//TODO TO IMPLEMENT THE TESTCASE RUNNING INFRASTRUCTURE
+		boolean successfullyCompiled = TCRunUtil.checkSuccessfulCompilation(projectPath);
+		if(!successfullyCompiled) {
+			return "FAIL:C";
+		}
+		String testPass = "";
+		try {
+			testPass = TCRunUtil.checkTriggerTestCasePassing(project, bugId, projectPath);
+		} catch (IOException e) {
+			return "FAIL:E"; 
+		}
+		/*if(testPass) {
+			return "PASS";
+		}
+		else {
+			return "FAIL:"+passed;
+		}*/
+		return testPass;
+	}
+	
+	public static boolean writeFile(String filePath, String text) {
+		File file = new File(filePath);
+		//boolean exists = file.exists();
+		try {
+			PrintWriter writer = new PrintWriter(file);
+			writer.println(text);
+			writer.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
 	/**
 	 * @author saikat
 	 * This method is for logging and debugging.

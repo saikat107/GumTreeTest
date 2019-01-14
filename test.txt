@@ -1,0 +1,2430 @@
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/10.java b/home/sc2nf/Desktop/icse/all/50/eval/after/10.java
+index 46063c5..bf2ea11 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/10.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/10.java
+@@ -1,3 +1,3 @@
+ public class A {
+-TYPE_1 METHOD_1 ( TYPE_2 VAR_1 ) throws TYPE_3 { assert ! ( METHOD_2 ( ) ) ; return VAR_1 . METHOD_3 ( ) . METHOD_4 ( ) ; } 
++TYPE_1 METHOD_1 ( TYPE_2 VAR_1 ) throws TYPE_3 { return METHOD_1 ( VAR_1 , false ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/11.java b/home/sc2nf/Desktop/icse/all/50/eval/after/11.java
+index 62873dd..b547c56 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/11.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/11.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) throws java.lang.Exception { METHOD_2 ( true , false , false ) ; } 
++public void METHOD_1 ( ) throws java.lang.Exception { METHOD_2 ( true , false , false , false ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/12.java b/home/sc2nf/Desktop/icse/all/50/eval/after/12.java
+index 5f52539..13405ae 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/12.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/12.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private java.io.File METHOD_1 ( ) { return new java.io.File ( TYPE_1 . METHOD_2 ( ) ) ; } 
++private java.io.File METHOD_1 ( ) { return new java.io.File ( TYPE_1 . METHOD_2 ( mContext ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/16.java b/home/sc2nf/Desktop/icse/all/50/eval/after/16.java
+index b9d81c4..5829036 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/16.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/16.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { this . VAR_1 = null ; } 
++public native void METHOD_1 ( ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/25.java b/home/sc2nf/Desktop/icse/all/50/eval/after/25.java
+index 90ab605..3590314 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/25.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/25.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static void METHOD_1 ( java.lang.String name ) { if ( VAR_1 ) TYPE_1 . METHOD_2 ( name , null ) ; } 
++public static void METHOD_1 ( java.lang.String name ) { TYPE_1 . METHOD_1 ( name , null ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/46.java b/home/sc2nf/Desktop/icse/all/50/eval/after/46.java
+index c9cf28b..654fe02 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/46.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/46.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public final TYPE_1 METHOD_1 ( TYPE_2 VAR_1 ) { if ( ( VAR_2 ) != null ) { VAR_2 . METHOD_2 ( ) ; } VAR_2 = new TYPE_3 ( VAR_1 ) ; return this ; } 
++public final TYPE_1 METHOD_1 ( TYPE_2 VAR_1 ) { VAR_2 = VAR_1 ; return this ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/48.java b/home/sc2nf/Desktop/icse/all/50/eval/after/48.java
+index e580ce5..50b03e6 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/48.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/48.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( android.bluetooth.BluetoothDevice VAR_1 , TYPE_1 config , boolean VAR_2 ) { android.util.Log.d ( VAR_3 . TAG , ( ( ( STRING_1 + ( VAR_1 == null ? null : VAR_1 . toString ( ) ) ) + STRING_2 ) + VAR_2 ) ) ; } 
++public void METHOD_1 ( android.bluetooth.BluetoothDevice VAR_1 , TYPE_1 config , boolean VAR_2 ) { android.util.Log.d ( VAR_3 . TAG , ( ( ( STRING_1 + VAR_1 ) + STRING_2 ) + VAR_2 ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/58.java b/home/sc2nf/Desktop/icse/all/50/eval/after/58.java
+index e8865f4..eb4ed43 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/58.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/58.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) throws java.lang.Exception { TYPE_1 . METHOD_2 ( VAR_1 , null , VAR_2 , false ) ; } 
++public void METHOD_1 ( ) throws java.lang.Exception { TYPE_1 . METHOD_2 ( null , VAR_2 , false ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/66.java b/home/sc2nf/Desktop/icse/all/50/eval/after/66.java
+index 7b3db9f..6f876fe 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/66.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/66.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static void run ( ) { TYPE_1 . METHOD_1 ( VAR_1 class ) ; TYPE_2 . METHOD_2 ( ) ; } 
++public static void run ( ) { TYPE_2 . METHOD_2 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/67.java b/home/sc2nf/Desktop/icse/all/50/eval/after/67.java
+index 717d10b..3686612 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/67.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/67.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( byte [ ] in , int VAR_1 , int VAR_2 ) { VAR_3 . METHOD_1 ( in , VAR_1 , VAR_2 ) ; VAR_4 . METHOD_1 ( in , VAR_1 , VAR_2 ) ; } 
++public void METHOD_1 ( byte [ ] input , int VAR_1 , int VAR_2 ) { VAR_3 . METHOD_1 ( input , VAR_1 , VAR_2 ) ; VAR_4 . METHOD_1 ( input , VAR_1 , VAR_2 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/69.java b/home/sc2nf/Desktop/icse/all/50/eval/after/69.java
+index 1de2a59..0c2cb06 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/69.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/69.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.lang.String METHOD_1 ( ) { if ( METHOD_2 ( ) ) { char [ ] VAR_1 = VAR_2 . METHOD_3 ( ) ; VAR_1 [ 0 ] = CHAR_1 ; return new java.lang.String ( VAR_1 ) ; } return VAR_2 ; } 
++public java.lang.String METHOD_1 ( ) { return VAR_2 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/73.java b/home/sc2nf/Desktop/icse/all/50/eval/after/73.java
+index 8e8627b..423cd14 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/73.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/73.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.lang.String toString ( ) { java.lang.String VAR_1 = METHOD_1 ( ) ; java.lang.String name = java.lang.String.format ( STRING_1 , METHOD_2 ( ) , METHOD_3 ( ) ) ; if ( VAR_1 != null ) { name += java.lang.String.format ( STRING_2 , VAR_1 ) ; } return name ; } 
++public java.lang.String toString ( ) { return java.lang.String.format ( STRING_1 , METHOD_2 ( ) , METHOD_3 ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/77.java b/home/sc2nf/Desktop/icse/all/50/eval/after/77.java
+index 147c244..5367606 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/77.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/77.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) throws java.lang.Exception { if ( ! ( METHOD_2 ( ) ) ) { TYPE_1 . METHOD_3 ( VAR_1 , STRING_1 ) ; return ; } METHOD_4 ( VAR_2 ) ; } 
++public void METHOD_1 ( ) throws java.lang.Exception { METHOD_4 ( VAR_2 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/80.java b/home/sc2nf/Desktop/icse/all/50/eval/after/80.java
+index 1441bf9..d87a804 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/80.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/80.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public boolean METHOD_1 ( TYPE_1 event ) { return event . METHOD_2 ( this ) ; } 
++public boolean METHOD_1 ( TYPE_1 event ) { return event . METHOD_2 ( this , null , null ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/81.java b/home/sc2nf/Desktop/icse/all/50/eval/after/81.java
+index f990c0b..2e65aea 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/81.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/81.java
+@@ -1,3 +1,3 @@
+ public class A {
+-final void METHOD_1 ( TYPE_1 app ) { METHOD_1 ( app , VAR_1 , VAR_2 ) ; } 
++final void METHOD_1 ( TYPE_1 app ) { METHOD_1 ( app , VAR_1 , VAR_2 , false ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/86.java b/home/sc2nf/Desktop/icse/all/50/eval/after/86.java
+index f544d07..13b846f 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/86.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/86.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 VAR_1 ) { if ( ( TYPE_2 . METHOD_2 ( ) . METHOD_3 ( ) ) == null ) { return ; } METHOD_4 ( ) ; } 
++public void METHOD_1 ( TYPE_1 VAR_1 ) { METHOD_4 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/88.java b/home/sc2nf/Desktop/icse/all/50/eval/after/88.java
+index 990eebd..8eb4323 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/88.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/88.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) throws java.lang.Exception { try { TYPE_1 . METHOD_2 ( VAR_1 , null , null , 0 , false , null , null ) ; fail ( ) ; } catch ( java.lang.NullPointerException expected ) { } } 
++public void METHOD_1 ( ) throws java.lang.Exception { try { TYPE_1 . METHOD_2 ( VAR_1 , null , null , 0 , false , null ) ; fail ( ) ; } catch ( java.lang.NullPointerException expected ) { } } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/89.java b/home/sc2nf/Desktop/icse/all/50/eval/after/89.java
+index cb402ae..cf143f7 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/89.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/89.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static int METHOD_1 ( ) { int VAR_1 = Main . METHOD_2 ( 7 ) ; long VAR_2 = Main . METHOD_3 ( INT_1 ) ; return VAR_1 > > VAR_2 ; } 
++public static int METHOD_1 ( ) { int VAR_1 = 7 ; long VAR_2 = 2 ; return VAR_1 > > VAR_2 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/98.java b/home/sc2nf/Desktop/icse/all/50/eval/after/98.java
+index c88441d..f659642 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/98.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/98.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static int METHOD_1 ( int arg ) { if ( VAR_1 ) { throw new TYPE_1 ( ) ; } return ( arg > > INT_1 ) & INT_2 ; } 
++public static int METHOD_1 ( int arg ) { return ( arg > > INT_1 ) & INT_2 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/100.java b/home/sc2nf/Desktop/icse/all/50/eval/after/100.java
+index 4a94c24..13b0c79 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/100.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/100.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static void METHOD_1 ( java.lang.String [ ] args ) { TYPE_1 . METHOD_2 ( VAR_1 class ) ; Main . METHOD_3 ( new TYPE_2 ( ) , new TYPE_3 ( ) ) ; } 
++public static void METHOD_1 ( java.lang.String [ ] args ) { Main . METHOD_3 ( new TYPE_2 ( ) , new TYPE_3 ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/103.java b/home/sc2nf/Desktop/icse/all/50/eval/after/103.java
+index 408a98b..a7f57b1 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/103.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/103.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public synchronized void METHOD_1 ( TYPE_1 state ) { throw new TYPE_2 ( ) ; } 
++public abstract void METHOD_1 ( TYPE_1 state ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/109.java b/home/sc2nf/Desktop/icse/all/50/eval/after/109.java
+index 55bf713..b85bd61 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/109.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/109.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static void METHOD_1 ( final TYPE_1 context ) { TYPE_2 . METHOD_2 ( ( ) - > { new TYPE_3 ( context . METHOD_3 ( ) ) . METHOD_4 ( null ) ; } ) ; } 
++public static void METHOD_1 ( final TYPE_1 context ) { TYPE_2 . METHOD_2 ( ( ) - > { new TYPE_3 ( context . METHOD_3 ( ) ) . METHOD_4 ( context , null ) ; } ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/112.java b/home/sc2nf/Desktop/icse/all/50/eval/after/112.java
+index 6a3c5ba..f6b2b02 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/112.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/112.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( char c ) throws android.os.RemoteException { } 
++public void METHOD_1 ( char c ) { this . METHOD_1 ( c ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/118.java b/home/sc2nf/Desktop/icse/all/50/eval/after/118.java
+index 06c7399..535ad99 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/118.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/118.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private static void METHOD_1 ( TYPE_1 VAR_1 ) { if ( VAR_1 . METHOD_2 ( VAR_2 ) ) { return ; } fail ( ( ( STRING_1 + ( VAR_2 ) ) + STRING_2 ) ) ; } 
++private static void METHOD_1 ( TYPE_1 VAR_1 ) { assertTrue ( VAR_1 . METHOD_2 ( VAR_2 ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/119.java b/home/sc2nf/Desktop/icse/all/50/eval/after/119.java
+index 44cde49..65dc02b 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/119.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/119.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public synchronized void METHOD_1 ( long VAR_1 ) { throw new TYPE_1 ( ) ; } 
++public abstract void METHOD_1 ( long VAR_1 ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/122.java b/home/sc2nf/Desktop/icse/all/50/eval/after/122.java
+index 07fe2e1..8dc623f 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/122.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/122.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static int METHOD_1 ( ) { int VAR_1 = Main . METHOD_2 ( ( - 7 ) ) ; long VAR_2 = Main . METHOD_3 ( INT_1 ) ; return VAR_1 > > > VAR_2 ; } 
++public static int METHOD_1 ( ) { int VAR_1 = - 7 ; long VAR_2 = 2 ; return VAR_1 > > > VAR_2 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/123.java b/home/sc2nf/Desktop/icse/all/50/eval/after/123.java
+index bbd4158..2f82732 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/123.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/123.java
+@@ -1,3 +1,3 @@
+ public class A {
+-TYPE_1 METHOD_1 ( TYPE_2 VAR_1 ) { synchronized ( this ) { TYPE_1 VAR_2 = VAR_3 . get ( VAR_1 ) ; if ( VAR_2 != null ) { VAR_3 . METHOD_2 ( VAR_2 ) ; } return VAR_2 ; } } 
++TYPE_1 METHOD_1 ( TYPE_2 VAR_1 ) { synchronized ( this ) { return VAR_3 . METHOD_2 ( VAR_1 ) ; } } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/131.java b/home/sc2nf/Desktop/icse/all/50/eval/after/131.java
+index b8e484e..4f1481b 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/131.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/131.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.lang.Class < ? > [ ] METHOD_1 ( ) { return VAR_1 . METHOD_2 ( ) . METHOD_1 ( ) ; } 
++public java.lang.Class < ? > [ ] METHOD_1 ( ) { return java.lang.Class . METHOD_2 ( VAR_1 ) . METHOD_1 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/135.java b/home/sc2nf/Desktop/icse/all/50/eval/after/135.java
+index 6d7e391..bbdc23d 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/135.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/135.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( java.lang.String app , java.lang.String version ) { METHOD_2 ( app , version ) ; } 
++public void METHOD_1 ( java.lang.String app , java.lang.String version ) { METHOD_2 ( app , version , null ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/143.java b/home/sc2nf/Desktop/icse/all/50/eval/after/143.java
+index 2f86c3d..ccd03f8 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/143.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/143.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private TYPE_1 METHOD_1 ( TYPE_2 status ) { return VAR_1 . get ( status ) ; } 
++private TYPE_1 METHOD_1 ( ) { return VAR_1 . get ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/146.java b/home/sc2nf/Desktop/icse/all/50/eval/after/146.java
+index 9c27ee4..7f20fa1 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/146.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/146.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private void METHOD_1 ( int VAR_1 ) { this . VAR_2 = VAR_1 ; } 
++private void METHOD_1 ( int VAR_1 ) { VAR_2 = VAR_1 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/153.java b/home/sc2nf/Desktop/icse/all/50/eval/after/153.java
+index a6b2981..696c7d7 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/153.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/153.java
+@@ -1,3 +1,3 @@
+ public class A {
+-java.io.File METHOD_1 ( ) ; 
++java.lang.String getName ( ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/158.java b/home/sc2nf/Desktop/icse/all/50/eval/after/158.java
+index 90bf0dc..b4b4dc3 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/158.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/158.java
+@@ -1,3 +1,3 @@
+ public class A {
+-native int METHOD_1 ( int VAR_1 , int id , int VAR_2 ) ; 
++native long METHOD_1 ( long VAR_1 , int id , long VAR_2 ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/159.java b/home/sc2nf/Desktop/icse/all/50/eval/after/159.java
+index 4ccfb7b..db1532e 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/159.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/159.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public final boolean METHOD_1 ( long VAR_1 ) { return super . METHOD_1 ( VAR_1 ) ; } 
++public final boolean METHOD_1 ( int VAR_1 ) { return super . METHOD_1 ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/162.java b/home/sc2nf/Desktop/icse/all/50/eval/after/162.java
+index 518d842..15f7926 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/162.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/162.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected synchronized int METHOD_1 ( TYPE_1 p ) throws java.io.IOException { METHOD_2 ( p , VAR_1 ) ; return p . METHOD_3 ( ) ; } 
++protected synchronized native int METHOD_1 ( TYPE_1 p ) throws java.io.IOException ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/166.java b/home/sc2nf/Desktop/icse/all/50/eval/after/166.java
+index b718e67..0d33121 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/166.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/166.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static native int METHOD_1 ( int VAR_1 , int VAR_2 ) ; 
++public static int METHOD_1 ( int VAR_1 , int VAR_2 ) { return VAR_1 < VAR_2 ? VAR_1 : VAR_2 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/168.java b/home/sc2nf/Desktop/icse/all/50/eval/after/168.java
+index 4c70800..4ceec8c 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/168.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/168.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 context , java.lang.String VAR_1 ) { } 
++public void METHOD_1 ( java.lang.String VAR_1 ) { } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/171.java b/home/sc2nf/Desktop/icse/all/50/eval/after/171.java
+index b509783..e38aeff 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/171.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/171.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static native TYPE_1 METHOD_1 ( TYPE_1 VAR_1 , TYPE_1 VAR_2 ) ; 
++public static native TYPE_1 METHOD_1 ( ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/174.java b/home/sc2nf/Desktop/icse/all/50/eval/after/174.java
+index f4789be..4d27d23 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/174.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/174.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( int VAR_1 ) { try { if ( VAR_2 ) { VAR_3 . METHOD_2 ( VAR_4 , VAR_1 ) ; } } catch ( android.os.RemoteException VAR_5 ) { } } 
++public void METHOD_1 ( int VAR_1 ) { try { if ( VAR_2 ) { VAR_3 . METHOD_2 ( VAR_4 , VAR_1 , null ) ; } } catch ( android.os.RemoteException VAR_5 ) { } } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/176.java b/home/sc2nf/Desktop/icse/all/50/eval/after/176.java
+index b7142cc..884b6fa 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/176.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/176.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static int METHOD_1 ( TYPE_1 VAR_1 , int VAR_2 ) { return TYPE_2 . METHOD_1 ( TYPE_2 . METHOD_2 ( VAR_1 ) , VAR_2 ) ; } 
++public static int METHOD_1 ( TYPE_1 VAR_1 , int VAR_2 ) { return TYPE_2 . METHOD_1 ( VAR_1 . METHOD_2 ( ) , VAR_2 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/179.java b/home/sc2nf/Desktop/icse/all/50/eval/after/179.java
+index 5829036..fbe1c28 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/179.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/179.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public native void METHOD_1 ( ) ; 
++public native void METHOD_1 ( java.lang.String msg ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/181.java b/home/sc2nf/Desktop/icse/all/50/eval/after/181.java
+index 065705a..5ea30eb 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/181.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/181.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public byte [ ] call ( ) throws java.io.IOException { return TYPE_1 . METHOD_1 ( VAR_1 ) ; } 
++public byte [ ] call ( ) throws java.io.IOException { return METHOD_1 ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/182.java b/home/sc2nf/Desktop/icse/all/50/eval/after/182.java
+index 10a8ae2..3cf89ba 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/182.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/182.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static boolean METHOD_1 ( ) { return false ; } 
++public static boolean METHOD_1 ( ) { return true ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/183.java b/home/sc2nf/Desktop/icse/all/50/eval/after/183.java
+index d149de9..9cee254 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/183.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/183.java
+@@ -1,3 +1,3 @@
+ public class A {
+-double METHOD_1 ( int index ) { throw new TYPE_1 ( ) ; } 
++abstract double METHOD_1 ( int index ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/184.java b/home/sc2nf/Desktop/icse/all/50/eval/after/184.java
+index c6796e4..eea6360 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/184.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/184.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( java.lang.String [ ] VAR_1 ) { VAR_2 = VAR_1 ; } 
++public void METHOD_1 ( java.io.File [ ] VAR_1 ) { VAR_2 = VAR_1 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/185.java b/home/sc2nf/Desktop/icse/all/50/eval/after/185.java
+index 6c80f97..58d8747 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/185.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/185.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public int METHOD_1 ( ) { long VAR_1 = TYPE_1 . METHOD_2 ( value ) ; return ( ( int ) ( VAR_1 ^ ( VAR_1 > > > INT_1 ) ) ) ; } 
++public int METHOD_1 ( ) { return TYPE_1 . METHOD_1 ( value ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/187.java b/home/sc2nf/Desktop/icse/all/50/eval/after/187.java
+index f47a71e..cff4327 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/187.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/187.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static TYPE_1 METHOD_1 ( int index ) { int i = 0 ; for ( TYPE_1 VAR_1 : TYPE_1 . values ( ) ) { if ( i == index ) { return VAR_1 ; } i ++ ; } return null ; } 
++public static TYPE_1 METHOD_1 ( int index ) { TYPE_1 [ ] values = TYPE_1 . values ( ) ; if ( ( index >= 0 ) && ( index < ( values . length ) ) ) { return values [ index ] ; } return null ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/189.java b/home/sc2nf/Desktop/icse/all/50/eval/after/189.java
+index c0c9b9d..24c2686 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/189.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/189.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 VAR_1 ) { if ( ! ( VAR_2 . METHOD_2 ( VAR_1 ) ) ) { VAR_3 = false ; } } 
++public void METHOD_1 ( TYPE_1 VAR_1 ) { if ( VAR_2 . METHOD_2 ( VAR_1 ) ) { VAR_3 = true ; } } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/192.java b/home/sc2nf/Desktop/icse/all/50/eval/after/192.java
+index 4bd964e..141ae3f 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/192.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/192.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( boolean VAR_1 , android.os.Message result ) { } 
++public void METHOD_1 ( int state , android.os.Message result ) { } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/195.java b/home/sc2nf/Desktop/icse/all/50/eval/after/195.java
+index e3d87d0..c1508bd 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/195.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/195.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( final java.lang.String VAR_1 ) { if ( METHOD_2 ( VAR_1 ) ) { VAR_2 . METHOD_3 ( STRING_1 , VAR_1 ) ; } } 
++public void METHOD_1 ( final java.lang.String VAR_1 ) { if ( METHOD_2 ( VAR_1 ) ) { VAR_2 . info ( STRING_1 , VAR_1 ) ; } } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/197.java b/home/sc2nf/Desktop/icse/all/50/eval/after/197.java
+index ba9b52b..3770950 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/197.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/197.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void run ( ) { VAR_1 . METHOD_1 ( ) ; } 
++public void run ( ) { if ( ( VAR_1 ) != null ) { VAR_1 . METHOD_1 ( ) ; } } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/199.java b/home/sc2nf/Desktop/icse/all/50/eval/after/199.java
+index 8276bd2..892e60c 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/199.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/199.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( java.lang.Object VAR_1 ) throws TYPE_1 { TYPE_2 VAR_2 = TYPE_3 . METHOD_2 ( ) ; if ( VAR_2 != null ) VAR_2 . METHOD_3 ( this ) ; } 
++public void METHOD_1 ( java.lang.Object VAR_1 ) throws TYPE_1 { } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/202.java b/home/sc2nf/Desktop/icse/all/50/eval/after/202.java
+index 4ca1f6a..441bac8 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/202.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/202.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void run ( ) { if ( VAR_1 . METHOD_1 ( ) ) { VAR_1 . METHOD_2 ( false , true ) ; } else { VAR_1 . METHOD_3 ( ) ; } } 
++public void run ( ) { VAR_1 . METHOD_3 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/207.java b/home/sc2nf/Desktop/icse/all/50/eval/after/207.java
+index f4c6a32..46fff25 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/207.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/207.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected void METHOD_1 ( TYPE_1 VAR_1 , TYPE_2 VAR_2 ) throws java.io.IOException { if ( METHOD_2 ( ) ) { throw new TYPE_3 ( STRING_1 ) ; } TYPE_4 . METHOD_3 ( fd , VAR_3 , TYPE_5 . METHOD_4 ( VAR_1 , VAR_2 ) ) ; } 
++protected native void METHOD_1 ( TYPE_1 VAR_1 , TYPE_2 VAR_2 ) throws java.io.IOException ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/211.java b/home/sc2nf/Desktop/icse/all/50/eval/after/211.java
+index 959cedc..19f49ab 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/211.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/211.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( byte VAR_1 , byte [ ] data ) { VAR_2 . METHOD_1 ( VAR_1 , data ) ; } 
++public void METHOD_1 ( android.bluetooth.BluetoothDevice device , byte VAR_1 , byte [ ] data ) { VAR_2 . METHOD_1 ( device , VAR_1 , data ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/213.java b/home/sc2nf/Desktop/icse/all/50/eval/after/213.java
+index 92c4a3c..5955ee4 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/213.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/213.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private boolean METHOD_1 ( TYPE_1 node ) { synchronized ( node ) { return node . METHOD_2 ( VAR_1 class ) ; } } 
++private boolean METHOD_1 ( TYPE_1 node ) { return node . METHOD_2 ( VAR_1 class ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/221.java b/home/sc2nf/Desktop/icse/all/50/eval/after/221.java
+index 1805583..92d1bbb 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/221.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/221.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static java.lang.String [ ] METHOD_1 ( ) { if ( ( VAR_1 ) >= ( VAR_2 ) ) { return VAR_3 ; } if ( ( VAR_1 ) >= ( VAR_4 ) ) { return VAR_5 ; } return VAR_6 ; } 
++public static java.lang.String [ ] METHOD_1 ( ) { return ( VAR_1 ) >= ( VAR_2 ) ? VAR_3 : VAR_5 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/229.java b/home/sc2nf/Desktop/icse/all/50/eval/after/229.java
+index 73f15f4..052bab3 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/229.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/229.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 VAR_1 ) { if ( ( VAR_2 ) != null ) { VAR_2 . METHOD_2 ( true ) ; } METHOD_3 ( ) ; } 
++public void METHOD_1 ( TYPE_1 VAR_1 ) { METHOD_3 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/238.java b/home/sc2nf/Desktop/icse/all/50/eval/after/238.java
+index 865893f..d235dfc 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/238.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/238.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 VAR_1 ) { METHOD_2 ( VAR_1 ) ; } 
++public void METHOD_1 ( ) { METHOD_2 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/240.java b/home/sc2nf/Desktop/icse/all/50/eval/after/240.java
+index 37fd16d..0f27b14 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/240.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/240.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { METHOD_2 ( ) ; org.junit.Assert.assertEquals ( VAR_1 , VAR_2 . METHOD_3 ( VAR_3 ) ) ; TYPE_1 . METHOD_4 ( VAR_2 . METHOD_5 ( ) , TYPE_2 . METHOD_6 ( VAR_4 class ) ) ; } 
++public void METHOD_1 ( ) { METHOD_2 ( ) ; org.junit.Assert.assertEquals ( VAR_1 , VAR_2 . METHOD_3 ( ) ) ; TYPE_1 . METHOD_4 ( VAR_2 . METHOD_5 ( ) , TYPE_2 . METHOD_6 ( VAR_4 class ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/248.java b/home/sc2nf/Desktop/icse/all/50/eval/after/248.java
+index 57fe47a..df25ac6 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/248.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/248.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) throws java.lang.Exception { METHOD_2 ( false , true , false ) ; } 
++public void METHOD_1 ( ) throws java.lang.Exception { METHOD_2 ( false , true , false , false ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/252.java b/home/sc2nf/Desktop/icse/all/50/eval/after/252.java
+index d15b0b3..2c88271 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/252.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/252.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( int method ) { METHOD_2 ( method ) ; } 
++public void METHOD_2 ( int method ) { this . METHOD_2 ( method ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/264.java b/home/sc2nf/Desktop/icse/all/50/eval/after/264.java
+index 022d674..629f8f2 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/264.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/264.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public synchronized void METHOD_1 ( TYPE_1 VAR_1 ) { throw new TYPE_2 ( ) ; } 
++public abstract void METHOD_1 ( TYPE_1 VAR_1 ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/265.java b/home/sc2nf/Desktop/icse/all/50/eval/after/265.java
+index dbdd49b..5451d38 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/265.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/265.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private void METHOD_1 ( java.lang.String VAR_1 , TYPE_1 VAR_2 ) throws java.io.IOException { METHOD_1 ( VAR_1 , VAR_2 , 1 , STRING_1 , 12 ) ; } 
++private void METHOD_1 ( java.lang.String VAR_1 ) throws java.io.IOException { METHOD_1 ( VAR_1 , 1 , STRING_1 , 9 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/266.java b/home/sc2nf/Desktop/icse/all/50/eval/after/266.java
+index 2ed7508..1f61578 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/266.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/266.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.util.List < TYPE_1 > METHOD_1 ( ) { return TYPE_2 . METHOD_2 ( ) . METHOD_3 ( VAR_1 ) ; } 
++public java.util.List < TYPE_1 > METHOD_1 ( ) { return VAR_1 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/273.java b/home/sc2nf/Desktop/icse/all/50/eval/after/273.java
+index 22cf790..14e87e1 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/273.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/273.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( java.lang.String [ ] VAR_1 ) throws android.os.RemoteException { } 
++public void METHOD_1 ( java.lang.String [ ] VAR_1 ) { this . METHOD_1 ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/276.java b/home/sc2nf/Desktop/icse/all/50/eval/after/276.java
+index 52b5a23..05243ea 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/276.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/276.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( java.lang.String VAR_1 , int VAR_2 ) { METHOD_2 ( VAR_1 , VAR_2 , false ) ; } 
++public void METHOD_1 ( java.lang.String VAR_1 , int VAR_2 ) { METHOD_2 ( VAR_1 , VAR_2 , false , true ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/277.java b/home/sc2nf/Desktop/icse/all/50/eval/after/277.java
+index 54b0171..29f7d96 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/277.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/277.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static < TYPE_1 , TYPE_2 > TYPE_3 < java.util.Map < TYPE_1 , TYPE_2 > > METHOD_1 ( TYPE_3 < TYPE_1 > VAR_1 ) { return TYPE_4 . METHOD_2 ( VAR_1 , VAR_2 < TYPE_2 > METHOD_3 ( ) ) ; } 
++public static < TYPE_1 > TYPE_3 < java.util.Map < ? extends TYPE_1 , ? > > METHOD_1 ( TYPE_3 < ? super TYPE_1 > VAR_1 ) { return new TYPE_4 < TYPE_1 , java.lang.Object > ( VAR_1 , TYPE_4 . METHOD_3 ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/281.java b/home/sc2nf/Desktop/icse/all/50/eval/after/281.java
+index 83c88bb..560ffbc 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/281.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/281.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public boolean METHOD_1 ( java.lang.String VAR_1 ) { final boolean VAR_2 = METHOD_2 ( VAR_1 ) ; synchronized ( VAR_3 ) { return METHOD_3 ( VAR_1 , VAR_2 ) ; } } 
++public boolean METHOD_1 ( java.lang.String VAR_1 ) { return true ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/301.java b/home/sc2nf/Desktop/icse/all/50/eval/after/301.java
+index af78e55..069e9c9 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/301.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/301.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 < java.lang.String > VAR_1 ) { METHOD_2 ( TYPE_2 . METHOD_3 ( VAR_1 ) ) ; } 
++public void METHOD_1 ( TYPE_1 < java.lang.String > VAR_1 ) { METHOD_2 ( METHOD_3 ( VAR_1 ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/307.java b/home/sc2nf/Desktop/icse/all/50/eval/after/307.java
+index 3a62495..2ca3a84 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/307.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/307.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private boolean METHOD_1 ( android.bluetooth.BluetoothDevice device ) { if ( device == null ) return false ; if ( TYPE_1 . METHOD_2 ( device . METHOD_3 ( ) ) ) return true ; return false ; } 
++private static boolean METHOD_1 ( android.bluetooth.BluetoothDevice device ) { return ( device != null ) && ( TYPE_1 . METHOD_2 ( device . METHOD_3 ( ) ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/309.java b/home/sc2nf/Desktop/icse/all/50/eval/after/309.java
+index 9d63090..57eace4 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/309.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/309.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( int subId , int VAR_1 ) throws android.os.RemoteException { this . METHOD_1 ( subId , VAR_1 ) ; } 
++public void METHOD_1 ( int slotId , int VAR_1 ) throws android.os.RemoteException { this . METHOD_1 ( slotId , VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/312.java b/home/sc2nf/Desktop/icse/all/50/eval/after/312.java
+index 69dc169..8e8da26 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/312.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/312.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected boolean METHOD_1 ( char c ) { return ( ( c == CHAR_1 ) || ( c == CHAR_2 ) ) || ( c == CHAR_3 ) ; } 
++protected boolean METHOD_1 ( char c ) { return c == CHAR_2 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/314.java b/home/sc2nf/Desktop/icse/all/50/eval/after/314.java
+index f6e8d8e..979dc7f 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/314.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/314.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private static native void METHOD_1 ( int VAR_1 ) ; 
++private static native void METHOD_1 ( long VAR_1 ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/320.java b/home/sc2nf/Desktop/icse/all/50/eval/after/320.java
+index 4aa51fe..d71d2be 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/320.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/320.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public int METHOD_1 ( ) { return ( this ) == ( VAR_1 ) ? VAR_2 : VAR_3 ; } 
++public int METHOD_1 ( ) { return VAR_3 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/322.java b/home/sc2nf/Desktop/icse/all/50/eval/after/322.java
+index 863b689..10043d0 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/322.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/322.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 METHOD_1 ( ) { return TYPE_2 . assertNotNull ( VAR_1 ) ; } 
++public TYPE_1 METHOD_1 ( ) { return VAR_1 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/327.java b/home/sc2nf/Desktop/icse/all/50/eval/after/327.java
+index 0900283..bd987e7 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/327.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/327.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.util.List < java.lang.String > METHOD_1 ( java.io.File VAR_1 ) { return TYPE_1 . METHOD_2 ( STRING_1 , STRING_2 , java.lang.Integer . toString ( VAR_2 ) , VAR_3 , STRING_3 , STRING_4 , VAR_1 . METHOD_3 ( ) , STRING_5 , STRING_6 ) ; } 
++public java.util.List < java.lang.String > METHOD_1 ( ) { return TYPE_1 . METHOD_2 ( STRING_1 , STRING_2 , java.lang.Integer . toString ( VAR_2 ) , VAR_3 , STRING_3 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/332.java b/home/sc2nf/Desktop/icse/all/50/eval/after/332.java
+index 7193076..0e5611c 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/332.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/332.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 METHOD_1 ( ) { return METHOD_2 ( ) ? null : TYPE_2 . METHOD_3 ( VAR_1 ) ; } 
++public TYPE_1 METHOD_1 ( ) { return METHOD_2 ( ) ? null : METHOD_3 ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/335.java b/home/sc2nf/Desktop/icse/all/50/eval/after/335.java
+index a4f6996..77983de 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/335.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/335.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) throws java.lang.Exception { METHOD_2 ( true , false , false , true ) ; } 
++public void METHOD_1 ( ) throws java.lang.Exception { METHOD_2 ( true , false , false , true , false ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/338.java b/home/sc2nf/Desktop/icse/all/50/eval/after/338.java
+index 676bfa0..447d249 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/338.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/338.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void run ( com.android.jack.ir.ast.JDefinedClassOrInterface t ) throws java.lang.Exception { if ( t instanceof TYPE_1 ) { t . METHOD_1 ( VAR_1 class ) ; } } 
++public void run ( com.android.jack.ir.ast.JDefinedClassOrInterface t ) throws java.lang.Exception { t . METHOD_1 ( VAR_1 class ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/350.java b/home/sc2nf/Desktop/icse/all/50/eval/after/350.java
+index 32775cc..eff6533 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/350.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/350.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 METHOD_1 ( java.lang.String VAR_1 ) { for ( TYPE_2 field : VAR_2 ) { if ( VAR_1 . equals ( field . getName ( ) ) ) { return field . METHOD_2 ( ) ; } } return null ; } 
++public TYPE_1 METHOD_1 ( java.lang.String VAR_1 ) { for ( TYPE_2 field : VAR_2 ) { if ( VAR_1 . equals ( field . name ) ) { return field . value ; } } return null ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/352.java b/home/sc2nf/Desktop/icse/all/50/eval/after/352.java
+index 4f1481b..3bf368e 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/352.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/352.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.lang.Class < ? > [ ] METHOD_1 ( ) { return java.lang.Class . METHOD_2 ( VAR_1 ) . METHOD_1 ( ) ; } 
++public java.lang.Class < ? > [ ] METHOD_1 ( ) { return super . METHOD_1 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/353.java b/home/sc2nf/Desktop/icse/all/50/eval/after/353.java
+index 579b2cd..e60294a 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/353.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/353.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.lang.String METHOD_1 ( ) { return VAR_1 ; } 
++public java.io.File METHOD_1 ( ) { return VAR_1 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/355.java b/home/sc2nf/Desktop/icse/all/50/eval/after/355.java
+index 4aa5b2a..434a1d2 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/355.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/355.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static void run ( ) throws java.lang.Exception { TYPE_1 . METHOD_1 ( VAR_1 class ) ; java.util.ArrayList < java.lang.Object > VAR_2 = new java.util.ArrayList < > ( 100 ) ; TYPE_2 . METHOD_2 ( ) ; TYPE_2 . METHOD_3 ( VAR_2 ) ; } 
++public static void run ( ) throws java.lang.Exception { java.util.ArrayList < java.lang.Object > VAR_2 = new java.util.ArrayList < > ( 100 ) ; TYPE_2 . METHOD_2 ( ) ; TYPE_2 . METHOD_3 ( VAR_2 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/359.java b/home/sc2nf/Desktop/icse/all/50/eval/after/359.java
+index 0d835c3..045c51f 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/359.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/359.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static TYPE_1 [ ] METHOD_1 ( ) { return VAR_1 . METHOD_1 ( ) ; } 
++public static TYPE_1 [ ] METHOD_1 ( ) { if ( ( VAR_1 ) == null ) { return new TYPE_1 [ 0 ] ; } return VAR_1 . METHOD_1 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/364.java b/home/sc2nf/Desktop/icse/all/50/eval/after/364.java
+index cea9864..197f5889 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/364.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/364.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static void run ( ) { TYPE_1 . METHOD_1 ( VAR_1 class ) ; TYPE_2 . METHOD_2 ( ) ; TYPE_2 . METHOD_3 ( ) ; TYPE_2 . METHOD_4 ( ) ; } 
++public static void run ( ) { TYPE_2 . METHOD_2 ( ) ; TYPE_2 . METHOD_3 ( ) ; TYPE_2 . METHOD_4 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/370.java b/home/sc2nf/Desktop/icse/all/50/eval/after/370.java
+index a7a5373..3590bd9 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/370.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/370.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public int METHOD_1 ( int VAR_1 ) throws android.os.RemoteException { return - 1 ; } 
++public int METHOD_1 ( int VAR_1 ) throws android.os.RemoteException { return this . METHOD_1 ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/374.java b/home/sc2nf/Desktop/icse/all/50/eval/after/374.java
+index 322250d..f09e477 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/374.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/374.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private TYPE_1 METHOD_1 ( boolean VAR_1 ) { return ( this . VAR_1 ) || ( ! VAR_1 ) ? this : new TYPE_1 ( this . type , this . VAR_2 , true ) ; } 
++public abstract TYPE_1 METHOD_1 ( boolean VAR_1 ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/375.java b/home/sc2nf/Desktop/icse/all/50/eval/after/375.java
+index c989667..0908942 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/375.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/375.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static void METHOD_1 ( int [ ] a ) { TYPE_1 . METHOD_1 ( a ) ; } 
++public static void METHOD_1 ( int [ ] a ) { TYPE_1 . METHOD_1 ( a , 0 , ( ( a . length ) - 1 ) , null , 0 , 0 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/379.java b/home/sc2nf/Desktop/icse/all/50/eval/after/379.java
+index 447331a..6c02518 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/379.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/379.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.io.File METHOD_1 ( ) { return new java.io.File ( METHOD_2 ( ) ) ; } 
++public java.io.File METHOD_1 ( ) { return super . METHOD_1 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/380.java b/home/sc2nf/Desktop/icse/all/50/eval/after/380.java
+index fbecfef..99695fe 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/380.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/380.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private void run ( TYPE_1 VAR_1 ) throws java.lang.Exception { new TYPE_2 ( VAR_1 ) . METHOD_1 ( VAR_2 ) . METHOD_2 ( TYPE_3 . getName ( ) , java.lang.String . METHOD_3 ( VAR_3 ) ) . METHOD_4 ( VAR_4 class ) . METHOD_5 ( ) ; } 
++private void run ( TYPE_1 VAR_1 ) throws java.lang.Exception { new TYPE_2 ( VAR_1 ) . METHOD_1 ( VAR_2 ) . METHOD_2 ( TYPE_3 . getName ( ) , java.lang.String . METHOD_3 ( VAR_3 ) ) . METHOD_5 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/382.java b/home/sc2nf/Desktop/icse/all/50/eval/after/382.java
+index ba72d33..6970459 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/382.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/382.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public boolean METHOD_1 ( TYPE_1 pkg ) { return pkg instanceof TYPE_2 ; } 
++public boolean METHOD_1 ( TYPE_1 pkg ) { return METHOD_1 ( pkg , false ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/384.java b/home/sc2nf/Desktop/icse/all/50/eval/after/384.java
+index 91f27e3..6128037 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/384.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/384.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 METHOD_1 ( ) { return TYPE_2 . METHOD_2 ( ) . METHOD_3 ( ) . METHOD_4 ( VAR_1 ) ; } 
++public TYPE_1 METHOD_1 ( ) { return type ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/389.java b/home/sc2nf/Desktop/icse/all/50/eval/after/389.java
+index 46dbcc8..c942f38 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/389.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/389.java
+@@ -1,3 +1,3 @@
+ public class A {
+-boolean METHOD_1 ( int VAR_1 ) throws android.os.RemoteException ; 
++boolean METHOD_1 ( ) throws android.os.RemoteException ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/400.java b/home/sc2nf/Desktop/icse/all/50/eval/after/400.java
+index d941ffa..b52a5a5 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/400.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/400.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private void METHOD_1 ( ) { TYPE_1 . METHOD_2 ( METHOD_3 ( ) , false ) ; } 
++private void METHOD_1 ( ) { METHOD_1 ( false ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/403.java b/home/sc2nf/Desktop/icse/all/50/eval/after/403.java
+index 716d6e4..88f79d9 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/403.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/403.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { final TYPE_1 VAR_1 = METHOD_2 ( ) ; if ( VAR_2 . METHOD_3 ( VAR_1 ) ) { METHOD_4 ( ) ; } super . METHOD_1 ( ) ; } 
++public void METHOD_1 ( ) { METHOD_4 ( ) ; super . METHOD_1 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/404.java b/home/sc2nf/Desktop/icse/all/50/eval/after/404.java
+index b49b2d4..f51fb62 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/404.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/404.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 VAR_1 ) { assert false ; } 
++public void METHOD_1 ( TYPE_1 VAR_1 ) { } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/412.java b/home/sc2nf/Desktop/icse/all/50/eval/after/412.java
+index 361a204..218b434 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/412.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/412.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public abstract void METHOD_1 ( boolean VAR_1 ) ; 
++public abstract void METHOD_1 ( ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/417.java b/home/sc2nf/Desktop/icse/all/50/eval/after/417.java
+index 4c08b7e..f097930 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/417.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/417.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected TYPE_1 METHOD_1 ( TYPE_2 < TYPE_3 > repo , com.google.gerrit.reviewdb.client.Account.Id VAR_1 ) throws java.lang.Exception { return METHOD_2 ( repo , null , VAR_1 , null , null , null ) ; } 
++protected TYPE_1 METHOD_2 ( TYPE_2 < TYPE_3 > repo ) throws java.lang.Exception { return METHOD_2 ( repo , null , null , null , null ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/418.java b/home/sc2nf/Desktop/icse/all/50/eval/after/418.java
+index 5becbf4..f0b6f07 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/418.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/418.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private void METHOD_1 ( ) throws java.lang.Exception { TYPE_1 . METHOD_2 ( STRING_1 , STRING_2 , VAR_1 . METHOD_3 ( ) , STRING_3 , STRING_4 , STRING_5 , STRING_6 ) ; } 
++private void METHOD_1 ( ) throws java.lang.Exception { TYPE_1 . METHOD_2 ( STRING_1 , STRING_2 , VAR_1 , STRING_3 , STRING_4 , STRING_5 , STRING_6 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/421.java b/home/sc2nf/Desktop/icse/all/50/eval/after/421.java
+index 192900b..4717b8e 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/421.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/421.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private TYPE_1 . ProjectConfig METHOD_1 ( ) throws java.lang.Exception { return METHOD_1 ( STRING_1 , true , true ) ; } 
++private TYPE_1 . ProjectConfig METHOD_1 ( ) throws java.lang.Exception { return METHOD_1 ( STRING_1 , true , true , true , true ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/423.java b/home/sc2nf/Desktop/icse/all/50/eval/after/423.java
+index a368acf..6dc1007 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/423.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/423.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected void METHOD_1 ( ) { factory ( VAR_1 . Factory class ) ; bind ( VAR_2 class ) . METHOD_2 ( VAR_3 ) ; } 
++protected void METHOD_1 ( ) { factory ( VAR_1 . Factory class ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/428.java b/home/sc2nf/Desktop/icse/all/50/eval/after/428.java
+index 4479414..bd7433a 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/428.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/428.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( final TYPE_1 event ) { METHOD_2 ( 1 ) ; } 
++public void METHOD_1 ( final TYPE_1 event ) { METHOD_2 ( ( - 1 ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/432.java b/home/sc2nf/Desktop/icse/all/50/eval/after/432.java
+index 05eeb62..499dc98 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/432.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/432.java
+@@ -1,3 +1,3 @@
+ public class A {
+-void METHOD_1 ( TYPE_1 VAR_1 , TYPE_2 VAR_2 ) { VAR_3 . METHOD_2 ( VAR_1 , VAR_2 ) ; } 
++void METHOD_1 ( TYPE_1 VAR_1 ) { VAR_3 . METHOD_2 ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/433.java b/home/sc2nf/Desktop/icse/all/50/eval/after/433.java
+index 641980a..c0efcb2 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/433.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/433.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private TYPE_1 METHOD_1 ( java.lang.String name , int VAR_1 , int VAR_2 , TYPE_2 VAR_3 , TYPE_3 < TYPE_4 . Result > VAR_4 ) { return new TYPE_1 ( VAR_5 , project , name , VAR_1 , VAR_2 , VAR_3 , VAR_4 ) ; } 
++public int get ( ) { return VAR_1 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/459.java b/home/sc2nf/Desktop/icse/all/50/eval/after/459.java
+index 891f2f3..0ec0580 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/459.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/459.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected void METHOD_1 ( TYPE_1 result ) { METHOD_2 ( VAR_1 . METHOD_3 ( ) ) ; METHOD_4 ( VAR_2 . METHOD_5 ( ) ) ; VAR_2 = null ; } 
++protected void METHOD_1 ( TYPE_1 result ) { METHOD_4 ( VAR_2 ) ; VAR_2 = null ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/460.java b/home/sc2nf/Desktop/icse/all/50/eval/after/460.java
+index dc35235..79ff9fd 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/460.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/460.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected void METHOD_1 ( ) { bind ( VAR_1 class ) ; METHOD_2 ( ) . to ( VAR_2 class ) ; factory ( VAR_3 . Factory class ) ; } 
++protected void METHOD_1 ( ) { bind ( VAR_1 class ) ; bind ( VAR_2 class ) ; METHOD_2 ( ) . to ( VAR_2 class ) ; factory ( VAR_3 . Factory class ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/461.java b/home/sc2nf/Desktop/icse/all/50/eval/after/461.java
+index 766340f..c10e90a 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/461.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/461.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected void METHOD_1 ( ) { bind ( VAR_1 class ) . METHOD_2 ( VAR_2 . ui ) ; bind ( VAR_3 class ) . METHOD_2 ( VAR_4 ) ; bind ( VAR_5 class ) . to ( VAR_6 class ) ; } 
++protected void METHOD_1 ( ) { bind ( VAR_1 class ) . METHOD_2 ( VAR_2 . ui ) ; bind ( VAR_3 class ) . METHOD_2 ( VAR_4 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/469.java b/home/sc2nf/Desktop/icse/all/50/eval/after/469.java
+index 953ba53..8a76c9b 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/469.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/469.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private TYPE_1 . ProjectConfig METHOD_1 ( java.lang.String VAR_1 ) throws java.lang.Exception { return METHOD_1 ( VAR_1 , true , true ) ; } 
++private TYPE_1 . ProjectConfig METHOD_1 ( java.lang.String VAR_1 ) throws java.lang.Exception { return METHOD_1 ( VAR_1 , true , true , true , true ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/471.java b/home/sc2nf/Desktop/icse/all/50/eval/after/471.java
+index 59197f6..49c3b7a 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/471.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/471.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) throws java.lang.Exception { METHOD_2 ( db ) ; } 
++public void METHOD_1 ( ) throws java.lang.Exception { org.junit.Assert . METHOD_2 ( db ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/472.java b/home/sc2nf/Desktop/icse/all/50/eval/after/472.java
+index 2e65dc9..fdc888d 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/472.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/472.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private static TYPE_1 revision ( com.google.gerrit.reviewdb.client.PatchSet.Id id , java.lang.String type ) { return TYPE_2 . revision ( id ) . view ( type ) ; } 
++private static TYPE_1 revision ( java.lang.String project , com.google.gerrit.reviewdb.client.PatchSet.Id id , java.lang.String type ) { return TYPE_2 . revision ( project , id ) . view ( type ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/474.java b/home/sc2nf/Desktop/icse/all/50/eval/after/474.java
+index 63fad0c..60d1b74 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/474.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/474.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected void METHOD_1 ( ) { bind ( VAR_1 class ) . METHOD_2 ( VAR_2 class ) . METHOD_3 ( VAR_3 ) ; bind ( VAR_4 class ) ; } 
++protected void METHOD_1 ( ) { bind ( VAR_1 class ) . METHOD_2 ( VAR_2 class ) . METHOD_3 ( VAR_3 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/477.java b/home/sc2nf/Desktop/icse/all/50/eval/after/477.java
+index 0905a16..43e795c 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/477.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/477.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static void METHOD_1 ( int id , java.lang.String commit , TYPE_1 < TYPE_2 > VAR_1 ) { TYPE_3 . revision ( id , commit ) . delete ( VAR_1 ) ; } 
++public static void METHOD_1 ( java.lang.String project , int id , java.lang.String commit , TYPE_1 < TYPE_2 > VAR_1 ) { TYPE_3 . revision ( project , id , commit ) . delete ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/478.java b/home/sc2nf/Desktop/icse/all/50/eval/after/478.java
+index d30aa4d..d6ecca9 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/478.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/478.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.lang.String toString ( ) { return ( STRING_1 + ( METHOD_1 ( ) ) ) + STRING_2 ; } 
++public java.lang.String toString ( ) { return ( STRING_1 + ( getName ( ) ) ) + STRING_2 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/481.java b/home/sc2nf/Desktop/icse/all/50/eval/after/481.java
+index b49f408..4f544b3 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/481.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/481.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static java.lang.String METHOD_1 ( com.google.gerrit.reviewdb.client.Account.Id VAR_1 ) { return TYPE_1 . METHOD_2 ( VAR_2 , VAR_1 ) . toString ( ) ; } 
++public static java.lang.String METHOD_1 ( com.google.gerrit.reviewdb.client.Change . Id changeId ) { return TYPE_1 . METHOD_2 ( VAR_2 , changeId . get ( ) ) . toString ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/483.java b/home/sc2nf/Desktop/icse/all/50/eval/after/483.java
+index c46f2c4..5bcb7a0 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/483.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/483.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.lang.String METHOD_1 ( ) { return ( ( TYPE_1 ) ( METHOD_2 ( ) ) ) . METHOD_3 ( ) . METHOD_4 ( VAR_1 . length ( ) ) ; } 
++public java.lang.String METHOD_1 ( ) { return METHOD_3 ( ) . METHOD_4 ( VAR_1 . length ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/484.java b/home/sc2nf/Desktop/icse/all/50/eval/after/484.java
+index 0e3f2ad..2862b83 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/484.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/484.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { new TYPE_1 ( VAR_1 , new TYPE_2 ( ) , METHOD_2 ( VAR_2 class ) ) ; } 
++public void METHOD_1 ( ) { new TYPE_1 ( VAR_1 , new TYPE_2 ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/494.java b/home/sc2nf/Desktop/icse/all/50/eval/after/494.java
+index 9595112..5947f21 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/494.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/494.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 METHOD_1 ( ) throws java.io.IOException , TYPE_2 { TYPE_3 path = METHOD_2 ( ) ; if ( path != null ) { try ( org.eclipse.jgit.lib.Repository repo = new TYPE_4 ( path ) ) { METHOD_1 ( repo ) ; } } return this ; } 
++public TYPE_1 METHOD_1 ( ) throws java.io.IOException , TYPE_2 { super . METHOD_1 ( ) ; return this ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/498.java b/home/sc2nf/Desktop/icse/all/50/eval/after/498.java
+index 34709e7..16139f7 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/498.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/498.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) throws java.lang.Exception { project = new com.google.gerrit.reviewdb.client.Project.NameKey ( STRING_1 ) ; TYPE_1 . METHOD_2 ( VAR_1 , project . get ( ) ) ; METHOD_3 ( ) ; METHOD_4 ( ) ; } 
++public void METHOD_1 ( ) throws java.lang.Exception { METHOD_3 ( ) ; METHOD_4 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/502.java b/home/sc2nf/Desktop/icse/all/50/eval/after/502.java
+index f805aaf..96f883f 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/502.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/502.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private TYPE_1 METHOD_1 ( ) { TYPE_1 VAR_1 = VAR_2 . get ( ) ; return VAR_3 . METHOD_2 ( VAR_1 . METHOD_3 ( ) , VAR_1 . METHOD_4 ( ) ) ; } 
++private TYPE_1 METHOD_1 ( ) { return VAR_3 . METHOD_2 ( VAR_2 . METHOD_3 ( ) , VAR_2 . METHOD_4 ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/504.java b/home/sc2nf/Desktop/icse/all/50/eval/after/504.java
+index 6fe21d2..96d8333 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/504.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/504.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public int METHOD_1 ( ) { throw new TYPE_1 ( ) ; } 
++public int METHOD_1 ( ) { return 1 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/507.java b/home/sc2nf/Desktop/icse/all/50/eval/after/507.java
+index 4a97974..f995f20 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/507.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/507.java
+@@ -1,3 +1,3 @@
+ public class A {
+-long METHOD_1 ( ) { return VAR_1 ; } 
++long METHOD_1 ( ) { return VAR_1 . get ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/508.java b/home/sc2nf/Desktop/icse/all/50/eval/after/508.java
+index cf823e8..a38a906 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/508.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/508.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private final native TYPE_1 METHOD_1 ( int VAR_1 ) ; 
++public final native void METHOD_1 ( int VAR_1 ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/511.java b/home/sc2nf/Desktop/icse/all/50/eval/after/511.java
+index 3ae2e2c..41dd64f 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/511.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/511.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) throws java.lang.Exception { TYPE_1 . ProjectConfig cfg = VAR_1 . METHOD_2 ( project ) . METHOD_3 ( ) ; TYPE_2 . METHOD_4 ( cfg , VAR_2 , VAR_3 , STRING_1 ) ; METHOD_5 ( project , cfg ) ; } 
++public void METHOD_1 ( ) throws java.lang.Exception { METHOD_4 ( VAR_2 , VAR_3 , STRING_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/512.java b/home/sc2nf/Desktop/icse/all/50/eval/after/512.java
+index dfa7c80..d364286 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/512.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/512.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private void METHOD_1 ( ) throws java.lang.Exception { METHOD_2 ( ) ; METHOD_3 ( VAR_1 , project , STRING_1 , false , VAR_2 ) ; } 
++private void METHOD_1 ( ) throws java.lang.Exception { METHOD_2 ( ) ; METHOD_3 ( project , STRING_1 , VAR_1 , false , VAR_2 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/513.java b/home/sc2nf/Desktop/icse/all/50/eval/after/513.java
+index 47cb6a5..fd80b42 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/513.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/513.java
+@@ -1,3 +1,3 @@
+ public class A {
+-void METHOD_1 ( com.google.gerrit.reviewdb.client.Change c ) { change = c ; } 
++com.google.gerrit.server.query.change.ChangeData create ( com.google.gerrit.reviewdb.server.ReviewDb db , com.google.gerrit.reviewdb.client.Change c ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/515.java b/home/sc2nf/Desktop/icse/all/50/eval/after/515.java
+index 187717a..e7a1219 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/515.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/515.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.util.Set < java.lang.String > METHOD_1 ( ) { return cfg . METHOD_1 ( VAR_1 , VAR_2 ) ; } 
++public java.util.Set < java.lang.String > METHOD_1 ( ) { return cfg . METHOD_1 ( VAR_1 , VAR_2 , true ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/517.java b/home/sc2nf/Desktop/icse/all/50/eval/after/517.java
+index 1b23b87..eff54e6 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/517.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/517.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { org.junit.Assert.assertEquals ( STRING_1 , TYPE_1 . not ( TYPE_2 . METHOD_2 ( STRING_2 , STRING_3 ) ) . toString ( ) ) ; } 
++public void METHOD_1 ( ) { org.junit.Assert.assertEquals ( STRING_1 , TYPE_1 . not ( METHOD_2 ( STRING_2 , STRING_3 ) ) . toString ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/518.java b/home/sc2nf/Desktop/icse/all/50/eval/after/518.java
+index 15d2a97..504d121 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/518.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/518.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static TYPE_1 METHOD_1 ( ) { return new TYPE_1 ( VAR_1 ) ; } 
++public static TYPE_1 METHOD_1 ( ) { return TYPE_1 . create ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/520.java b/home/sc2nf/Desktop/icse/all/50/eval/after/520.java
+index ba9ca37..153a54b 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/520.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/520.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) throws java.lang.Exception { METHOD_2 ( user ) ; TYPE_1 in = new TYPE_1 ( ) ; in . name = STRING_1 ; METHOD_3 ( in , VAR_1 class ) ; } 
++public void METHOD_1 ( ) throws java.lang.Exception { METHOD_2 ( user ) ; TYPE_1 in = new TYPE_1 ( ) ; in . name = name ( STRING_1 ) ; METHOD_3 ( in , VAR_1 class ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/523.java b/home/sc2nf/Desktop/icse/all/50/eval/after/523.java
+index 12ab399..b6cda63 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/523.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/523.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private TYPE_1 METHOD_1 ( ) { return VAR_1 . create ( TYPE_2 . of ( VAR_2 ) ) ; } 
++private TYPE_1 METHOD_1 ( ) { return VAR_1 . create ( VAR_2 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/529.java b/home/sc2nf/Desktop/icse/all/50/eval/after/529.java
+index 8b4a202..8f28d7a 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/529.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/529.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private final native void METHOD_1 ( java.lang.String VAR_1 ) ; 
++public final native void line ( int n ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/530.java b/home/sc2nf/Desktop/icse/all/50/eval/after/530.java
+index 0214247..0574135 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/530.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/530.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( final TYPE_1 config ) { this . config = config ; } 
++public void METHOD_1 ( final TYPE_1 config ) { } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/537.java b/home/sc2nf/Desktop/icse/all/50/eval/after/537.java
+index 9609c79..7eb8f96 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/537.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/537.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 METHOD_1 ( ) { return VAR_1 . METHOD_2 ( ) . METHOD_1 ( ) ; } 
++public TYPE_1 METHOD_1 ( ) { return METHOD_2 ( ) . METHOD_1 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/538.java b/home/sc2nf/Desktop/icse/all/50/eval/after/538.java
+index a7b47c8..6c3c172 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/538.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/538.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 . AccountGroup METHOD_1 ( final java.lang.String VAR_1 ) { return VAR_2 . get ( new TYPE_2 . NameKey ( VAR_1 ) ) ; } 
++public TYPE_1 . AccountGroup get ( final TYPE_2 . NameKey name ) { return VAR_2 . get ( name ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/544.java b/home/sc2nf/Desktop/icse/all/50/eval/after/544.java
+index d5fae50..7a005d8 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/544.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/544.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void run ( ) { this . METHOD_1 ( ) ; } 
++public void run ( ) { this . METHOD_1 ( true ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/553.java b/home/sc2nf/Desktop/icse/all/50/eval/after/553.java
+index cf6a0d7..3d85524 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/553.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/553.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 event , com.google.gerrit.reviewdb.server.ReviewDb db ) throws com.google.gwtorm.server.OrmException { METHOD_2 ( event , db ) ; } 
++public void METHOD_1 ( TYPE_1 event ) throws com.google.gwtorm.server.OrmException { METHOD_2 ( event ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/556.java b/home/sc2nf/Desktop/icse/all/50/eval/after/556.java
+index 4fde1e1..b2d9342 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/556.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/556.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private java.util.List < TYPE_1 > METHOD_1 ( java.lang.String err , java.lang.Exception e ) { if ( VAR_1 ) { VAR_2 . error ( err , e ) ; return TYPE_2 . METHOD_2 ( ) ; } else { return TYPE_2 . METHOD_3 ( err ) ; } } 
++private java.util.List < TYPE_1 > METHOD_1 ( java.lang.String err ) { return METHOD_1 ( err , null ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/558.java b/home/sc2nf/Desktop/icse/all/50/eval/after/558.java
+index be6af49..7833492 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/558.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/558.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 ctx ) throws java.lang.Exception { ctx . METHOD_2 ( ) . METHOD_3 ( magicBranch . topic ) ; } 
++public void METHOD_1 ( TYPE_1 ctx ) throws java.lang.Exception { ctx . METHOD_2 ( ps . getId ( ) ) . METHOD_3 ( magicBranch . topic ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/559.java b/home/sc2nf/Desktop/icse/all/50/eval/after/559.java
+index ff67dd5..d7da818 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/559.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/559.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected com.google.gerrit.reviewdb.client.Change METHOD_1 ( ) { return TYPE_1 . METHOD_1 ( project , VAR_1 ) ; } 
++protected com.google.gerrit.reviewdb.client.Change METHOD_1 ( ) { return TYPE_1 . METHOD_1 ( project , VAR_1 . getAccountId ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/563.java b/home/sc2nf/Desktop/icse/all/50/eval/after/563.java
+index 0fb5b8a..b1d8b26 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/563.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/563.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void onSuccess ( TYPE_1 VAR_1 ) { TYPE_2 . METHOD_1 ( VAR_1 ) ; } 
++public void onSuccess ( TYPE_1 info ) { TYPE_2 . METHOD_1 ( info ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/564.java b/home/sc2nf/Desktop/icse/all/50/eval/after/564.java
+index da5beb9..a0e38be 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/564.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/564.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( final TYPE_1 . PatchSet ps ) { patchSet = ps ; } 
++public void METHOD_1 ( final com.google.gerrit.reviewdb.client.PatchSet ps ) { patchSet = ps ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/567.java b/home/sc2nf/Desktop/icse/all/50/eval/after/567.java
+index 2200f02..db649fb 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/567.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/567.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) throws java.lang.Exception { VAR_1 . METHOD_2 ( VAR_2 class ) ; VAR_3 . projects ( ) . name ( project . get ( ) ) . METHOD_3 ( STRING_1 ) . get ( ) ; } 
++public void METHOD_1 ( ) throws java.lang.Exception { VAR_1 . METHOD_2 ( VAR_2 class ) ; project ( ) . METHOD_3 ( STRING_1 ) . get ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/569.java b/home/sc2nf/Desktop/icse/all/50/eval/after/569.java
+index 4e05265..42a39cb 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/569.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/569.java
+@@ -1,3 +1,3 @@
+ public class A {
+-void METHOD_1 ( TYPE_1 VAR_1 , int line , TYPE_2 group ) { TYPE_3 < TYPE_4 , TYPE_5 > VAR_2 = METHOD_2 ( VAR_1 ) ; if ( ( VAR_2 . get ( line ) ) == group ) { VAR_2 . METHOD_3 ( line ) ; } } 
++void METHOD_1 ( TYPE_1 VAR_1 , int line , TYPE_2 group ) { super . METHOD_1 ( VAR_1 , line , group ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/570.java b/home/sc2nf/Desktop/icse/all/50/eval/after/570.java
+index bf2df3a..761cff6 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/570.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/570.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { try { VAR_1 . METHOD_2 ( ) ; } finally { plugins . METHOD_1 ( name , VAR_1 ) ; } } 
++public void METHOD_1 ( ) { VAR_1 . METHOD_2 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/575.java b/home/sc2nf/Desktop/icse/all/50/eval/after/575.java
+index fea6359..f034a1a 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/575.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/575.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 VAR_1 ) { VAR_2 . METHOD_2 ( VAR_3 . METHOD_3 ( ) ) ; METHOD_4 ( ( ! ( METHOD_5 ( ) ) ) ) ; METHOD_6 ( ) ; } 
++public void METHOD_1 ( TYPE_1 VAR_1 ) { METHOD_4 ( true ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/578.java b/home/sc2nf/Desktop/icse/all/50/eval/after/578.java
+index 417c616..7bbcd65 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/578.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/578.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.lang.String toString ( ) { return VAR_1 ; } 
++public java.lang.String toString ( ) { return VAR_1 . get ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/579.java b/home/sc2nf/Desktop/icse/all/50/eval/after/579.java
+index 28d4896..df543c3 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/579.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/579.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.util.List < TYPE_1 > METHOD_1 ( ) { return java.util.Collections . METHOD_2 ( TYPE_2 . METHOD_3 ( VAR_1 ) ) ; } 
++public java.util.List < TYPE_1 > METHOD_1 ( ) { return java.util.Collections . METHOD_2 ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/580.java b/home/sc2nf/Desktop/icse/all/50/eval/after/580.java
+index 6622c8e..ed02fc4 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/580.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/580.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 < com.google.gerrit.reviewdb.client.Account.Id > METHOD_1 ( java.lang.String VAR_1 ) throws java.lang.Exception { return TYPE_1 . METHOD_2 ( VAR_2 . get ( TYPE_2 . create ( VAR_3 , VAR_1 ) ) ) . METHOD_3 ( TYPE_3 : : METHOD_4 ) ; } 
++public TYPE_1 < com.google.gerrit.reviewdb.client.Account.Id > METHOD_1 ( java.lang.String VAR_1 ) throws java.lang.Exception { return VAR_2 . get ( TYPE_2 . create ( VAR_3 , VAR_1 ) ) . METHOD_3 ( TYPE_3 : : METHOD_4 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/581.java b/home/sc2nf/Desktop/icse/all/50/eval/after/581.java
+index 1847332..9486051 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/581.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/581.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 create ( com.google.gerrit.reviewdb.client.Change change ) ; 
++public TYPE_1 create ( com.google.gerrit.reviewdb.client.Change . Id id ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/585.java b/home/sc2nf/Desktop/icse/all/50/eval/after/585.java
+index 3aa60cd..2a9add8 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/585.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/585.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static void METHOD_1 ( int changeId , java.lang.String revision , TYPE_1 < TYPE_2 > VAR_1 ) { TYPE_3 . revision ( changeId , revision ) . view ( STRING_1 ) . METHOD_2 ( STRING_2 ) . get ( VAR_1 ) ; } 
++public static void METHOD_1 ( java.lang.String project , int changeId , java.lang.String revision , TYPE_1 < TYPE_2 > VAR_1 ) { TYPE_3 . revision ( project , changeId , revision ) . view ( STRING_1 ) . METHOD_2 ( STRING_2 ) . get ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/588.java b/home/sc2nf/Desktop/icse/all/50/eval/after/588.java
+index f94205c..b0f7fcd 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/588.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/588.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected java.lang.String getRefName ( ) { return TYPE_1 . METHOD_1 ( VAR_1 , getChange ( ) . getId ( ) ) ; } 
++protected java.lang.String getRefName ( ) { return TYPE_1 . METHOD_1 ( VAR_1 , ctl . getId ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/592.java b/home/sc2nf/Desktop/icse/all/50/eval/after/592.java
+index bacc3da..47d0580 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/592.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/592.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 create ( TYPE_2 VAR_1 , com.google.gerrit.reviewdb.client.Account.Id id ) { return new TYPE_1 ( VAR_2 , VAR_3 , VAR_4 , VAR_5 , VAR_6 , VAR_7 , VAR_8 , VAR_9 , VAR_10 , TYPE_3 . of ( VAR_1 ) , null , id , null ) ; } 
++public TYPE_1 create ( com.google.gerrit.reviewdb.client.Account.Id id ) { return create ( ( ( TYPE_2 ) ( null ) ) , id ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/598.java b/home/sc2nf/Desktop/icse/all/50/eval/after/598.java
+index 3bb5315..78e429a 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/598.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/598.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static TYPE_1 METHOD_1 ( ) { return TYPE_2 . METHOD_2 ( VAR_1 ) ; } 
++public static TYPE_1 METHOD_1 ( ) { return TYPE_1 . error ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/599.java b/home/sc2nf/Desktop/icse/all/50/eval/after/599.java
+index ccdee4f..643214d 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/599.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/599.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected void METHOD_1 ( ) { bind ( VAR_1 class ) . to ( VAR_2 class ) ; bind ( VAR_3 class ) ; bind ( VAR_4 class ) ; METHOD_2 ( ) . to ( VAR_4 class ) ; factory ( VAR_5 . Factory class ) ; } 
++protected void METHOD_1 ( ) { bind ( VAR_1 class ) . to ( VAR_2 class ) ; bind ( VAR_4 class ) ; METHOD_2 ( ) . to ( VAR_4 class ) ; factory ( VAR_5 . Factory class ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/601.java b/home/sc2nf/Desktop/icse/all/50/eval/after/601.java
+index 66e50d5..97d9c0c 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/601.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/601.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private int METHOD_1 ( java.lang.String name , java.lang.String VAR_1 , int VAR_2 ) { return config . METHOD_1 ( STRING_1 , name , VAR_1 , VAR_2 ) ; } 
++private int METHOD_1 ( java.lang.String n , java.lang.String s , int d ) { return config . METHOD_1 ( STRING_1 , n , s , d ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/608.java b/home/sc2nf/Desktop/icse/all/50/eval/after/608.java
+index 357b7a4..33c9aef 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/608.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/608.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private void METHOD_1 ( TYPE_1 notes , TYPE_2 VAR_1 ) throws java.lang.Exception { com.google.common.truth.Truth.assertThat ( VAR_2 . METHOD_2 ( METHOD_3 ( notes ) , VAR_1 ) . METHOD_4 ( ) ) . isEmpty ( ) ; } 
++private void METHOD_1 ( TYPE_1 notes , TYPE_2 VAR_1 ) throws java.lang.Exception { com.google.common.truth.Truth.assertThat ( VAR_2 . METHOD_2 ( notes , VAR_1 ) . METHOD_4 ( ) ) . isEmpty ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/614.java b/home/sc2nf/Desktop/icse/all/50/eval/after/614.java
+index bd7433a..4479414 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/614.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/614.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( final TYPE_1 event ) { METHOD_2 ( ( - 1 ) ) ; } 
++public void METHOD_1 ( final TYPE_1 event ) { METHOD_2 ( 1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/621.java b/home/sc2nf/Desktop/icse/all/50/eval/after/621.java
+index 4034828..276e503 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/621.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/621.java
+@@ -1,3 +1,3 @@
+ public class A {
+-com.google.gerrit.server.query.change.ChangeData METHOD_1 ( com.google.gerrit.reviewdb.client . PatchSetApproval t ) { return new com.google.gerrit.server.query.change.ChangeData ( t . METHOD_2 ( ) . getParentKey ( ) ) ; } 
++com.google.gerrit.server.query.change.ChangeData METHOD_1 ( com.google.gerrit.reviewdb.client.PatchSet t ) { return factory . create ( db . get ( ) , t . getId ( ) . getParentKey ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/622.java b/home/sc2nf/Desktop/icse/all/50/eval/after/622.java
+index 84db2c6..0039e9f 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/622.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/622.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 METHOD_1 ( java.lang.String VAR_1 ) { if ( TYPE_2 . METHOD_2 ( VAR_1 ) ) { return METHOD_3 ( VAR_1 , METHOD_4 ( VAR_1 ) ) ; } return null ; } 
++public TYPE_1 METHOD_1 ( java.lang.String VAR_1 ) { return METHOD_1 ( VAR_1 , false ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/623.java b/home/sc2nf/Desktop/icse/all/50/eval/after/623.java
+index 3559731..c7b8c46 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/623.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/623.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( boolean b ) { VAR_1 = false ; } 
++public void METHOD_1 ( boolean b ) { VAR_1 = b ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/625.java b/home/sc2nf/Desktop/icse/all/50/eval/after/625.java
+index 11f05ab..24f4ab1 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/625.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/625.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 apply ( TYPE_2 VAR_1 ) throws TYPE_3 , TYPE_4 , TYPE_5 , java.lang.Exception { return new TYPE_6 ( VAR_1 . METHOD_1 ( ) . METHOD_2 ( ) ) ; } 
++public TYPE_1 apply ( TYPE_2 VAR_1 ) { return new TYPE_6 ( VAR_1 . METHOD_2 ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/626.java b/home/sc2nf/Desktop/icse/all/50/eval/after/626.java
+index 324b68f..7e9a631 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/626.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/626.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static void METHOD_1 ( TYPE_1 view , TYPE_2 VAR_1 ) { view . METHOD_2 ( VAR_1 ) ; } 
++public static void METHOD_1 ( TYPE_1 view , TYPE_2 VAR_1 ) { view . METHOD_1 ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/627.java b/home/sc2nf/Desktop/icse/all/50/eval/after/627.java
+index a4296a8..a38a906 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/627.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/627.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private final native void METHOD_1 ( int VAR_1 ) ; 
++public final native void METHOD_1 ( int VAR_1 ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/628.java b/home/sc2nf/Desktop/icse/all/50/eval/after/628.java
+index 72a9ecf..6a9e45d 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/628.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/628.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { TYPE_1 VAR_1 = TYPE_1 . METHOD_2 ( null ) ; org.junit.Assert.assertEquals ( STRING_1 , VAR_1 . METHOD_3 ( STRING_1 ) ) ; } 
++public void METHOD_1 ( ) { org.junit.Assert.assertEquals ( STRING_1 , new TYPE_1 ( ) . METHOD_3 ( STRING_1 ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/632.java b/home/sc2nf/Desktop/icse/all/50/eval/after/632.java
+index 89e3903..41a0414 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/632.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/632.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private boolean METHOD_1 ( TYPE_1 event ) { return ( ! ( METHOD_2 ( event ) ) ) && ( ( event . getRefName ( ) . METHOD_3 ( VAR_1 ) ) || ( event . getRefName ( ) . METHOD_3 ( VAR_2 ) ) ) ; } 
++private boolean METHOD_1 ( TYPE_1 event ) { return ! ( METHOD_2 ( event ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/636.java b/home/sc2nf/Desktop/icse/all/50/eval/after/636.java
+index e318e79..66c98c0 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/636.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/636.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private void METHOD_1 ( ) { METHOD_2 ( VAR_1 , METHOD_3 ( ) ) ; } 
++private void METHOD_1 ( ) { METHOD_2 ( VAR_1 , getParameters ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/637.java b/home/sc2nf/Desktop/icse/all/50/eval/after/637.java
+index 03c3f83..8ad40ca 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/637.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/637.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 METHOD_1 ( ) { TYPE_1 model = VAR_1 . METHOD_1 ( ) ; METHOD_1 ( model ) ; return model ; } 
++public TYPE_1 METHOD_1 ( ) { return VAR_1 . METHOD_1 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/639.java b/home/sc2nf/Desktop/icse/all/50/eval/after/639.java
+index 76523b6..aec26be 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/639.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/639.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 get ( ) { return TYPE_2 . METHOD_1 ( METHOD_2 ( METHOD_3 ( ) : : get ) ) ; } 
++public TYPE_1 get ( ) { TYPE_1 vm = METHOD_2 ( METHOD_3 ( ) : : get ) ; TYPE_2 . METHOD_1 ( vm ) ; return vm ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/644.java b/home/sc2nf/Desktop/icse/all/50/eval/after/644.java
+index fa71027..83c5539 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/644.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/644.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void onSuccess ( java.lang.Object model , java.lang.Object returnValue ) { VAR_1 = ( ( org.ovirt.engine.core.common.businessentities.StoragePool ) ( returnValue ) ) ; METHOD_1 ( ) ; } 
++public void onSuccess ( org.ovirt.engine.core.common.businessentities.StoragePool returnValue ) { VAR_1 = returnValue ; METHOD_1 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/653.java b/home/sc2nf/Desktop/icse/all/50/eval/after/653.java
+index 30f2fa8..79a48e0 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/653.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/653.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( java.lang.Integer value ) { VAR_1 . METHOD_2 ( value ) ; } 
++public void METHOD_1 ( java.lang.Integer value ) { VAR_1 . METHOD_1 ( value ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/655.java b/home/sc2nf/Desktop/icse/all/50/eval/after/655.java
+index e213ce9..c336c59 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/655.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/655.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { org.mockito.Mockito.when ( VAR_1 . METHOD_2 ( TYPE_1 . any ( ) ) ) . thenReturn ( TYPE_2 . METHOD_3 ( ) ) ; TYPE_3 . METHOD_4 ( cmd ) ; } 
++public void METHOD_1 ( ) { TYPE_3 . METHOD_4 ( cmd ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/657.java b/home/sc2nf/Desktop/icse/all/50/eval/after/657.java
+index f93617e..60eaf0a 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/657.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/657.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 . ValidationResult METHOD_1 ( ) { return METHOD_2 ( new TYPE_2 ( ) { public TYPE_1 . ValidationResult METHOD_3 ( TYPE_3 < org.ovirt.engine.core.compat.Guid , TYPE_4 > VAR_1 ) { return METHOD_4 ( VAR_1 ) . METHOD_5 ( ) ; } } ) ; } 
++public TYPE_1 . ValidationResult METHOD_1 ( ) { return METHOD_2 ( ( VAR_1 ) - > METHOD_4 ( VAR_1 ) . METHOD_5 ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/661.java b/home/sc2nf/Desktop/icse/all/50/eval/after/661.java
+index b74d140..b2c5d2f 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/661.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/661.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { TYPE_1 . METHOD_2 ( STRING_1 , VAR_1 . METHOD_3 ( STRING_2 , STRING_3 ) ) ; } 
++public void METHOD_1 ( ) { TYPE_1 . METHOD_2 ( STRING_1 , VAR_1 . METHOD_3 ( STRING_2 , STRING_3 , true ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/662.java b/home/sc2nf/Desktop/icse/all/50/eval/after/662.java
+index 97375cc..c56b4b7 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/662.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/662.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private static boolean map ( java.lang.String value ) { final TYPE_1 VAR_1 = TYPE_1 . METHOD_1 ( value ) ; return ( VAR_2 ) == VAR_1 ; } 
++private static boolean map ( TYPE_1 VAR_1 ) { return ( VAR_2 ) == VAR_1 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/666.java b/home/sc2nf/Desktop/icse/all/50/eval/after/666.java
+index dc8b236..6ad246a 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/666.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/666.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void onSuccess ( java.lang.Object target , java.lang.Object returnValue ) { METHOD_1 ( ) . setEntity ( ( ( java.lang.Integer ) ( returnValue ) ) ) ; METHOD_2 ( ) ; } 
++public void onSuccess ( java.lang.Integer returnValue ) { METHOD_1 ( ) . setEntity ( returnValue ) ; METHOD_2 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/674.java b/home/sc2nf/Desktop/icse/all/50/eval/after/674.java
+index ffc3274..e1f6f7d 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/674.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/674.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private void METHOD_1 ( ) { VAR_1 = new TYPE_1 < TYPE_2 > ( STRING_1 ) ; } 
++private void METHOD_1 ( ) { VAR_1 = new TYPE_1 ( STRING_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/682.java b/home/sc2nf/Desktop/icse/all/50/eval/after/682.java
+index 2597baa..be79eb4 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/682.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/682.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public int METHOD_1 ( org.ovirt.engine.core.common.businessentities.VDS VAR_1 , org.ovirt.engine.core.common.businessentities.VDS VAR_2 ) { return java.lang.Integer . valueOf ( TYPE_1 . METHOD_2 ( VAR_1 ) ) . METHOD_3 ( TYPE_1 . METHOD_2 ( VAR_2 ) ) ; } 
++public int METHOD_1 ( org.ovirt.engine.core.common.businessentities.VDS VAR_1 , org.ovirt.engine.core.common.businessentities.VDS VAR_2 ) { return java.lang.Integer . valueOf ( METHOD_2 ( VAR_1 ) ) . METHOD_3 ( METHOD_2 ( VAR_2 ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/692.java b/home/sc2nf/Desktop/icse/all/50/eval/after/692.java
+index e6b5182..bf8ee42 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/692.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/692.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void setEntity ( TYPE_1 value ) { super . setEntity ( value ) ; } 
++public void setEntity ( org.ovirt.engine.core.common.businessentities.StoragePool value ) { super . setEntity ( value ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/693.java b/home/sc2nf/Desktop/icse/all/50/eval/after/693.java
+index 6e912b9..60f3b705 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/693.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/693.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static boolean METHOD_1 ( int VAR_1 , org.ovirt.engine.core.compat . Version version ) { return TYPE_1 . METHOD_2 ( VAR_1 , version ) . METHOD_3 ( VAR_2 ) ; } 
++public boolean METHOD_1 ( int VAR_1 , org.ovirt.engine.core.compat . Version version ) { return METHOD_2 ( VAR_1 , version ) . METHOD_3 ( VAR_2 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/698.java b/home/sc2nf/Desktop/icse/all/50/eval/after/698.java
+index f7e29f9..f4a3e9e 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/698.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/698.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected java.util.List < TYPE_1 < ? > > METHOD_1 ( ) { if ( getParameters ( ) . METHOD_2 ( ) ) { return TYPE_2 . METHOD_3 ( VAR_1 class ) ; } return TYPE_2 . METHOD_3 ( VAR_2 class ) ; } 
++protected java.util.List < TYPE_1 < ? > > METHOD_1 ( ) { if ( TYPE_2 . getParameters ( ) . METHOD_2 ( ) ) { return TYPE_2 . METHOD_3 ( VAR_1 class ) ; } return TYPE_2 . METHOD_3 ( VAR_2 class ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/700.java b/home/sc2nf/Desktop/icse/all/50/eval/after/700.java
+index eceaeb3..b26c1ea 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/700.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/700.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static boolean METHOD_1 ( java.lang.String version ) { return ( ( java.lang.Boolean ) ( TYPE_1 . METHOD_2 ( VAR_1 , version ) ) ) ; } 
++public boolean METHOD_1 ( java.lang.String version ) { return ( ( java.lang.Boolean ) ( METHOD_2 ( VAR_1 , version ) ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/702.java b/home/sc2nf/Desktop/icse/all/50/eval/after/702.java
+index f3a1e0f..77a8582 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/702.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/702.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public org.ovirt.engine.core.common.businessentities.StorageDomain getEntity ( ) { return ( ( org.ovirt.engine.core.common.businessentities.StorageDomain ) ( super . getEntity ( ) ) ) ; } 
++public org.ovirt.engine.core.common.businessentities.StorageDomain getEntity ( ) { return super . getEntity ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/703.java b/home/sc2nf/Desktop/icse/all/50/eval/after/703.java
+index f920076..2d09c65 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/703.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/703.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private java.util.List < TYPE_1 > METHOD_1 ( ) { return TYPE_2 . METHOD_2 ( new TYPE_1 ( VAR_1 , VAR_2 , VAR_3 , vmId , VAR_4 ) ) ; } 
++private java.util.List < TYPE_1 > METHOD_1 ( ) { return TYPE_2 . METHOD_2 ( new TYPE_1 ( VAR_1 , VAR_2 , VAR_3 , vmId , VAR_4 , VAR_1 ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/704.java b/home/sc2nf/Desktop/icse/all/50/eval/after/704.java
+index e6daad0..e7e701f 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/704.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/704.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private void METHOD_1 ( TYPE_1 command ) { org.mockito.Mockito.doReturn ( VAR_1 ) . when ( command ) . METHOD_2 ( ) ; org.mockito.Mockito.doReturn ( METHOD_3 ( ) ) . when ( VAR_1 ) . METHOD_4 ( TYPE_2 . any ( VAR_2 . Guid class ) ) ; } 
++private void METHOD_1 ( ) { org.mockito.Mockito.doReturn ( METHOD_3 ( ) ) . when ( VAR_1 ) . METHOD_4 ( TYPE_2 . any ( VAR_2 . Guid class ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/709.java b/home/sc2nf/Desktop/icse/all/50/eval/after/709.java
+index 50d5b8f..1d9dbdb 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/709.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/709.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { if ( ( frontend . METHOD_2 ( ) ) != null ) { frontend . METHOD_2 ( ) . METHOD_3 ( ) ; } TYPE_1 . METHOD_4 ( ) ; } 
++public void METHOD_1 ( ) { TYPE_1 . METHOD_4 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/715.java b/home/sc2nf/Desktop/icse/all/50/eval/after/715.java
+index dc7b4ca..45640bf 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/715.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/715.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.lang.String getValue ( org.ovirt.engine.core.common.businessentities.VM object ) { return object . METHOD_1 ( ) ; } 
++public java.lang.String getValue ( java.lang.Object object ) { return ( ( org.ovirt.engine.core.common.businessentities.VM ) ( object ) ) . METHOD_1 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/719.java b/home/sc2nf/Desktop/icse/all/50/eval/after/719.java
+index b5097d4..8b3e8a5 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/719.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/719.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected boolean METHOD_1 ( ) { return validate ( TYPE_1 . METHOD_1 ( TYPE_2 . METHOD_2 ( TYPE_3 . getParameters ( ) . METHOD_3 ( ) , TYPE_3 . METHOD_4 ( ) ) , TYPE_3 . METHOD_5 ( ) ) ) ; } 
++protected boolean METHOD_1 ( ) { return validate ( TYPE_1 . METHOD_1 ( TYPE_2 . METHOD_2 ( TYPE_3 . METHOD_3 ( ) , TYPE_3 . METHOD_4 ( ) ) , TYPE_3 . METHOD_5 ( ) ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/724.java b/home/sc2nf/Desktop/icse/all/50/eval/after/724.java
+index 7cef3a1..ddf4dbe 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/724.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/724.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.lang.String METHOD_1 ( java.lang.Object object ) { return ( ( TYPE_1 ) ( object ) ) . getName ( ) ; } 
++public java.lang.String METHOD_1 ( TYPE_1 object ) { return object . getName ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/725.java b/home/sc2nf/Desktop/icse/all/50/eval/after/725.java
+index 47ef63f..b829c57 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/725.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/725.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public final java.lang.Object METHOD_1 ( java.lang.String VAR_1 , boolean VAR_2 ) { java.lang.String VAR_3 = TYPE_1 . METHOD_2 ( ) ; if ( VAR_3 == null ) { return null ; } return METHOD_1 ( VAR_3 , VAR_1 , VAR_2 ) ; } 
++public final java.lang.Object METHOD_1 ( java.lang.String VAR_1 , boolean VAR_2 ) { return METHOD_1 ( TYPE_1 . METHOD_2 ( ) , VAR_1 , VAR_2 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/732.java b/home/sc2nf/Desktop/icse/all/50/eval/after/732.java
+index ddaaf89..1505042 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/732.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/732.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 METHOD_1 ( java.lang.String id ) { return inject ( new TYPE_2 ( VAR_1 , id , this , VAR_2 , METHOD_2 ( ) , METHOD_3 ( ) , VAR_3 ) ) ; } 
++public TYPE_1 METHOD_1 ( java.lang.String id ) { return inject ( new TYPE_2 ( id , vmId ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/739.java b/home/sc2nf/Desktop/icse/all/50/eval/after/739.java
+index abbfe2b..7227a64 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/739.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/739.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public int METHOD_1 ( org.ovirt.engine.core.common.businessentities.network.Network VAR_1 , org.ovirt.engine.core.common.businessentities.network.Network VAR_2 ) { return TYPE_1 . equals ( VAR_1 . METHOD_2 ( ) ) ? - 1 : VAR_1 . METHOD_2 ( ) . METHOD_3 ( VAR_2 . METHOD_2 ( ) ) ; } 
++public int METHOD_1 ( org.ovirt.engine.core.common.businessentities.network.Network VAR_1 , org.ovirt.engine.core.common.businessentities.network.Network VAR_2 ) { return TYPE_1 . equals ( VAR_1 . getName ( ) ) ? - 1 : VAR_1 . getName ( ) . METHOD_3 ( VAR_2 . getName ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/741.java b/home/sc2nf/Desktop/icse/all/50/eval/after/741.java
+index 3514cbf..28c05ee 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/741.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/741.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.lang.Integer METHOD_1 ( ) { return TYPE_1 . METHOD_1 ( vm . METHOD_2 ( ) , vm . METHOD_3 ( ) ) ; } 
++public java.lang.Integer METHOD_1 ( ) { return TYPE_1 . METHOD_1 ( vm , vm . METHOD_3 ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/742.java b/home/sc2nf/Desktop/icse/all/50/eval/after/742.java
+index f8ef884..32349b5 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/742.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/742.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { org.mockito.Mockito.doReturn ( VAR_1 ) . when ( validator ) . METHOD_2 ( org.mockito.Mockito . any ( VAR_2 . VDS class ) ) ; org.mockito.Mockito.doReturn ( VAR_3 ) . when ( validator ) . METHOD_3 ( ) ; } 
++public void METHOD_1 ( ) { org.mockito.Mockito.doReturn ( VAR_1 ) . when ( validator ) . METHOD_2 ( org.mockito.Mockito . any ( ) ) ; org.mockito.Mockito.doReturn ( VAR_3 ) . when ( validator ) . METHOD_3 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/744.java b/home/sc2nf/Desktop/icse/all/50/eval/after/744.java
+index 8d0dc43..74adce9 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/744.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/744.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { METHOD_2 ( true , true , true ) ; } 
++public void METHOD_1 ( ) { METHOD_2 ( true , true , true , false ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/752.java b/home/sc2nf/Desktop/icse/all/50/eval/after/752.java
+index fd46bca..a6de45e 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/752.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/752.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected TYPE_1 METHOD_1 ( TYPE_1 model ) { model . METHOD_2 ( TYPE_2 . METHOD_3 ( VAR_1 class ) . value ( ) ) ; return model ; } 
++protected TYPE_1 METHOD_1 ( TYPE_1 model ) { model . METHOD_2 ( TYPE_2 . METHOD_3 ( VAR_1 class ) ) ; return model ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/754.java b/home/sc2nf/Desktop/icse/all/50/eval/after/754.java
+index 7597f58..3e0ed1e 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/754.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/754.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 METHOD_1 ( ) throws TYPE_2 { if ( ( this . VAR_1 ) == null ) { METHOD_2 ( ) ; } return this . VAR_1 ; } 
++public TYPE_1 METHOD_1 ( ) { return this . VAR_1 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/755.java b/home/sc2nf/Desktop/icse/all/50/eval/after/755.java
+index cca02e8..4156575 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/755.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/755.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { TYPE_1 . METHOD_2 ( VAR_1 . METHOD_3 ( ) . get ( VAR_2 ) ) ; } 
++public void METHOD_1 ( ) { TYPE_1 . METHOD_2 ( dao . get ( VAR_2 ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/759.java b/home/sc2nf/Desktop/icse/all/50/eval/after/759.java
+index efea08e..faae271 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/759.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/759.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { org.mockito.Mockito.doReturn ( VAR_1 ) . when ( VAR_2 ) . METHOD_2 ( ) ; TYPE_1 . METHOD_3 ( cmd ) ; } 
++public void METHOD_1 ( ) { TYPE_1 . METHOD_3 ( cmd ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/763.java b/home/sc2nf/Desktop/icse/all/50/eval/after/763.java
+index f5dd6e6..3788edc 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/763.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/763.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private TYPE_1 METHOD_1 ( ) { TYPE_1 VAR_1 = new TYPE_1 ( ) ; VAR_1 . METHOD_2 ( STRING_1 ) ; VAR_1 . METHOD_3 ( VAR_2 ) ; VAR_1 . METHOD_4 ( VAR_3 ) ; return VAR_1 ; } 
++private TYPE_1 METHOD_1 ( ) { TYPE_1 pool = new TYPE_1 ( ) ; pool . METHOD_2 ( STRING_1 ) ; pool . METHOD_3 ( VAR_2 ) ; pool . METHOD_4 ( VAR_3 ) ; return pool ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/768.java b/home/sc2nf/Desktop/icse/all/50/eval/after/768.java
+index 8f0ae40..f611455 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/768.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/768.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.lang.String getValue ( TYPE_1 object ) { return ( object . METHOD_1 ( ) . METHOD_2 ( ) ) == null ? STRING_1 : object . METHOD_1 ( ) . METHOD_2 ( ) . toString ( ) ; } 
++public java.lang.String getValue ( TYPE_1 object ) { return ( object . METHOD_2 ( ) ) == null ? STRING_1 : object . METHOD_2 ( ) . toString ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/770.java b/home/sc2nf/Desktop/icse/all/50/eval/after/770.java
+index 7c98bdb..86e13b0 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/770.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/770.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 item ) { METHOD_1 ( item , INT_1 ) ; } 
++public void METHOD_1 ( TYPE_1 item ) { METHOD_1 ( item , null ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/778.java b/home/sc2nf/Desktop/icse/all/50/eval/after/778.java
+index 93af444..06bb5db 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/778.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/778.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private void METHOD_1 ( ) { org.mockito.Mockito.when ( VAR_1 . METHOD_2 ( TYPE_1 . any ( VAR_2 . Guid class ) ) ) . thenReturn ( TYPE_2 . METHOD_3 ( ) . get ( 0 ) ) ; } 
++private void METHOD_1 ( ) { org.mockito.Mockito.when ( VAR_1 . METHOD_2 ( TYPE_1 . any ( ) ) ) . thenReturn ( TYPE_2 . METHOD_3 ( ) . get ( 0 ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/782.java b/home/sc2nf/Desktop/icse/all/50/eval/after/782.java
+index 5496ab3..286449f 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/782.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/782.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static < TYPE_1 extends TYPE_2 > TYPE_1 METHOD_1 ( TYPE_3 VAR_1 , TYPE_1 model ) { return TYPE_4 . METHOD_1 ( VAR_1 , model , null ) ; } 
++public static < TYPE_1 extends TYPE_2 > TYPE_1 METHOD_1 ( TYPE_1 model ) { return TYPE_4 . METHOD_1 ( model , null ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/783.java b/home/sc2nf/Desktop/icse/all/50/eval/after/783.java
+index 5485a34..95628d7 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/783.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/783.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private static TYPE_1 METHOD_1 ( ) { return TYPE_2 . METHOD_2 ( VAR_1 class , STRING_1 ) ; } 
++private static TYPE_1 METHOD_1 ( ) { return TYPE_2 . METHOD_2 ( VAR_1 class ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/787.java b/home/sc2nf/Desktop/icse/all/50/eval/after/787.java
+index cd927ff..f29c369 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/787.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/787.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected void METHOD_1 ( org.ovirt.engine.core.common.businessentities.StoragePool VAR_1 ) { org.mockito.Mockito.when ( VAR_2 . get ( TYPE_1 . any ( VAR_3 . Guid class ) ) ) . thenReturn ( VAR_1 ) ; } 
++protected void METHOD_1 ( org.ovirt.engine.core.common.businessentities.StoragePool VAR_1 ) { org.mockito.Mockito.when ( VAR_2 . get ( TYPE_1 . any ( ) ) ) . thenReturn ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/795.java b/home/sc2nf/Desktop/icse/all/50/eval/after/795.java
+index f72de86..622bbc2 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/795.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/795.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { org.mockito.Mockito.when ( VAR_1 . METHOD_2 ( TYPE_1 . any ( VAR_2 . Guid class ) ) ) . thenReturn ( METHOD_3 ( ) ) ; } 
++public void METHOD_1 ( ) { org.mockito.Mockito.when ( VAR_1 . METHOD_2 ( TYPE_1 . any ( ) ) ) . thenReturn ( METHOD_3 ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/796.java b/home/sc2nf/Desktop/icse/all/50/eval/after/796.java
+index 2ed13f7..16684c4 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/796.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/796.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 result ) { TYPE_2 VAR_1 = ( ( TYPE_2 ) ( result . METHOD_2 ( ) ) ) ; VAR_1 . METHOD_3 ( result ) ; } 
++public void METHOD_1 ( TYPE_1 result ) { VAR_1 . METHOD_3 ( result . getReturnValue ( ) , VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/797.java b/home/sc2nf/Desktop/icse/all/50/eval/after/797.java
+index 2e05f40..679f123 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/797.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/797.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 context , TYPE_2 value , TYPE_3 VAR_1 ) { VAR_1 . append ( VAR_2 . METHOD_2 ( TYPE_4 . METHOD_3 ( VAR_3 , value . METHOD_4 ( ) ) , value . METHOD_4 ( ) ) ) ; } 
++public void METHOD_1 ( TYPE_1 context , TYPE_2 value , TYPE_3 VAR_1 ) { VAR_1 . append ( VAR_2 . METHOD_2 ( TYPE_4 . METHOD_3 ( VAR_3 , value . getName ( ) ) , value . getName ( ) ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/801.java b/home/sc2nf/Desktop/icse/all/50/eval/after/801.java
+index 4f3f2e6..9ff1946 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/801.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/801.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private void METHOD_1 ( ) { cmd . METHOD_2 ( ) ; org.mockito.Mockito.doReturn ( VAR_1 ) . when ( cmd ) . METHOD_3 ( ) ; } 
++private void METHOD_1 ( ) { cmd . METHOD_2 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/810.java b/home/sc2nf/Desktop/icse/all/50/eval/after/810.java
+index 587d84f..f6eba52 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/810.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/810.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected TYPE_1 METHOD_1 ( org.ovirt.engine.ui.uicommonweb.models.EntityModel < TYPE_2 > VAR_1 ) { return VAR_1 . getEntity ( ) . METHOD_2 ( ) ; } 
++protected TYPE_1 METHOD_1 ( TYPE_2 VAR_1 ) { return VAR_1 . METHOD_2 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/817.java b/home/sc2nf/Desktop/icse/all/50/eval/after/817.java
+index d1a4707..cabf6c5 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/817.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/817.java
+@@ -1,3 +1,3 @@
+ public class A {
+-TYPE_1 . ValidationResult METHOD_1 ( TYPE_2 value ) ; 
++TYPE_1 . ValidationResult validate ( java.lang.Object value ) ; 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/818.java b/home/sc2nf/Desktop/icse/all/50/eval/after/818.java
+index ed81f7d..8e4baf6 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/818.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/818.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected TYPE_1 METHOD_1 ( java.lang.String VAR_1 ) { TYPE_1 VAR_2 = getEntity ( VAR_3 . VM class , VAR_4 , new TYPE_2 ( VAR_5 ) , VAR_5 . toString ( ) ) . METHOD_2 ( ) ; VAR_2 . METHOD_3 ( VAR_1 ) ; return VAR_2 ; } 
++protected TYPE_1 METHOD_1 ( java.lang.String VAR_1 ) { TYPE_1 VAR_2 = getEntity ( VAR_3 . VM class , VAR_4 , new org.ovirt.engine.core.common.queries.IdQueryParameters ( VAR_5 ) , VAR_5 . toString ( ) ) . METHOD_2 ( ) ; VAR_2 . METHOD_3 ( VAR_1 ) ; return VAR_2 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/823.java b/home/sc2nf/Desktop/icse/all/50/eval/after/823.java
+index 20e9202..f161df4 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/823.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/823.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 < TYPE_2 > errors ) { VAR_1 = TYPE_3 . METHOD_2 ( errors ) ; } 
++public void METHOD_1 ( TYPE_1 < TYPE_2 > errors ) { VAR_1 = errors ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/824.java b/home/sc2nf/Desktop/icse/all/50/eval/after/824.java
+index 618f6c6..7857f9f 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/824.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/824.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected TYPE_1 METHOD_1 ( ) { return new TYPE_1 ( org.ovirt.engine.core.compat.Guid . METHOD_2 ( ) , VAR_1 , true , VAR_2 , STRING_1 , STRING_2 , false , false , true ) ; } 
++protected TYPE_1 METHOD_1 ( ) { return new TYPE_1 ( org.ovirt.engine.core.compat.Guid . METHOD_2 ( ) , VAR_1 , true , VAR_2 , STRING_1 , STRING_2 , false , false ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/825.java b/home/sc2nf/Desktop/icse/all/50/eval/after/825.java
+index cd7ffbc..f24d996 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/825.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/825.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { TYPE_1 . METHOD_2 ( METHOD_3 ( ) . METHOD_4 ( VAR_1 ) ) ; } 
++public void METHOD_1 ( ) { TYPE_1 . METHOD_2 ( dao . METHOD_4 ( VAR_1 ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/834.java b/home/sc2nf/Desktop/icse/all/50/eval/after/834.java
+index 0a0bebb..c866236 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/834.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/834.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { java.util.List < org.ovirt.engine.core.common.businessentities.VDS > result = dao . METHOD_2 ( VAR_1 . METHOD_3 ( ) , VAR_2 , true ) ; METHOD_4 ( result ) ; } 
++public void METHOD_1 ( ) { java.util.List < org.ovirt.engine.core.common.businessentities.VDS > result = dao . METHOD_2 ( VAR_1 . getStoragePoolId ( ) , VAR_2 , true ) ; METHOD_4 ( result ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/835.java b/home/sc2nf/Desktop/icse/all/50/eval/after/835.java
+index f6ae4a8..86852c0 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/835.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/835.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.lang.Object METHOD_1 ( ) { return getId ( ) ; } 
++public java.lang.String toString ( ) { return getString ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/837.java b/home/sc2nf/Desktop/icse/all/50/eval/after/837.java
+index 3b825d2..ed5de41 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/837.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/837.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { if ( ( METHOD_2 ( ) ) != null ) { super . METHOD_1 ( ) ; } } 
++public void METHOD_1 ( ) { if ( ( getEntity ( ) ) != null ) { super . METHOD_1 ( ) ; } } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/840.java b/home/sc2nf/Desktop/icse/all/50/eval/after/840.java
+index 5a2e15b..86ab10f 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/840.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/840.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private void METHOD_1 ( ) { TYPE_1 parameters = METHOD_2 ( ) ; command = TYPE_2 . METHOD_3 ( new TYPE_3 < TYPE_1 > ( parameters ) ) ; TYPE_2 . METHOD_4 ( VAR_1 class ) ; } 
++public void METHOD_1 ( ) { TYPE_1 parameters = METHOD_2 ( ) ; command = org.mockito.Mockito . METHOD_3 ( new TYPE_3 < TYPE_1 > ( parameters ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/846.java b/home/sc2nf/Desktop/icse/all/50/eval/after/846.java
+index 5e1e462..24f1a06 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/846.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/846.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 METHOD_1 ( TYPE_1 VAR_1 ) { METHOD_2 ( VAR_2 class , VAR_1 ) ; return METHOD_3 ( VAR_1 , new TYPE_2 ( VAR_3 , VAR_4 class ) , VAR_5 , new TYPE_3 ( ) ) ; } 
++public TYPE_1 METHOD_1 ( TYPE_1 VAR_1 ) { return METHOD_3 ( VAR_1 , new TYPE_2 ( VAR_3 , VAR_4 class ) , VAR_5 , new TYPE_3 ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/850.java b/home/sc2nf/Desktop/icse/all/50/eval/after/850.java
+index 728aeaf..4e36584 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/850.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/850.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( org.ovirt.engine.core.compat . Version version ) { TYPE_1 cluster = new TYPE_1 ( ) ; cluster . METHOD_2 ( version ) ; org.mockito.Mockito.when ( VAR_1 . get ( TYPE_2 . any ( VAR_2 . Guid class ) ) ) . thenReturn ( cluster ) ; } 
++public void METHOD_1 ( org.ovirt.engine.core.compat . Version version ) { TYPE_1 cluster = new TYPE_1 ( ) ; cluster . METHOD_2 ( version ) ; org.mockito.Mockito.when ( VAR_1 . get ( TYPE_2 . any ( ) ) ) . thenReturn ( cluster ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/852.java b/home/sc2nf/Desktop/icse/all/50/eval/after/852.java
+index 66b2179..76fd6cb 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/852.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/852.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected org.ovirt.engine.core.compat.Guid METHOD_1 ( ) { return VAR_1 . METHOD_2 ( ) . getValue ( ) ; } 
++protected org.ovirt.engine.core.compat.Guid METHOD_1 ( ) { return VAR_1 . getStoragePoolId ( ) . getValue ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/853.java b/home/sc2nf/Desktop/icse/all/50/eval/after/853.java
+index 2bd99c4..579b2cd 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/853.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/853.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.lang.String METHOD_1 ( ) { return ( VAR_1 ) == null ? null : VAR_1 . toString ( ) ; } 
++public java.lang.String METHOD_1 ( ) { return VAR_1 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/855.java b/home/sc2nf/Desktop/icse/all/50/eval/after/855.java
+index d2b2c73..04065d9 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/855.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/855.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void onSuccess ( java.lang.Object model , java.lang.Object returnValue ) { java.util.List < TYPE_1 > VAR_1 = ( ( TYPE_2 . VdcQueryReturnValue ) ( returnValue ) ) . getReturnValue ( ) ; ( ( TYPE_3 ) ( model ) ) . METHOD_1 ( VAR_1 ) ; } 
++public void onSuccess ( TYPE_2 . VdcQueryReturnValue returnValue ) { java.util.List < TYPE_1 > VAR_1 = returnValue . getReturnValue ( ) ; METHOD_1 ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/870.java b/home/sc2nf/Desktop/icse/all/50/eval/after/870.java
+index f51fb62..4effeba 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/870.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/870.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 VAR_1 ) { } 
++public void METHOD_1 ( TYPE_1 VAR_1 ) { this . VAR_1 = VAR_1 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/871.java b/home/sc2nf/Desktop/icse/all/50/eval/after/871.java
+index eb9d1b9..cc1fa8a 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/871.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/871.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected TYPE_1 . VM METHOD_1 ( java.lang.String VAR_1 ) { TYPE_1 . VM VAR_2 = getEntity ( VAR_3 . VM class , VAR_4 , new TYPE_2 ( METHOD_2 ( VAR_1 ) ) , STRING_1 ) ; return VAR_2 ; } 
++protected TYPE_1 . VM METHOD_1 ( java.lang.String VAR_1 ) { TYPE_1 . VM VAR_2 = getEntity ( VAR_3 . VM class , VAR_4 , new org.ovirt.engine.core.common.queries.IdQueryParameters ( METHOD_2 ( VAR_1 ) ) , STRING_1 ) ; return VAR_2 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/872.java b/home/sc2nf/Desktop/icse/all/50/eval/after/872.java
+index 8f7c9cb..23648e2 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/872.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/872.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public boolean METHOD_1 ( org.ovirt.engine.core.common.businessentities.StorageDomain storageDomain , org.ovirt.engine.core.compat.Guid VAR_1 ) { TYPE_1 parameters = new TYPE_1 ( storageDomain . getId ( ) ) ; parameters . METHOD_2 ( VAR_1 ) ; TYPE_2 . getInstance ( ) . METHOD_3 ( VAR_2 , parameters ) ; return true ; } 
++public boolean METHOD_1 ( org.ovirt.engine.core.common.businessentities.StorageDomain storageDomain , org.ovirt.engine.core.compat.Guid VAR_1 ) { return true ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/873.java b/home/sc2nf/Desktop/icse/all/50/eval/after/873.java
+index d5f738f..b6fc938 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/873.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/873.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { org.mockito.Mockito.doReturn ( null ) . when ( command ) . METHOD_2 ( TYPE_1 . any ( VAR_1 class ) ) ; TYPE_2 . METHOD_3 ( command , VAR_2 ) ; } 
++public void METHOD_1 ( ) { org.mockito.Mockito.doReturn ( null ) . when ( command ) . METHOD_2 ( TYPE_1 . any ( ) ) ; TYPE_2 . METHOD_3 ( command , VAR_2 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/877.java b/home/sc2nf/Desktop/icse/all/50/eval/after/877.java
+index 3b42006..c2410ce 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/877.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/877.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 < TYPE_2 > METHOD_1 ( ) { java.util.Map < java.lang.String , TYPE_2 > VAR_1 = VAR_2 . METHOD_2 ( VAR_3 class ) ; TYPE_1 < TYPE_2 > VAR_4 = new TYPE_3 ( VAR_1 . METHOD_3 ( ) ) ; return VAR_4 ; } 
++public TYPE_1 < TYPE_2 > METHOD_1 ( ) { java.util.Map < java.lang.String , TYPE_2 > VAR_1 = VAR_2 . METHOD_2 ( VAR_3 class ) ; return new TYPE_3 ( VAR_1 . METHOD_3 ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/882.java b/home/sc2nf/Desktop/icse/all/50/eval/after/882.java
+index b542ef9..54b32ad 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/882.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/882.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected TYPE_1 METHOD_1 ( ) { return VAR_1 . getModel ( ) ; } 
++protected TYPE_1 METHOD_1 ( ) { return VAR_1 . get ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/883.java b/home/sc2nf/Desktop/icse/all/50/eval/after/883.java
+index 03bbef8..a455a78 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/883.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/883.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 METHOD_1 ( ) { return new TYPE_1 ( ) ; } 
++public org.ovirt.engine.core.common.businessentities.StoragePool METHOD_1 ( ) { return new org.ovirt.engine.core.common.businessentities.StoragePool ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/890.java b/home/sc2nf/Desktop/icse/all/50/eval/after/890.java
+index 8237c05..0b2fd52 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/890.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/890.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 < org.ovirt.engine.core.common.businessentities.network.VdsNetworkInterface > METHOD_1 ( ) { java.util.List < org.ovirt.engine.core.common.businessentities.network.VdsNetworkInterface > VAR_1 = METHOD_2 ( VAR_2 . VdsNetworkInterface class , VAR_3 , new org.ovirt.engine.core.common.queries.IdQueryParameters ( VAR_4 ) ) ; return new TYPE_1 < org.ovirt.engine.core.common.businessentities.network.VdsNetworkInterface > ( VAR_1 ) ; } 
++public TYPE_1 < org.ovirt.engine.core.common.businessentities.network.VdsNetworkInterface > METHOD_1 ( ) { java.util.List < org.ovirt.engine.core.common.businessentities.network.VdsNetworkInterface > VAR_1 = METHOD_2 ( VAR_2 . VdsNetworkInterface class , VAR_3 , new org.ovirt.engine.core.common.queries.IdQueryParameters ( VAR_4 ) ) ; return new TYPE_1 ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/905.java b/home/sc2nf/Desktop/icse/all/50/eval/after/905.java
+index c9df649..7140ea2 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/905.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/905.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static TYPE_1 METHOD_1 ( ) { return TYPE_2 . METHOD_2 ( VAR_1 , VAR_2 , VAR_3 . METHOD_3 ( ) ) ; } 
++public static TYPE_1 METHOD_1 ( ) { return TYPE_2 . METHOD_1 ( VAR_1 , VAR_2 , VAR_3 . METHOD_3 ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/906.java b/home/sc2nf/Desktop/icse/all/50/eval/after/906.java
+index 536244d..0a72a40 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/906.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/906.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { java.util.List < org.ovirt.engine.core.common.businessentities.VDS > result = dao . METHOD_2 ( VAR_1 . METHOD_3 ( ) , VAR_2 , false ) ; METHOD_4 ( result ) ; } 
++public void METHOD_1 ( ) { java.util.List < org.ovirt.engine.core.common.businessentities.VDS > result = dao . METHOD_2 ( VAR_1 . getStoragePoolId ( ) , VAR_2 , false ) ; METHOD_4 ( result ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/920.java b/home/sc2nf/Desktop/icse/all/50/eval/after/920.java
+index fe8d1e2..88acfbc 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/920.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/920.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 METHOD_1 ( TYPE_1 VAR_1 ) { METHOD_2 ( VAR_2 class , VAR_1 ) ; if ( ( VAR_1 . METHOD_3 ( ) ) || ( VAR_1 . METHOD_4 ( ) ) ) { METHOD_5 ( VAR_1 ) ; } return super . METHOD_1 ( VAR_1 ) ; } 
++public TYPE_1 METHOD_1 ( TYPE_1 VAR_1 ) { METHOD_2 ( VAR_2 class , VAR_1 ) ; return super . METHOD_1 ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/922.java b/home/sc2nf/Desktop/icse/all/50/eval/after/922.java
+index 8c5d593..a1a3682 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/922.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/922.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( org.ovirt.engine.core.compat.Guid vmId ) { getWindow ( ) . METHOD_2 ( ) ; METHOD_3 ( ) ; METHOD_4 ( ) ; } 
++public void METHOD_1 ( org.ovirt.engine.core.compat.Guid vmId ) { } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/924.java b/home/sc2nf/Desktop/icse/all/50/eval/after/924.java
+index 775b2e0..f4566cb 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/924.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/924.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected void METHOD_1 ( ) { if ( VAR_1 ) { METHOD_2 ( ) . setEntity ( true ) ; } else { METHOD_2 ( ) . setEntity ( true ) ; METHOD_2 ( ) . METHOD_3 ( false ) ; } } 
++protected void METHOD_1 ( ) { METHOD_2 ( ) . setEntity ( true ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/926.java b/home/sc2nf/Desktop/icse/all/50/eval/after/926.java
+index acc287a..2a271f6 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/926.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/926.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 METHOD_1 ( ) { return METHOD_2 ( new TYPE_2 ( ) { public boolean METHOD_3 ( TYPE_3 VAR_1 ) { return true ; } } ) ; } 
++public TYPE_1 METHOD_1 ( ) { return METHOD_2 ( ( VAR_1 ) - > true ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/928.java b/home/sc2nf/Desktop/icse/all/50/eval/after/928.java
+index 081d5fc..8a06c2e 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/928.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/928.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( java.lang.String VAR_1 ) { VAR_2 . METHOD_1 ( TYPE_1 . METHOD_2 ( VAR_1 ) ) ; } 
++public org.ovirt.engine.core.compat.Guid getId ( ) { return id ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/929.java b/home/sc2nf/Desktop/icse/all/50/eval/after/929.java
+index 5cd841b..792b536 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/929.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/929.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private boolean METHOD_1 ( ) { return ( ( VAR_1 . getStatus ( ) ) == ( VAR_2 ) ) && ( METHOD_2 ( ) . METHOD_3 ( ) . equals ( VAR_1 . METHOD_4 ( ) ) ) ; } 
++private boolean METHOD_1 ( ) { return METHOD_1 ( VAR_1 . getStatus ( ) , VAR_1 . METHOD_4 ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/932.java b/home/sc2nf/Desktop/icse/all/50/eval/after/932.java
+index 2510b02..28f97d7 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/932.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/932.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 getConstants ( ) { return constants ; } 
++public TYPE_1 getConstants ( ) { return org.ovirt.engine.ui.uicompat.ConstantsManager . constants ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/935.java b/home/sc2nf/Desktop/icse/all/50/eval/after/935.java
+index ba956aa..36bbe3a 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/935.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/935.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private boolean METHOD_1 ( TYPE_1 cluster ) { return ( cluster . METHOD_2 ( ) ) && ( METHOD_3 ( ) . METHOD_4 ( cluster . METHOD_5 ( ) , cluster . getId ( ) ) ) ; } 
++private boolean METHOD_1 ( TYPE_1 cluster ) { return cluster . METHOD_2 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/945.java b/home/sc2nf/Desktop/icse/all/50/eval/after/945.java
+index adbb589..b34197c 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/945.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/945.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected TYPE_1 METHOD_1 ( TYPE_2 VAR_1 ) { final TYPE_3 cluster = new TYPE_3 ( ) ; cluster . METHOD_2 ( VAR_2 ) ; TYPE_1 model = new TYPE_4 ( VAR_1 ) { public TYPE_3 METHOD_3 ( ) { return cluster ; } } ; return model ; } 
++protected TYPE_1 METHOD_1 ( TYPE_2 VAR_1 ) { return new TYPE_4 ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/956.java b/home/sc2nf/Desktop/icse/all/50/eval/after/956.java
+index 269e28f..0e186c2 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/956.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/956.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected void METHOD_1 ( ) { org.ovirt.engine.core.common.businessentities.VDS vds = new org.ovirt.engine.core.common.businessentities.VDS ( ) ; vds . METHOD_2 ( TYPE_1 . METHOD_3 ( ) ) ; org.mockito.Mockito.when ( VAR_1 . get ( TYPE_2 . any ( VAR_2 . Guid class ) ) ) . thenReturn ( vds ) ; } 
++protected void METHOD_1 ( ) { org.ovirt.engine.core.common.businessentities.VDS vds = new org.ovirt.engine.core.common.businessentities.VDS ( ) ; vds . METHOD_2 ( TYPE_1 . METHOD_3 ( ) ) ; org.mockito.Mockito.when ( VAR_1 . get ( TYPE_2 . any ( ) ) ) . thenReturn ( vds ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/965.java b/home/sc2nf/Desktop/icse/all/50/eval/after/965.java
+index 42f3142..46387d7 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/965.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/965.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { org.mockito.Mockito.doReturn ( VAR_1 ) . when ( command ) . METHOD_2 ( ) ; org.mockito.Mockito.when ( VAR_1 . METHOD_3 ( TYPE_1 . any ( VAR_2 . Guid class ) ) ) . thenReturn ( METHOD_4 ( ) ) ; } 
++public void METHOD_1 ( ) { org.mockito.Mockito.when ( VAR_1 . METHOD_3 ( TYPE_1 . any ( VAR_2 . Guid class ) ) ) . thenReturn ( METHOD_4 ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/966.java b/home/sc2nf/Desktop/icse/all/50/eval/after/966.java
+index 05a78c4..e40e780 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/966.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/966.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void onSuccess ( java.lang.Object model , java.lang.Object returnValue ) { VAR_1 = TYPE_1 . METHOD_1 ( ( ( TYPE_2 < org.ovirt.engine.core.common.businessentities.StoragePool > ) ( returnValue ) ) ) ; METHOD_2 ( ) ; } 
++public void onSuccess ( java.util.List < org.ovirt.engine.core.common.businessentities.StoragePool > returnValue ) { VAR_1 = TYPE_1 . METHOD_1 ( returnValue ) ; METHOD_2 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/967.java b/home/sc2nf/Desktop/icse/all/50/eval/after/967.java
+index 7860da9..32828f5 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/967.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/967.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) throws java.lang.Exception { org.mockito.Mockito.doReturn ( true ) . when ( VAR_1 ) . METHOD_2 ( TYPE_1 . any ( VAR_2 . StoragePool class ) ) ; VAR_1 . METHOD_3 ( ) ; METHOD_4 ( java.lang.Boolean . TRUE ) ; } 
++public void METHOD_1 ( ) throws java.lang.Exception { VAR_1 . METHOD_3 ( ) ; METHOD_4 ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/969.java b/home/sc2nf/Desktop/icse/all/50/eval/after/969.java
+index 763b599..1ab28db 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/969.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/969.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 METHOD_1 ( ) { TYPE_1 VAR_1 = TYPE_2 . METHOD_2 ( VAR_2 , VAR_3 ) ; if ( VAR_1 != null ) { return VAR_1 ; } else { return this ; } } 
++public TYPE_1 METHOD_1 ( ) { return TYPE_2 . METHOD_2 ( VAR_2 , VAR_3 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/971.java b/home/sc2nf/Desktop/icse/all/50/eval/after/971.java
+index ed9267a..6af1e08 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/971.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/971.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public java.lang.String getName ( ) { return METHOD_1 ( ) ; } 
++public java.lang.String getName ( ) { return super . getName ( ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/985.java b/home/sc2nf/Desktop/icse/all/50/eval/after/985.java
+index 29de982..fc053d3 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/985.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/985.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static boolean METHOD_1 ( org.ovirt.engine.core.common.businessentities.StorageDomain storageDomain ) { boolean VAR_1 = ( ( storageDomain . METHOD_2 ( ) ) != null ) && ( ( storageDomain . METHOD_2 ( ) ) == ( VAR_2 ) ) ; return VAR_1 ; } 
++public static boolean METHOD_1 ( org.ovirt.engine.core.common.businessentities.StorageDomain storageDomain ) { boolean VAR_1 = ( ( storageDomain . getStatus ( ) ) != null ) && ( ( storageDomain . getStatus ( ) ) == ( VAR_2 ) ) ; return VAR_1 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/989.java b/home/sc2nf/Desktop/icse/all/50/eval/after/989.java
+index 4944ab4..f24904a 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/989.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/989.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 VAR_1 ) { VAR_2 . put ( VAR_1 . getName ( ) , VAR_1 ) ; } 
++public void METHOD_1 ( TYPE_1 VAR_1 ) { METHOD_1 ( VAR_2 , VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/991.java b/home/sc2nf/Desktop/icse/all/50/eval/after/991.java
+index 5a518e6..32d4a64 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/991.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/991.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected void METHOD_1 ( ) { org.ovirt.engine.core.compat.Guid VAR_1 = getParameters ( ) . METHOD_2 ( ) . getId ( ) ; METHOD_3 ( STRING_1 , VAR_1 . toString ( ) ) ; getReturnValue ( ) . METHOD_4 ( VAR_1 ) ; } 
++protected void METHOD_1 ( ) { getReturnValue ( ) . METHOD_4 ( getParameters ( ) . METHOD_2 ( ) . getId ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/992.java b/home/sc2nf/Desktop/icse/all/50/eval/after/992.java
+index ac4f0bf..ac25ca7 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/992.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/992.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public TYPE_1 getValue ( TYPE_2 object ) { return new TYPE_3 ( ) . getValue ( ( ( TYPE_2 ) ( object ) ) . getVm ( ) ) ; } 
++public TYPE_1 getValue ( TYPE_2 object ) { return new TYPE_3 ( ) . getValue ( object . getVm ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/998.java b/home/sc2nf/Desktop/icse/all/50/eval/after/998.java
+index f93b118..665e5fb 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/998.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/998.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected java.lang.String METHOD_1 ( ) { return java.lang.String . METHOD_2 ( STRING_1 , version ) ; } 
++protected java.lang.String METHOD_1 ( ) { return java.lang.String . METHOD_2 ( STRING_1 , version . getValue ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/1007.java b/home/sc2nf/Desktop/icse/all/50/eval/after/1007.java
+index 66ca791..557ff92 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/1007.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/1007.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public static boolean METHOD_1 ( org.ovirt.engine.core.common.businessentities.VM vm , java.util.List < java.lang.String > VAR_1 ) { return TYPE_1 . METHOD_1 ( vm , VAR_1 , TYPE_1 . METHOD_2 ( vm , null ) ) ; } 
++public static boolean METHOD_1 ( org.ovirt.engine.core.compat.Guid vmId , java.util.List < java.lang.String > VAR_1 ) { return TYPE_1 . METHOD_1 ( VAR_1 , TYPE_1 . METHOD_2 ( vmId , null ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/1013.java b/home/sc2nf/Desktop/icse/all/50/eval/after/1013.java
+index e47c15a..e7e4d42 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/1013.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/1013.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) throws java.lang.Exception { METHOD_2 ( VAR_1 , VAR_2 , VAR_3 ) ; } 
++public void METHOD_1 ( ) throws java.lang.Exception { METHOD_2 ( VAR_1 , VAR_2 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/1015.java b/home/sc2nf/Desktop/icse/all/50/eval/after/1015.java
+index c205c24..2586801 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/1015.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/1015.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected java.lang.String METHOD_1 ( TYPE_1 . DiskImage image ) { return java.lang.String . METHOD_2 ( STRING_1 , image . METHOD_3 ( ) ) ; } 
++protected java.lang.String METHOD_1 ( TYPE_1 . DiskImage image ) { return java.lang.String . METHOD_2 ( STRING_1 , image . getId ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/1019.java b/home/sc2nf/Desktop/icse/all/50/eval/after/1019.java
+index e23471f..1f09c93 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/1019.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/1019.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public abstract boolean METHOD_1 ( TYPE_1 other ) ; 
++public boolean METHOD_1 ( TYPE_1 other ) { return false ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/1020.java b/home/sc2nf/Desktop/icse/all/50/eval/after/1020.java
+index fd60c1b..42d1e74 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/1020.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/1020.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void onSuccess ( java.lang.Object model , java.lang.Object result ) { VAR_1 = ( ( org.ovirt.engine.core.common.businessentities.VM ) ( result ) ) ; METHOD_1 ( VAR_1 ) ; } 
++public void onSuccess ( org.ovirt.engine.core.common.businessentities.VM result ) { VAR_1 = result ; METHOD_1 ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/1022.java b/home/sc2nf/Desktop/icse/all/50/eval/after/1022.java
+index 1e56262..2625935 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/1022.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/1022.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private void METHOD_1 ( java.util.List < TYPE_1 > VAR_1 ) { org.mockito.Mockito.doReturn ( VAR_1 ) . when ( VAR_2 ) . METHOD_2 ( ) ; } 
++private void METHOD_1 ( java.util.List < TYPE_1 > VAR_1 ) { org.mockito.Mockito.when ( VAR_2 . METHOD_2 ( ) ) . thenReturn ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/1025.java b/home/sc2nf/Desktop/icse/all/50/eval/after/1025.java
+index 4e38c4b..0ac437a 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/1025.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/1025.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected int METHOD_1 ( ) { return 1 ; } 
++protected int METHOD_1 ( ) { return 2 ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/1026.java b/home/sc2nf/Desktop/icse/all/50/eval/after/1026.java
+index 730302c..b02d6d2 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/1026.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/1026.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 entity ) { TYPE_2 . METHOD_2 ( ) . METHOD_3 ( METHOD_4 ( ) , METHOD_5 ( entity ) ) ; } 
++public void METHOD_1 ( TYPE_1 entity ) { METHOD_1 ( entity , METHOD_4 ( ) ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/1027.java b/home/sc2nf/Desktop/icse/all/50/eval/after/1027.java
+index a5967f3..32f38a3 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/1027.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/1027.java
+@@ -1,3 +1,3 @@
+ public class A {
+-private void METHOD_1 ( ) { org.mockito.Mockito.doReturn ( METHOD_2 ( ) ) . when ( VAR_1 ) . METHOD_3 ( TYPE_1 . any ( VAR_2 . Guid class ) ) ; org.mockito.Mockito.doReturn ( METHOD_4 ( ) ) . when ( VAR_3 ) . METHOD_5 ( VAR_4 ) ; } 
++private void METHOD_1 ( ) { org.mockito.Mockito.doReturn ( METHOD_2 ( ) ) . when ( VAR_1 ) . METHOD_3 ( TYPE_1 . any ( ) ) ; org.mockito.Mockito.doReturn ( METHOD_4 ( ) ) . when ( VAR_3 ) . METHOD_5 ( VAR_4 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/1030.java b/home/sc2nf/Desktop/icse/all/50/eval/after/1030.java
+index cca46af..52368a9 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/1030.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/1030.java
+@@ -1,3 +1,3 @@
+ public class A {
+-protected void METHOD_1 ( TYPE_1 value ) { super . setItems ( value ) ; java.util.List < org.ovirt.engine.core.common.businessentities.VM > list = ( ( java.util.List < org.ovirt.engine.core.common.businessentities.VM > ) ( METHOD_2 ( ) ) ) ; } 
++public void METHOD_1 ( TYPE_1 value ) { super . setItems ( value ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/1046.java b/home/sc2nf/Desktop/icse/all/50/eval/after/1046.java
+index 4effeba..e818d6e 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/1046.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/1046.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 VAR_1 ) { this . VAR_1 = VAR_1 ; } 
++public void METHOD_1 ( TYPE_1 VAR_1 ) { this . client . METHOD_1 ( VAR_1 ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/1048.java b/home/sc2nf/Desktop/icse/all/50/eval/after/1048.java
+index b913ee7..ad370df 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/1048.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/1048.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { TYPE_1 . METHOD_2 ( true , true , null , false ) ; } 
++public void METHOD_1 ( ) { METHOD_2 ( true , true , null , false ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/1060.java b/home/sc2nf/Desktop/icse/all/50/eval/after/1060.java
+index ad4ef55..84814c1 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/1060.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/1060.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void onSuccess ( java.lang.Object model , java.lang.Object result ) { METHOD_1 ( ( ( java.util.List < TYPE_1 > ) ( result ) ) ) ; } 
++public void onSuccess ( java.util.List < TYPE_1 > result ) { METHOD_1 ( result ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/1061.java b/home/sc2nf/Desktop/icse/all/50/eval/after/1061.java
+index 0258ef6..aae9264 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/1061.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/1061.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( TYPE_1 widget ) { VAR_1 . METHOD_1 ( widget ) ; } 
++public void METHOD_1 ( TYPE_1 widget ) { VAR_1 . add ( widget ) ; } 
+ }
+diff --git a/home/sc2nf/Desktop/icse/all/50/eval/before/1075.java b/home/sc2nf/Desktop/icse/all/50/eval/after/1075.java
+index 9f212bf..fc31994 100644
+--- a/home/sc2nf/Desktop/icse/all/50/eval/before/1075.java
++++ b/home/sc2nf/Desktop/icse/all/50/eval/after/1075.java
+@@ -1,3 +1,3 @@
+ public class A {
+-public void METHOD_1 ( ) { org.mockito.Mockito.when ( VAR_1 . get ( TYPE_1 . any ( VAR_2 . Guid class ) ) ) . thenReturn ( parameters . METHOD_2 ( ) ) ; TYPE_2 . METHOD_3 ( command , VAR_3 ) ; } 
++public void METHOD_1 ( ) { org.mockito.Mockito.when ( VAR_1 . get ( TYPE_1 . any ( ) ) ) . thenReturn ( parameters . METHOD_2 ( ) ) ; TYPE_2 . METHOD_3 ( command , VAR_3 ) ; } 
+ }
