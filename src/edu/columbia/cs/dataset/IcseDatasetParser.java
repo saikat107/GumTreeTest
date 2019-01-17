@@ -118,6 +118,8 @@ public class IcseDatasetParser {
 		//	this.alreadyParsed = false;
 		//	return false;
 		//}
+		//Util.dfsPrint(srcTree);
+		//Util.dfsPrint(destTree);
 		this.alreadyParsed = true;
 		this.cParentSrc = srcTree;
 		this.cParentDest = destTree;
@@ -462,14 +464,17 @@ public class IcseDatasetParser {
 						//Util.logln(parentFile + " " + childFile);
 						String srcText = Util.readFile(parentFile);
 						String destText = Util.readFile(childFile);
-						TreeContext srcContext = new JdtTreeGenerator().generateFromFile(parentFile);
-						TreeContext destContext = new JdtTreeGenerator().generateFromFile(childFile);
+						Util.logln(srcText);
+						TreeContext srcContext = new JdtTreeGenerator().generateFromString(srcText);
+						TreeContext destContext = new JdtTreeGenerator().generateFromString(destText);
 						ITree srcTree = srcContext.getRoot();
 						ITree destTree = destContext.getRoot();
+						Util.dfsPrint(srcTree);
+						Util.dfsPrint(destTree);
 						List<NodePair> methodPairs = getMethodPairs(srcTree, destTree, srcText, destText);
 						for (NodePair pair : methodPairs) {
 							IcseDatasetParser parser = new IcseDatasetParser(parentFile, childFile, srcText, destText);
-							boolean original = !arg.replace();
+							boolean original = true;//!arg.replace();
 							boolean successfullyParsed = parser.checkSuccessFullParse(pair.srcNode, pair.tgtNode,
 									original, arg.excludeStringChange());
 							if (successfullyParsed) {
@@ -477,6 +482,8 @@ public class IcseDatasetParser {
 								//String cTime = stfmt.format(current);
 								Util.logln(totalFileCount);
 								printDataToDirectory(allFileDirectory, Arrays.asList(new IcseDatasetParser[] { parser }));
+								Util.logln(parser.parentCodeString);
+								Util.logln(parser.childCodeString);
 								totalFileCount++;
 								parserList.add(parser);
 							}
