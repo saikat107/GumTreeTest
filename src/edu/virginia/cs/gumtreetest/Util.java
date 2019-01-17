@@ -237,7 +237,7 @@ public class Util {
 			for(int i = 0; i < l; i++){
 				System.out.print('\t');
 			}
-			System.out.println(curr.getLabel() + " " + curr.getMetadata("subs_name"));
+			System.out.println(curr.getType() + " " + curr.getLabel());
 			List<ITree> children = curr.getChildren();
 			int cz = children.size();
 			for(int idx = cz-1;  idx >=0; idx --){
@@ -318,6 +318,80 @@ public class Util {
 		}
 	}
 	
+	// \.[]{}()<>*+-=?^$|
+	private static final String[] PUNCTUATIONS = {"~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "+", "=",
+			 "|", "\"", "'", ";", ":", "<", ">", ",", ".", "?", "/"};
+	private static final String[] REGEXES = {"~", "`", "!", "@", "#", "\\$", "%", "\\^", "&", "\\*", "\\(", "\\)", "\\-", "\\+", "\\=",
+			 "\\|", "\"", "'", ";", ":", "\\<", "\\>", ",", "\\.", "\\?", "/"};
+	
+	
+	public static String getFormattedCode(ITree root) {
+		String code = getRunnableCodeRecusrsive(root);
+		
+		for(int i = 0; i < PUNCTUATIONS.length; i++) {
+			String punc = PUNCTUATIONS[i];
+			String rges = REGEXES[i];
+			String fStr = " " + punc;
+			String rFStre = " " + rges;
+			if(code.contains(fStr)) {
+				code = code.replaceAll(rFStre, punc);
+			}
+			String sStr = punc + " ";
+			String rSStre = rges + " ";
+			if(code.contains(sStr))
+				code = code.replaceAll(rSStre, punc);
+		}
+		if(code.contains("{"))
+			code = code.replaceAll("\\{", "{\n\t");
+		if(code.contains("}"))
+			code = code.replaceAll("}", "}\n");
+		if(code.contains(";"))
+			code = code.replaceAll(";", ";\n");
+		if(code.contains("[ "))
+			code = code.replaceAll("\\[ ", "[");
+		if(code.contains(" ["))
+			code = code.replaceAll(" \\[", "[");
+		if(code.contains(" [ "))
+			code = code.replaceAll(" \\[ ", "[");
+		if(code.contains(" ["))
+			code = code.replaceAll(" \\]", "]");
+		
+		return code;
+	}
+	
+	/**
+	 * @author saikat
+	 * @param root
+	 * @return
+	 */
+	private static String getRunnableCodeRecusrsive(ITree root){
+		if(root.getChildren().size() == 0){
+			Object name = null;
+			if(name == null){
+				name = root.getLabel() ;
+			}
+//			Util.logln(name);
+			String token = name.toString().trim();
+			if(token.equalsIgnoreCase("STRING_CONSTANT")) {
+				token = "\"\"";
+			}
+			else if(token.equalsIgnoreCase("NUMBER_CONSTANT")){
+				token = "0";
+			}
+			else if(token.equalsIgnoreCase("NUMBER_CONSTANT")){
+				token = "'\n'";
+			}
+			return  token + " ";
+			//return root.getLabel().trim() + " ";
+		}
+		else{
+			String code = "";
+			for(ITree child: root.getChildren()){
+				code += getRunnableCodeRecusrsive(child);
+			}
+			return code;
+		}
+	}
 	
 	/**
 	 * @author saikat
@@ -334,7 +408,8 @@ public class Util {
 				name = root.getLabel() ;
 			}
 //			Util.logln(name);
-			return  name.toString().trim() + " ";
+			String token = name.toString().trim();
+			return  token + " ";
 			//return root.getLabel().trim() + " ";
 		}
 		else{

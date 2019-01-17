@@ -25,13 +25,12 @@ import com.github.gumtreediff.matchers.MappingStore;
 import com.github.gumtreediff.matchers.Matcher;
 import com.github.gumtreediff.matchers.Matchers;
 import com.github.gumtreediff.tree.ITree;
-import com.github.gumtreediff.tree.Tree;
 import com.github.gumtreediff.tree.TreeContext;
 
 import edu.virginia.cs.gumtreetest.visitors.DataTypeVisitor;
 import edu.virginia.cs.gumtreetest.visitors.VariableVisitor;
 
-public class DiffParser {
+public class SourceConcreTizer {
 	
 	private static Argument arg;
 	private  int nonLeafIdx = 200;
@@ -58,7 +57,7 @@ public class DiffParser {
 	private String childTypeTreeString = null;
 	private String parentOriginalTypeTreeString = null;
 	
-	public DiffParser(String srcPath, String destPath, String srcText, String destText) throws IOException{
+	public SourceConcreTizer(String srcPath, String destPath, String srcText, String destText) throws IOException{
 		Run.initGenerators();
 		this.srcPath = srcPath;
 		this.destPath = destPath;
@@ -417,41 +416,42 @@ public class DiffParser {
 		String startTime = stfmt.format(start);
 		arg = Argument.preprocessArgument(args);
 		Util.logln(arg);
-		File outputFile = new File(arg.outputFilePath());
-		if(outputFile.exists()){
-			Util.deleteDirectory(outputFile);
-		}
-		outputFile.mkdir();
-
-		DateFormat fmt = new SimpleDateFormat("HH-mm-ss");
-		Date d = new Date();
-		PrintStream debugStream = new PrintStream(new File("debug-" + arg.maxChangeSize() + "-" + 
-							arg.maxTreeSize() + "-" + arg.replace() + "-" + arg.astOnly() + "-" +
-							fmt.format(d) + ".txt"));
-		
-		String allFileDirectory = arg.outputFilePath() + "/all";
-		File allFile = new File(allFileDirectory);
-		if(!allFile.exists()) {
-			allFile.mkdir();
-		}
-
-		
+//		File outputFile = new File(arg.outputFilePath());
+//		if(outputFile.exists()){
+//			Util.deleteDirectory(outputFile);
+//		}
+//		outputFile.mkdir();
+//
+//		DateFormat fmt = new SimpleDateFormat("HH-mm-ss");
+//		Date d = new Date();
+//		PrintStream debugStream = new PrintStream(new File("debug-" + arg.maxChangeSize() + "-" + 
+//							arg.maxTreeSize() + "-" + arg.replace() + "-" + arg.astOnly() + "-" +
+//							fmt.format(d) + ".txt"));
+//		
+//		String allFileDirectory = arg.outputFilePath() + "/all";
+//		File allFile = new File(allFileDirectory);
+//		if(!allFile.exists()) {
+//			allFile.mkdir();
+//		}
+//
+//		
 		int totalFileCount = 0;
 		Scanner allFilePathsScanner = new Scanner(new File(arg.allPathsFile()));
-		Map<String, List<DiffParser>> allParsedResults = new HashMap<String, List<DiffParser>>();
+//		Map<String, List<SourceConcreTizer>> allParsedResults = new HashMap<String, List<SourceConcreTizer>>();
 		while(allFilePathsScanner.hasNextLine()){
 			try{
 				String filePath = allFilePathsScanner.nextLine().trim();
 				Scanner filePathScanner = new Scanner(new File(filePath));
-				List<DiffParser> parserList = new ArrayList<DiffParser>();
+//				List<SourceConcreTizer> parserList = new ArrayList<SourceConcreTizer>();
 				// #TODO Print after every project is finished. 
+				int totalMethodInProject = 0;
 				while(filePathScanner.hasNextLine()){
 					try{
 						String bothPath = filePathScanner.nextLine().trim();
 						String []filePathParts = bothPath.split("\t");
 						String parentFile = filePathParts[0];
 						String childFile = filePathParts[1];
-						//Util.logln(parentFile);
+//						//Util.logln(parentFile);
 						String srcText = Util.readFile(parentFile);
 						String destText = Util.readFile(childFile);
 						TreeContext srcContext = new JdtTreeGenerator().generateFromFile(parentFile);
@@ -459,41 +459,44 @@ public class DiffParser {
 						ITree srcTree = srcContext.getRoot();
 						ITree destTree = destContext.getRoot();
 						List<NodePair> methodPairs = getMethodPairs(srcTree, destTree, srcText, destText);
-						for(NodePair pair : methodPairs){
-							DiffParser parser = new DiffParser(parentFile, childFile, srcText, destText);
-							//Util.logln(pair.srcNode.toTreeString());
-							//Util.logln(pair.tgtNode.toTreeString());
-							boolean successfullyParsed = parser.checkSuccessFullParse(
-									pair.srcNode, pair.tgtNode, arg.replace(), arg.excludeStringChange());
-							if(successfullyParsed){
-								Date current = new Date();
-								String cTime = stfmt.format(current);
-								Util.logln(startTime  + " -> " + cTime + "\t" + totalFileCount);
-								printDataToDirectory(allFileDirectory, Arrays.asList(parser));
-								totalFileCount++;
-								parserList.add(parser);
-							}
-						}
+						int methodInThisFile = methodPairs.size();
+						totalMethodInProject += methodInThisFile;
+//						for(NodePair pair : methodPairs){
+//							SourceConcreTizer parser = new SourceConcreTizer(parentFile, childFile, srcText, destText);
+//							//Util.logln(pair.srcNode.toTreeString());
+//							//Util.logln(pair.tgtNode.toTreeString());
+//							boolean successfullyParsed = parser.checkSuccessFullParse(pair.srcNode, pair.tgtNode, arg.replace(), arg.excludeStringChange());
+//							if(successfullyParsed){
+//								Date current = new Date();
+//								String cTime = stfmt.format(current);
+//								Util.logln(startTime  + " -> " + cTime + "\t" + totalFileCount);
+//								printDataToDirectory(allFileDirectory, Arrays.asList(parser));
+//								totalFileCount++;
+//								parserList.add(parser);
+//							}
+//						}
 					}catch(Exception ex){
 						
 					}
+					
 				}
-				debugStream.println(filePath + " " + parserList.size());
-				debugStream.flush();
-				Util.logln(filePath);
-				printTrainAndTestData(parserList);
-				filePathScanner.close();
-				allParsedResults.put(filePath, parserList);
+				System.out.println(filePath + " , " + totalMethodInProject);
+//				debugStream.println(filePath + " " + parserList.size());
+//				debugStream.flush();
+//				Util.logln(filePath);
+//				printTrainAndTestData(parserList);
+//				filePathScanner.close();
+//				allParsedResults.put(filePath, parserList);
 			}catch(Exception ex){
 				
 			}
 		}
 		allFilePathsScanner.close();
-		debugStream.close();
+//		debugStream.close();
 //		printTrainAndTestData(allParsedResults);
 	}
-
 	
+
 	private static List<NodePair> getMethodPairs(ITree srcTree, ITree destTree, String srcText, String destText) {
 		Matcher m = Matchers.getInstance().getMatcher(srcTree, destTree);
 		m.match();
@@ -517,14 +520,14 @@ public class DiffParser {
 		return methods;
 	}
 
-	private static void printTrainAndTestData(Map<String, List<DiffParser>> allParsedResults) {
+	private static void printTrainAndTestData(Map<String, List<SourceConcreTizer>> allParsedResults) {
 		String trainDirectory = arg.outputFilePath() + "/train";
 		String testDirectory = arg.outputFilePath() + "/test";
-		List<DiffParser> trainParsers = new ArrayList<DiffParser>();
-		List<DiffParser> testParsers = new ArrayList<DiffParser>();
+		List<SourceConcreTizer> trainParsers = new ArrayList<SourceConcreTizer>();
+		List<SourceConcreTizer> testParsers = new ArrayList<SourceConcreTizer>();
 		Set<String> projects = allParsedResults.keySet();
 		for(String project : projects){
-			List<DiffParser> parsers = allParsedResults.get(project);
+			List<SourceConcreTizer> parsers = allParsedResults.get(project);
 			int totalNumber = parsers.size();
 			int testNumber = (int)Math.ceil(totalNumber * testPercentage);
 			int trainNumber = totalNumber - testNumber;
@@ -541,11 +544,11 @@ public class DiffParser {
 		printDataToDirectory(testDirectory, testParsers);
 	}
 
-	private static void printTrainAndTestData(List<DiffParser> parsers) {
+	private static void printTrainAndTestData(List<SourceConcreTizer> parsers) {
 		String trainDirectory = arg.outputFilePath() + "/train";
 		String testDirectory = arg.outputFilePath() + "/test";
-		List<DiffParser> trainParsers = new ArrayList<DiffParser>();
-		List<DiffParser> testParsers = new ArrayList<DiffParser>();
+		List<SourceConcreTizer> trainParsers = new ArrayList<SourceConcreTizer>();
+		List<SourceConcreTizer> testParsers = new ArrayList<SourceConcreTizer>();
 		int totalNumber = parsers.size();
 		int testNumber = (int)Math.ceil(totalNumber * testPercentage);
 		int trainNumber = totalNumber - testNumber;
@@ -562,7 +565,7 @@ public class DiffParser {
 	}
 	
 
-	private static void printDataToDirectory(String baseDir, List<DiffParser> parsers) {
+	private static void printDataToDirectory(String baseDir, List<SourceConcreTizer> parsers) {
 		// #TODO Append the files
 		Util.logln(baseDir + " " + parsers.size());
 		try {
@@ -581,7 +584,7 @@ public class DiffParser {
 			PrintStream childTypeTree = new PrintStream(new FileOutputStream(baseDir + "/child.type.tree", true));
 			PrintStream tokenMasks = new PrintStream(new FileOutputStream(baseDir + "/allowed.tokens", true));
 			PrintStream fileNames = new PrintStream(new FileOutputStream(baseDir + "/files.txt", true));
-			for(DiffParser parser : parsers){
+			for(SourceConcreTizer parser : parsers){
 				parentCode.println(parser.parentCodeString);
 				parentTree.println(parser.parentTreeString);
 				childCode.println(parser.childCodeString);
@@ -743,17 +746,4 @@ public class DiffParser {
 		}
 	}
 
-}
-
-class NodePair{
-	ITree srcNode;
-	ITree tgtNode;
-	String srcText;
-	String tgtText;
-	public NodePair(ITree s, ITree d, String sText, String dText){
-		this.srcNode = s;
-		this.tgtNode = d;
-		this.srcText = sText;
-		this.tgtText = dText;
-	}
 }
