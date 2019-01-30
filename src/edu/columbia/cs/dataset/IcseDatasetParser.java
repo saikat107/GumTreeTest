@@ -3,6 +3,7 @@ package edu.columbia.cs.dataset;
 import com.github.gumtreediff.actions.ActionGenerator;
 import com.github.gumtreediff.actions.model.Action;
 import com.github.gumtreediff.client.Run;
+import com.github.gumtreediff.gen.c.CTreeGenerator;
 import com.github.gumtreediff.gen.jdt.JdtTreeGenerator;
 import com.github.gumtreediff.matchers.MappingStore;
 import com.github.gumtreediff.matchers.Matcher;
@@ -11,6 +12,7 @@ import com.github.gumtreediff.tree.ITree;
 import com.github.gumtreediff.tree.TreeContext;
 
 import edu.virginia.cs.gumtreetest.Argument;
+import edu.virginia.cs.gumtreetest.Config;
 import edu.virginia.cs.gumtreetest.TreeUtil;
 import edu.virginia.cs.gumtreetest.Util;
 import edu.virginia.cs.gumtreetest.visitors.DataTypeVisitor;
@@ -31,6 +33,10 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
+
+import javax.naming.ldap.Rdn;
+
+import org.hamcrest.core.IsInstanceOf;
 
 public class IcseDatasetParser {
 	private static Argument arg;
@@ -224,20 +230,39 @@ public class IcseDatasetParser {
 	}
 
 	private void setMetaDataToDestTree(ITree srcTree, ITree destTree, MappingStore store, Map<String, String> sTable) {
+		int maxNode = getMaxNodeNumber(sTable);
+		maxNode++;
 		Stack<ITree> st = new Stack<ITree>();
 		st.push(destTree);
 		while (!st.isEmpty()) {
 			ITree curr = (ITree) st.pop();
-			if (curr.getType() == 42) {
+			if (curr.getType() == Config.ASTTYPE_TAG.SIMPLE_NAME || curr.getType() == Config.ASTTYPE_TAG.COMPLEX_NAME) {
 				String name = curr.getLabel();
 				if (sTable.containsKey(name)) {
 					curr.setMetadata("subs_name", sTable.get(name));
 				} else {
-					curr.setMetadata("subs_name", name);
+					curr.setMetadata("subs_name", "t" + maxNode);
+					sTable.put(name, "t" + maxNode);
+					maxNode++;
 				}
 			}
 			st.addAll(curr.getChildren());
 		}
+	}
+
+	private int getMaxNodeNumber(Map<String, String> sTable) {
+		List<Integer> numbers = new ArrayList<Integer>();
+		for(String key: sTable.keySet()) {
+			String val = sTable.get(key);
+			numbers.add(Integer.parseInt(val.substring(1)));
+		}
+		int max = -1;
+		for(Integer a : numbers) {
+			if(a > max) {
+				max = a;
+			}
+		}
+		return max;
 	}
 
 	private void setIndices(ITree root) {
@@ -425,6 +450,7 @@ public class IcseDatasetParser {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
+		
 		DateFormat stfmt = new SimpleDateFormat("MM/dd/yy hh:mm:ss");
 		Date start = new Date();
 		String startTime = stfmt.format(start);
@@ -452,52 +478,64 @@ public class IcseDatasetParser {
 		Map<String, List<IcseDatasetParser>> allParsedResults = new HashMap<String, List<IcseDatasetParser>>();
 		while (allFilePathsScanner.hasNextLine()) {
 			try {
-				String filePath = allFilePathsScanner.nextLine().trim();
-				Scanner filePathScanner = new Scanner(new File(filePath));
+				//Scanner filePathScanner = new Scanner(new File(filePath));
 				List<IcseDatasetParser> parserList = new ArrayList<IcseDatasetParser>();
-				while (filePathScanner.hasNextLine()) {
-					try {
-						String bothPath = filePathScanner.nextLine().trim();
-						String[] filePathParts = bothPath.split("\t");
-						String parentFile = filePathParts[0];
-						String childFile = filePathParts[1];
-						//Util.logln(parentFile + " " + childFile);
-						String srcText = Util.readFile(parentFile);
-						String destText = Util.readFile(childFile);
-						Util.logln(srcText);
-						TreeContext srcContext = new JdtTreeGenerator().generateFromString(srcText);
-						TreeContext destContext = new JdtTreeGenerator().generateFromString(destText);
-						ITree srcTree = srcContext.getRoot();
-						ITree destTree = destContext.getRoot();
-						Util.dfsPrint(srcTree);
-						Util.dfsPrint(destTree);
-						List<NodePair> methodPairs = getMethodPairs(srcTree, destTree, srcText, destText);
-						for (NodePair pair : methodPairs) {
-							IcseDatasetParser parser = new IcseDatasetParser(parentFile, childFile, srcText, destText);
-							boolean original = true;//!arg.replace();
-							boolean successfullyParsed = parser.checkSuccessFullParse(pair.srcNode, pair.tgtNode,
-									original, arg.excludeStringChange());
-							if (successfullyParsed) {
-								//Date current = new Date();
-								//String cTime = stfmt.format(current);
-								Util.logln(totalFileCount);
-								printDataToDirectory(allFileDirectory, Arrays.asList(new IcseDatasetParser[] { parser }));
-								Util.logln(parser.parentCodeString);
-								Util.logln(parser.childCodeString);
-								totalFileCount++;
-								parserList.add(parser);
-							}
-							/*else {
-								System.out.println("git diff " + parentFile + " " + childFile);
-							}*/
+				//while (filePathScanner.hasNextLine()) {
+				try {
+					String bothPath = allFilePathsScanner.nextLine().trim();
+					String[] filePathParts = bothPath.split("\t");
+					String parentFile = filePathParts[0];
+					String childFile = filePathParts[1];
+					//Util.logln(parentFile + " " + childFile);
+					String srcText = Util.readFile(parentFile);
+					String destText = Util.readFile(childFile);
+					srcText = srcText.replaceAll(" class", " . class");
+					destText = destText.replaceAll(" class", " . class");
+					for(int idx = 0; idx < Util.PUNCTUATIONS.length; idx++) {
+						String punc = Util.PUNCTUATIONS[idx];
+						String rges = Util.REGEXES[idx];
+						String fStr = " " + punc;
+						String rFStre = " " + rges;
+						if (srcText.contains(fStr)) {
+							srcText = srcText.replaceAll(rFStre, punc);
 						}
-					} catch (Exception localException) {
+						if(destText.contains(fStr)) {
+							destText = destText.replaceAll(rFStre, punc);
+						}
 					}
+					//Util.logln(srcText);
+					TreeContext srcContext = new JdtTreeGenerator().generateFromString(srcText);
+					TreeContext destContext = new JdtTreeGenerator().generateFromString(destText);
+					ITree srcTree = srcContext.getRoot();
+					ITree destTree = destContext.getRoot();
+					//Util.dfsPrint(srcTree);
+					//Util.dfsPrint(destTree);
+					List<NodePair> methodPairs = getMethodPairs(srcTree, destTree, srcText, destText);
+					for (NodePair pair : methodPairs) {
+						IcseDatasetParser parser = new IcseDatasetParser(parentFile, childFile, srcText, destText);
+						boolean original = true;//!arg.replace();
+						boolean successfullyParsed = parser.checkSuccessFullParse(pair.srcNode, pair.tgtNode,
+								original, arg.excludeStringChange(), arg.replace());
+						if (successfullyParsed) {
+							//Date current = new Date();
+							//String cTime = stfmt.format(current);
+							Util.logln(totalFileCount);
+							printDataToDirectory(allFileDirectory, Arrays.asList(new IcseDatasetParser[] { parser }));
+							//Util.logln(parser.parentCodeString);
+							Util.logln(parser.childCodeString);
+							totalFileCount++;
+							parserList.add(parser);
+						}
+						/*else {
+							System.out.println("git diff " + parentFile + " " + childFile);
+						}*/
+					}
+				} catch (Exception localException) {
 				}
+				
 				//Util.logln(filePath);
 				//printTrainAndTestData(parserList);
-				filePathScanner.close();
-				allParsedResults.put(filePath, parserList);
+				//allParsedResults.put(filePath, parserList);
 			} catch (Exception localException1) {
 			}
 		}
@@ -608,7 +646,7 @@ public class IcseDatasetParser {
 	}
 
 	private boolean checkSuccessFullParse(ITree srcNode, ITree destNode, 
-			boolean original, boolean excludeStringChange) {
+			boolean original, boolean excludeStringChange, boolean replace) {
 		try {
 			boolean success = false;
 			if(!original) {
@@ -621,16 +659,16 @@ public class IcseDatasetParser {
 				Util.logln("Not Successful");
 				return false;
 			}
-			this.parentCodeString = getParentCodeString(false).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
-			this.parentTreeString = getParentTreeString(false).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
-			this.parentOrgTreeString = getParentOrgTreeString(false).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)",
+			this.parentCodeString = getParentCodeString(replace).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
+			this.parentTreeString = getParentTreeString(replace).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
+			this.parentOrgTreeString = getParentOrgTreeString(replace).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)",
 					"");
-			this.childCodeString = getChildCodeString(false).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
-			this.childTreeString = getChildTreeString(false).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
-			this.parentTypeCodeString = getParentCodeString(false).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
-			this.childTypeCodeString = getChildCodeString(false).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
-			this.childTypeTreeString = getChildTreeString(false).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
-			this.parentOriginalTypeTreeString = getParentOrgTreeString(false)
+			this.childCodeString = getChildCodeString(replace).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
+			this.childTreeString = getChildTreeString(replace).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
+			this.parentTypeCodeString = getParentCodeString(replace).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
+			this.childTypeCodeString = getChildCodeString(replace).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
+			this.childTypeTreeString = getChildTreeString(replace).replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
+			this.parentOriginalTypeTreeString = getParentOrgTreeString(replace)
 					.replaceAll("([\n]+[\r]*)|([\r]+[\n]*)", "");
 			if ((this.parentCodeString == null) || (this.parentTreeString == null) || (this.childCodeString == null)
 					|| (this.childTreeString == null)) {

@@ -986,9 +986,9 @@ public class Util {
 	}
 	
 	
-	private static final String[] PUNCTUATIONS = { "~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "+", "=", 
+	public static final String[] PUNCTUATIONS = { "~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "+", "=", 
 			    "|", "\"", "'", ";", ":", "<", ">", ",", ".", "?", "/" };
-	private static final String[] REGEXES = { "~", "`", "!", "@", "#", "\\$", "%", "\\^", "&", "\\*", "\\(", "\\)", "\\-", "\\+", "\\=", 
+	public static final String[] REGEXES = { "~", "`", "!", "@", "#", "\\$", "%", "\\^", "&", "\\*", "\\(", "\\)", "\\-", "\\+", "\\=", 
 			    "\\|", "\"", "'", ";", ":", "\\<", "\\>", ",", "\\.", "\\?", "/" };
 			  
 	public static String getFormattedCode(ITree root){

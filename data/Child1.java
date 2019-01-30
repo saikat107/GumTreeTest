@@ -5,9 +5,11 @@ import java.io.IOException;
 class B{
 	public int hello() {
 		int res = 0;
-		for(int i = 0; i< 10; i++) {
-			res += 9;
+		for(int i = 0; i <=10; i++) {
+			res + = 9;
 		}
+		String s = "ggf";
+		Class p = B class;
 		return res;
 	}
 }

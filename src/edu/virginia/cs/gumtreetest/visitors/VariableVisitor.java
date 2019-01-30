@@ -22,7 +22,7 @@ public class VariableVisitor {
 		stack.push(root);
 		while(!stack.isEmpty()){
 			ITree curr = stack.pop();
-			if(curr.getType() == Config.ASTTYPE_TAG.SIMPLE_NAME){
+			if(curr.getType() == Config.ASTTYPE_TAG.SIMPLE_NAME || curr.getType() == Config.ASTTYPE_TAG.COMPLEX_NAME){
 				String name = curr.getLabel();
 				if(!symbolTree.containsKey(name)){
 					symbolTree.put(name, "t"+identifierNumber);

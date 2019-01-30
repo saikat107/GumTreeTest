@@ -1,10 +1,14 @@
-package edu.virginia.cs.gumtreetest;
+package edu.columbia.cs.dataset;
+
 
 //import java.util.ArrayList;
 //import java.util.Arrays;
 //import java.util.List;
 
-public class Argument {
+public class ICSEArgument {
+	private String allTrainPaths = "data/paths.txt";
+	private String allTestPaths = "data/paths.txt";
+	private String allValidPaths = "data/paths.txt";
 	private String allPathsFile = "data/paths.txt";
 	private String sFilePath = null;
 	private String dFilePath = null;
@@ -72,8 +76,8 @@ public class Argument {
 	//private static List<String> commandList = Arrays.asList("--src", "-s", "--dest", "-d", "--out", "-o", "--replace", "-r", "--maxchange", "-mc", "--maxtree", "-mt", 
 	//"--method_only", "-mo", "--exlude_string_change", "-esc");
 	
-	public static Argument preprocessArgument(String []args){
-		Argument arg = new Argument();
+	public static ICSEArgument preprocessArgument(String []args){
+		ICSEArgument arg = new ICSEArgument();
 		for(int i = 0 ; i < args.length; i++){
 			String command = args[i];
 			switch (command) {
