@@ -10,6 +10,8 @@ import com.github.gumtreediff.tree.ITree;
 import com.github.gumtreediff.tree.Tree;
 import com.github.gumtreediff.tree.TreeContext;
 
+import edu.columbia.cs.dataset.NodeForIcseData;
+
 public class TreeUtil {
 	
 	/**
@@ -41,6 +43,32 @@ public class TreeUtil {
 		}
 	}
 	
+
+	public static NodeForIcseData normalizeToSubTree(List<NodeForIcseData> nodes, boolean icse) throws InternalError{
+		if(nodes.size() == 1){
+			return nodes.get(0);
+		}
+		else if(nodes.size() > 100){
+			throw new InternalError("Large number of nodes");
+		}
+		else{
+			List<NodeForIcseData> binaryChildren = new ArrayList<NodeForIcseData>();
+			NodeForIcseData leftChild = nodes.get(0);
+			List<NodeForIcseData> right = new ArrayList<NodeForIcseData>();
+			for(int i = 1; i < nodes.size(); i++){
+				right.add(nodes.get(i));
+			}
+			NodeForIcseData rightChild = normalizeToSubTree(right, icse);
+			binaryChildren.add(leftChild);
+			binaryChildren.add(rightChild);
+			NodeForIcseData head = new NodeForIcseData();
+			head.nodeTypeOriginal = Config.INTERMEDIATE_NODE_TYPE;
+			head.text = "";
+			head.children = binaryChildren;
+			return head;
+		}
+	}
+	
 	
 	/**
 	 * @author saikat
@@ -62,6 +90,32 @@ public class TreeUtil {
 				newChildren.add(binarizeAST(child));
 			}
 			ITree secondRoot = normalizeToSubTree(newChildren);
+			root = secondRoot;
+		}
+		return root;
+	}
+	
+	/**
+	 * @author saikat
+	 * @param root
+	 * @return
+	 * @throws InternalError
+	 */
+	public static NodeForIcseData binarizeAST(NodeForIcseData oldRoot) throws InternalError{
+		NodeForIcseData root = new NodeForIcseData(oldRoot);
+		List<NodeForIcseData> children = oldRoot.children;
+		List<NodeForIcseData> newChildren = new ArrayList<NodeForIcseData>();
+		if(children.size() == 0){
+			return root;
+		}
+		else if(children.size() == 1){
+			return binarizeAST(children.get(0));
+		}
+		else{
+			for(NodeForIcseData child : children){
+				newChildren.add(binarizeAST(child));
+			}
+			NodeForIcseData secondRoot = normalizeToSubTree(newChildren, true);
 			root = secondRoot;
 		}
 		return root;

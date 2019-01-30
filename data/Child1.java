@@ -1,7 +1,3 @@
-
-import java.util.Scanner;
-import java.io.File;
-import java.io.IOException;
 class B{
 	public int hello() {
 		int res = 0;

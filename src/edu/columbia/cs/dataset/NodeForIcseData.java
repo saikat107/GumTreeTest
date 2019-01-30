@@ -15,5 +15,20 @@ public class NodeForIcseData {
 	public NodeForIcseData parent = null;
 	public String text = null;
 	public List<NodeForIcseData> children = new ArrayList<NodeForIcseData>();
+	
+	public int id = 0;
+	
+	public NodeForIcseData(NodeForIcseData other){
+		this.nodeTypeOriginal = other.nodeTypeOriginal;
+		this.parentNodeTypeOriginal = other.parentNodeTypeOriginal;
+		this.selfNode = other.selfNode;
+		this.parentNode = other.parentNode;
+		this.parent = other.parent;
+		this.text = other.text;
+	}
+	
+	public NodeForIcseData(){
+		
+	}
 
 }

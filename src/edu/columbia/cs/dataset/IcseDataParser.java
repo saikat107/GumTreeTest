@@ -2,6 +2,7 @@ package edu.columbia.cs.dataset;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -9,9 +10,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.Stack;
 
 import org.eclipse.jdt.core.JavaCore;
@@ -20,13 +23,17 @@ import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
+import com.github.gumtreediff.tree.ITree;
+
 import codemining.ast.AstNodeSymbol;
 import codemining.ast.TreeNode;
 import codemining.ast.java.AbstractJavaTreeExtractor;
 import codemining.ast.java.BinaryJavaAstTreeExtractor;
 import codemining.ast.java.JavaAstTreeExtractor;
 import edu.virginia.cs.gumtreetest.Argument;
+import edu.virginia.cs.gumtreetest.Config;
 import edu.virginia.cs.gumtreetest.DiffParser;
+import edu.virginia.cs.gumtreetest.TreeUtil;
 //import edu.virginia.cs.gumtreetest.NodePair;
 import edu.virginia.cs.gumtreetest.Util;
 
@@ -38,6 +45,7 @@ public class IcseDataParser {
 	private String childText = null;
 	private NodeForIcseData parentNode = null;
 	private NodeForIcseData childNode = null;
+	private NodeForIcseData parentBinarizedNode = null;
 	private String parentCodeString;
 	private String parentTreeString;
 	private String parentOrgTreeString;
@@ -47,6 +55,9 @@ public class IcseDataParser {
 	private String childTypeCodeString;
 	private String childTypeTreeString;
 	private String parentOriginalTypeTreeString;
+	private String allowedTokensString = "";
+	private int nonLeafIdx = 200;
+	private int currentIdx = 0;
 	public IcseDataParser(String parentFile, String childFile, String srcText, String destText) {
 		this.parentFilePath = parentFile;
 		this.childfilePath = childFile;
@@ -54,7 +65,26 @@ public class IcseDataParser {
 		this.childText = destText;
 		this.parentNode = processFileExtractTree(parentFilePath, parentText);
 		this.childNode = processFileExtractTree(childfilePath, childText);
+		this.parentBinarizedNode = binarizeTree(this.parentNode);
+		setIndices(this.parentBinarizedNode);
+		extractAllowedToken();
+		//Util.logln(getParentTreeString(false));
+		//Util.logln(getParentOrgTreeString(false));
+		//Util.logln(allowedTokensString);
+		
 	}
+	
+	private void extractAllowedToken() {
+		Set<String> allowedTokens = extractAllVariablesInScope();
+		for (String token : allowedTokens) {
+			this.allowedTokensString = (this.allowedTokensString + token + " ");
+		}
+	}
+
+	private NodeForIcseData binarizeTree(NodeForIcseData node) {
+		return TreeUtil.binarizeAST(node);
+	}
+	
 	private NodeForIcseData processFileExtractTree(String filePath, String documentText) {
 		ASTParser parser = ASTParser.newParser(AST.JLS8);
 		Map<String, String> options = JavaCore.getOptions();
@@ -97,10 +127,10 @@ public class IcseDataParser {
 			List<List<TreeNode<Integer>>> children =  curr.getChildrenByProperty();
 			int sz = children.size();
 			currNode.children = new ArrayList<NodeForIcseData>();
-			for(int cid = sz - 1; cid >= 0; cid--){
+			for(int cid = sz -1; cid >= 0; cid--){
 				List<TreeNode<Integer>> ch  = children.get(cid);
 				int cz = ch.size();
-				for(int idx = cz-1;  idx >=0; idx --){
+				for(int idx = cz -1;  idx >= 0; idx--){
 					TreeNode<Integer> child = ch.get(idx);
 					nodes.push(child);
 					NodeForIcseData childNode = new NodeForIcseData();
@@ -114,8 +144,27 @@ public class IcseDataParser {
 		}
 
 		Util.fixBinaryAST(rootNode);
-		return rootNode.children.get(0).children.get(0);
+		NodeForIcseData retNode = rootNode.children.get(0).children.get(0);
+		
+		//Util.dfsPrint(rootNode);
+		//Util.dfsPrint(retNode);
+		return retNode;
+		//return rootNode;
 	}
+	
+	private void setIndices(NodeForIcseData root) {
+		if (root.children.size() == 0) {
+			root.id = this.currentIdx;
+			this.currentIdx += 1;
+		} else {
+			root.id = this.nonLeafIdx;
+			this.nonLeafIdx += 1;
+			for (NodeForIcseData child : root.children) {
+				setIndices(child);
+			}
+		}
+	}
+	
 	public static void main(String[] args) throws FileNotFoundException {
 		DateFormat stfmt = new SimpleDateFormat("MM/dd/yy hh:mm:ss");
 		Date start = new Date();
@@ -157,7 +206,7 @@ public class IcseDataParser {
 						String srcText = Util.readFile(parentFile);
 						String destText = Util.readFile(childFile);
 						//Util.logln();
-						Util.logln(parentFile);
+						//Util.logln(parentFile);
 						IcseDataParser parser = new IcseDataParser(parentFile, childFile, srcText, destText);
 						boolean successfullyParsed = parser.checkSuccessFullParse(parser.parentNode, parser.childNode,
 								arg.replace(), arg.excludeStringChange());
@@ -168,8 +217,8 @@ public class IcseDataParser {
 							printDataToDirectory(allFileDirectory, Arrays.asList(new IcseDataParser[] { parser }));
 							totalFileCount++;
 						}
-						Util.dfsPrint(parser.parentNode);
-						Util.dfsPrint(parser.childNode);
+						//Util.dfsPrint(parser.parentNode);
+						//Util.dfsPrint(parser.childNode);
 					} catch (Exception localException) {
 						localException.printStackTrace();
 					}
@@ -186,8 +235,45 @@ public class IcseDataParser {
 		allFilePathsScanner.close();
 		debugStream.close();
 	}
-	private static void printDataToDirectory(String allFileDirectory, List<IcseDataParser> parsers) {
-		// TODO Auto-generated method stub
+	private static void printDataToDirectory(String baseDir, List<IcseDataParser> parsers) {
+		try {
+			File baseDirFile = new File(baseDir);
+			if (!baseDirFile.exists()) {
+				baseDirFile.mkdir();
+			}
+			PrintStream parentCode = new PrintStream(new FileOutputStream(baseDir + "/parent.code", true));
+			PrintStream parentTree = new PrintStream(new FileOutputStream(baseDir + "/parent.tree", true));
+			PrintStream childCode = new PrintStream(new FileOutputStream(baseDir + "/child.code", true));
+			PrintStream childTree = new PrintStream(new FileOutputStream(baseDir + "/child.tree", true));
+			PrintStream parentOrgTree = new PrintStream(new FileOutputStream(baseDir + "/parent.org.tree", true));
+			PrintStream parentTypeCode = new PrintStream(new FileOutputStream(baseDir + "/parent.type.code", true));
+			PrintStream childTypeCode = new PrintStream(new FileOutputStream(baseDir + "/child.type.code", true));
+			PrintStream parentTypeTree = new PrintStream(new FileOutputStream(baseDir + "/parent.org.type.tree", true));
+			PrintStream childTypeTree = new PrintStream(new FileOutputStream(baseDir + "/child.type.tree", true));
+			PrintStream tokenMasks = new PrintStream(new FileOutputStream(baseDir + "/allowed.tokens", true));
+			PrintStream fileNames = new PrintStream(new FileOutputStream(baseDir + "/files.txt", true));
+			for (IcseDataParser parser : parsers) {
+				parentCode.println(parser.parentCodeString);
+				parentTree.println(parser.parentTreeString);
+				childCode.println(parser.childCodeString);
+				childTree.println(parser.childTreeString);
+				parentOrgTree.println(parser.parentOrgTreeString);
+				parentTypeCode.println(parser.parentTypeCodeString);
+				childTypeCode.println(parser.childTypeCodeString);
+				parentTypeTree.println(parser.parentOriginalTypeTreeString);
+				childTypeTree.println(parser.childTypeTreeString);
+				tokenMasks.println(parser.allowedTokensString);
+				fileNames.println(parser.parentFilePath);
+				flushAllPrintStreams(parentCode, parentTree, childCode, childTree, parentOrgTree, parentTypeCode,
+						childTypeCode, parentTypeTree, childTypeTree, tokenMasks);
+				fileNames.flush();
+			}
+			closeAllPrintStreams(parentCode, parentTree, childCode, childTree, parentOrgTree, parentTypeCode,
+					childTypeCode, parentTypeTree, childTypeTree, tokenMasks);
+			fileNames.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	private boolean checkSuccessFullParse(NodeForIcseData parentNode, NodeForIcseData childNode, boolean replace, boolean excludeStringChange) {
@@ -218,40 +304,89 @@ public class IcseDataParser {
 		return true;
 	}
 	
-	private String getParentOriginalTypeTreeString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	private String getChildTypeTreeString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	private String getChildTypeCodeString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	private String getParentTypeCodeString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	private String getChildTreeString(boolean replace) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	private String getChildCodeString(boolean replace) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	private String getParentOrgTreeString(boolean replace) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	private String getParentTreeString(boolean replace) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	private String getParentCodeString(boolean replace) {
-		return null;//Util.getCodeRecusrsive(this.parentNode, replace);
+		return Util.getCodeRecusrsive(this.parentNode, replace);
+	}
+	
+	private String getParentTreeString(boolean replace) {
+		return Util.getSourceTree(this.parentBinarizedNode);
+	}
+	
+	private String getParentOrgTreeString(boolean replace) {
+		return Util.getDestTree(this.parentNode, replace);
+	}
+	
+	private String getChildCodeString(boolean replace) {
+		return Util.getCodeRecusrsive(this.childNode, replace);
+	}
+	
+	private String getChildTreeString(boolean replace) {
+		return Util.getDestTree(this.childNode, replace);
+	}
+	
+	private String getParentTypeCodeString() {
+		return Util.getCodeRecusrsive(this.parentNode, false);
+	}
+	
+	private String getChildTypeCodeString() {
+		return Util.getCodeRecusrsive(this.childNode, false);
+	}
+	
+	private String getChildTypeTreeString() {
+		return Util.getDestTree(this.childNode, false);
+	}
+	
+	private String getParentOriginalTypeTreeString() {
+		return Util.getDestTree(this.parentNode, false);
+	}
+	
+	private static void closeAllPrintStreams(PrintStream parentCode, PrintStream parentTree, PrintStream childCode,
+			PrintStream childTree, PrintStream parentOrgTree, PrintStream parentTypeCode, PrintStream childTypeCode,
+			PrintStream parentTypeTree, PrintStream childTypeTree, PrintStream alloedTokens) {
+		parentCode.close();
+		parentTree.close();
+		childCode.close();
+		childTree.close();
+		parentOrgTree.close();
+		parentTypeCode.close();
+		parentTypeTree.close();
+		childTypeCode.close();
+		childTypeTree.close();
+		alloedTokens.close();
 	}
 
+	private static void flushAllPrintStreams(PrintStream parentCode, PrintStream parentTree, PrintStream childCode,
+			PrintStream childTree, PrintStream parentOrgTree, PrintStream parentTypeCode, PrintStream childTypeCode,
+			PrintStream parentTypeTree, PrintStream childTypeTree, PrintStream alloedTokens) {
+		parentCode.flush();
+		parentTree.flush();
+		childCode.flush();
+		childTree.flush();
+		parentOrgTree.flush();
+		parentTypeCode.flush();
+		childTypeCode.flush();
+		parentTypeTree.flush();
+		childTypeTree.flush();
+		alloedTokens.flush();
+	}
+	
+	public Set<String> extractAllVariablesInScope() {
+		Set<String> variables = new HashSet<String>();
+			Stack<NodeForIcseData> st = new Stack<NodeForIcseData>();
+			st.push(parentNode);
+			st.push(childNode);
+			while(!st.isEmpty()){
+				NodeForIcseData curr = st.pop();
+				if(curr.nodeTypeOriginal == Config.ASTTYPE_TAG.SIMPLE_NAME){
+					String var = curr.text;
+					variables.add(var);
+				}
+				for(NodeForIcseData child : curr.children){
+					st.push(child);
+				}
+			}
+		
+		return variables;
+	}
+	
 }
