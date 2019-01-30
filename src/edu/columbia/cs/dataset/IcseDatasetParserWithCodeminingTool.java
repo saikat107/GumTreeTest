@@ -38,6 +38,8 @@ import edu.virginia.cs.gumtreetest.TreeUtil;
 import edu.virginia.cs.gumtreetest.Util;
 
 public class IcseDatasetParserWithCodeminingTool {
+	public static Set<Integer> emptyNodeSet = new HashSet<Integer>();
+	public boolean everythingFine = true;
 	public static Argument arg = null;
 	private String parentFilePath = null;
 	private String childfilePath = null;
@@ -142,9 +144,15 @@ public class IcseDatasetParserWithCodeminingTool {
 				}
 			}
 		}
-		
+		//Util.dfsPrint(rootNode);
 		Util.fixBinaryAST(rootNode);
 		NodeForIcseData retNode = rootNode.children.get(0).children.get(0);
+		int type = retNode.nodeTypeOriginal;
+		if(type != 31) {
+			everythingFine = false;
+			//Util.dfsPrint(rootNode);
+		}
+		//Util.dfsPrint(retNode);
 		return retNode;
 	}
 	
@@ -175,9 +183,6 @@ public class IcseDatasetParserWithCodeminingTool {
 
 		DateFormat fmt = new SimpleDateFormat("HH-mm-ss");
 		Date d = new Date();
-		//PrintStream debugStream = new PrintStream(new File("debug-" + arg.maxChangeSize() + "-" + arg.maxTreeSize()
-		//		+ "-" + arg.replace() + "-" + arg.astOnly() + "-" + fmt.format(d) + ".txt"));
-
 		String allFileDirectory = arg.outputFilePath() ;
 		File allFile = new File(allFileDirectory);
 		if (!allFile.exists()) {
@@ -201,8 +206,8 @@ public class IcseDatasetParserWithCodeminingTool {
 							
 						String srcText = Util.readFile(parentFile);
 						String destText = Util.readFile(childFile);
-						srcText = srcText.replaceAll(" class", " . class");
-						destText = destText.replaceAll(" class", " . class");
+						srcText = srcText.replaceAll(" class", " .class");
+						destText = destText.replaceAll(" class", " .class");
 						for(int idx = 0; idx < Util.PUNCTUATIONS.length; idx++) {
 							String punc = Util.PUNCTUATIONS[idx];
 							String rges = Util.REGEXES[idx];
@@ -215,17 +220,21 @@ public class IcseDatasetParserWithCodeminingTool {
 								destText = destText.replaceAll(rFStre, punc);
 							}
 						}
-						//Util.logln();
-						//Util.logln(parentFile);
 						IcseDatasetParserWithCodeminingTool parser = new IcseDatasetParserWithCodeminingTool(parentFile, childFile, srcText, destText);
 						boolean successfullyParsed = parser.checkSuccessFullParse(parser.parentNode, parser.childNode,
 								arg.replace(), arg.excludeStringChange());
 						if (successfullyParsed) {
 							Date current = new Date();
 							String cTime = stfmt.format(current);
-							Util.logln(startTime + " -> " + cTime + "\t" + totalFileCount);
-							printDataToDirectory(allFileDirectory, Arrays.asList(new IcseDatasetParserWithCodeminingTool[] { parser }));
-							totalFileCount++;
+							if(!parser.everythingFine) {
+								Util.logln(parentFile);
+								
+							}
+							//Util.logln(startTime + " -> " + cTime + "\t" + totalFileCount);
+							else {
+								printDataToDirectory(allFileDirectory, Arrays.asList(new IcseDatasetParserWithCodeminingTool[] { parser }));
+								totalFileCount++;
+							}
 						}
 						//Util.dfsPrint(parser.parentNode);
 						//Util.dfsPrint(parser.childNode);
@@ -242,6 +251,7 @@ public class IcseDatasetParserWithCodeminingTool {
 			}
 		}
 		allFilePathsScanner.close();
+		Util.logln(emptyNodeSet);
 	}
 	private static void printDataToDirectory(String baseDir, List<IcseDatasetParserWithCodeminingTool> parsers) {
 		try {
@@ -385,7 +395,8 @@ public class IcseDatasetParserWithCodeminingTool {
 			st.push(childNode);
 			while(!st.isEmpty()){
 				NodeForIcseData curr = st.pop();
-				if(curr.nodeTypeOriginal == Config.ASTTYPE_TAG.SIMPLE_NAME){
+				if(curr.nodeTypeOriginal == Config.ASTTYPE_TAG.SIMPLE_NAME || 
+						((curr.nodeTypeOriginal == Config.ASTTYPE_TAG.COMPLEX_NAME) && curr.children.size() == 0)){
 					String var = curr.text;
 					variables.add(var);
 				}

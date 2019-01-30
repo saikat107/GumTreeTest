@@ -23,6 +23,7 @@ import java.util.Stack;
 import com.github.gumtreediff.tree.ITree;
 import com.github.gumtreediff.tree.Tree;
 
+import edu.columbia.cs.dataset.IcseDatasetParserWithCodeminingTool;
 import edu.columbia.cs.dataset.NodeForIcseData;
 
 @SuppressWarnings("unchecked")
@@ -344,6 +345,7 @@ public class Util {
 		nodes.push(root);
 		while(!nodes.isEmpty()){
 			NodeForIcseData curr = nodes.pop();
+			
 			if(curr.nodeTypeOriginal == -1){
 				if(curr.parentNodeTypeOriginal == -1){
 					curr.nodeTypeOriginal = curr.parent.nodeTypeOriginal;
@@ -351,6 +353,10 @@ public class Util {
 				else{
 					curr.nodeTypeOriginal = 1000 + curr.parent.nodeTypeOriginal;
 				}
+			}
+			if(curr.nodeTypeOriginal == Config.ASTTYPE_TAG.COMPLEX_NAME) {
+				curr.text = getFullComplexName(curr);
+				curr.children = new ArrayList<>();
 			}
 			if(curr.children.size() > 0){ //Non-terminal Node
 				if(curr.text != ""){//text is not empty
@@ -384,11 +390,39 @@ public class Util {
 				}*/
 				else {
 					if(curr.text == "") {
+						IcseDatasetParserWithCodeminingTool.emptyNodeSet.add(curr.nodeTypeOriginal);
 						curr.text = "<EMPTY>";
 					}
 				}
 			}
 		}
+	}
+
+	private static String getFullComplexName(NodeForIcseData root) {
+		List<String> parts = new ArrayList<String>();
+		Stack<NodeForIcseData> st =  new Stack<NodeForIcseData>();
+		st.push(root);
+		while(!st.isEmpty()) {
+			NodeForIcseData curr = st.pop();
+			if(curr.children.size() == 0) {
+				parts.add(curr.text);
+			}
+			else {
+				for(NodeForIcseData child : curr.children) {
+					st.push(child);
+				}
+			}
+		}
+		String name = "";
+		int sz = parts.size();
+		for(int i = 0; i< sz; i++) {
+			if(i != 0) {
+				name += ".";
+			}
+			name += parts.get(i);
+		}
+		
+		return name;
 	}
 
 	/**
