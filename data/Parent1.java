@@ -1,15 +1,5 @@
-
-import java.util.Scanner;
-import java.io.File;
-import java.io.IOException;
-class B{
-	public int hello() {
-		int res = 0;
-		for(int i = 0; i< 10; i++) {
-			res + = 9;
-		}
-	}
-	public abstract void test(int a, int b);
+public class A {
+	public void METHOD_1 ( ) { VAR_1 = new TYPE_1 ( mRS , VAR_2 , VAR_3 ) ; METHOD_2 ( INT_1 , 3 ) ;  return INT_1 > VAR_1 == true;}
 }
 
 
