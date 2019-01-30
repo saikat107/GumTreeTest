@@ -5,7 +5,7 @@ package edu.virginia.cs.gumtreetest;
 //import java.util.List;
 
 public class Argument {
-	private String allPathsFile = "data/all_paths.txt";
+	private String allPathsFile = "data/paths.txt";
 	private String sFilePath = null;
 	private String dFilePath = null;
 	private String oPath = "data/out.txt";

@@ -23,6 +23,8 @@ import java.util.Stack;
 import com.github.gumtreediff.tree.ITree;
 import com.github.gumtreediff.tree.Tree;
 
+import edu.columbia.cs.dataset.NodeForIcseData;
+
 @SuppressWarnings("unchecked")
 public class Util {
 	
@@ -304,6 +306,84 @@ public class Util {
 			int cz = children.size();
 			for(int idx = cz-1;  idx >=0; idx --){
 				ITree child = children.get(idx);
+				nodes.push(child);
+				level.push(l+1);
+			}
+		}
+	}
+	
+	public static void dfsPrint(NodeForIcseData root){
+		StackTraceElement caller = Thread.currentThread().getStackTrace()[2];
+		System.out.print(caller + "\n");
+		if(root == null){
+			return;
+		}
+		Stack<NodeForIcseData> nodes = new Stack<>();
+		Stack<Integer> level = new Stack<>();
+		nodes.push(root);
+		level.push(0);
+		while(!nodes.isEmpty()){
+			NodeForIcseData curr = nodes.pop();
+			int l = level.pop();
+			for(int i = 0; i < l; i++){
+				System.out.print('\t');
+			}
+			System.out.println(curr.nodeTypeOriginal + " "  + curr.text);
+			List<NodeForIcseData> children = curr.children;
+			int cz = children.size();
+			for(int idx = 0;  idx < cz; idx ++){
+				NodeForIcseData child = children.get(idx);
+				nodes.push(child);
+				level.push(l+1);
+			}
+		}
+	}
+	
+	public static void fixBinaryAST(NodeForIcseData root){
+		//StackTraceElement caller = Thread.currentThread().getStackTrace()[2];
+		//System.out.print(caller + "\n");
+		if(root == null){
+			return;
+		}
+		Stack<NodeForIcseData> nodes = new Stack<>();
+		Stack<Integer> level = new Stack<>();
+		nodes.push(root);
+		level.push(0);
+		while(!nodes.isEmpty()){
+			NodeForIcseData curr = nodes.pop();
+			int l = level.pop();
+			//for(int i = 0; i < l; i++){
+			//	System.out.print('\t');
+			//}
+			//System.out.println(curr.nodeType + " " + curr.parentNodeTypeOriginal + " " + curr.text);
+			if(curr.nodeTypeOriginal == -1){
+				if(curr.parentNodeTypeOriginal == -1){
+					curr.nodeTypeOriginal = curr.parent.nodeTypeOriginal;
+				}
+				else{
+					curr.nodeTypeOriginal = 1000 + curr.parent.nodeTypeOriginal;
+				}
+			}
+			//else{
+			//	curr.nodeTypeModified = curr.nodeTypeOriginal;
+			//}
+			if(curr.children.size() > 0){ //Non-terminal Node
+				if(curr.text != ""){//text is not empty
+					NodeForIcseData newNode = new NodeForIcseData();
+					int type = Util.getNodeTypeFromLeftOver(curr.text.trim());
+					newNode.nodeTypeOriginal = type;
+					newNode.text = curr.text;
+					curr.text = "";
+					newNode.parentNodeTypeOriginal = curr.nodeTypeOriginal;
+					newNode.parentNode = curr.selfNode;
+					curr.children.add(newNode);
+				}
+			}
+			List<NodeForIcseData> children = curr.children;
+			int cz = children.size();
+			
+			for(int idx = 0;  idx < cz; idx ++){
+				NodeForIcseData child = children.get(idx);
 				nodes.push(child);
 				level.push(l+1);
 			}
@@ -638,6 +718,179 @@ public class Util {
 	 * @return
 	 */
 	public static int getNodeTypeFromLeftOver(ITree root, String leftOver) {
+		
+		if(leftOver.compareTo("+") == 0){
+			return 200;
+		}
+		else if(leftOver.compareTo("-") == 0){
+			return 201;
+		}
+		else if(leftOver.compareTo("*") == 0){
+			return 202;
+		}
+		else if(leftOver.compareTo("/") == 0){
+			return 203;
+		}
+		else if(leftOver.compareTo("=") == 0){
+			return 204;
+		}
+		else if(leftOver.compareTo("~") == 0){
+			return 205;
+		}
+		else if(leftOver.compareTo("`") == 0){
+			return 206;
+		}
+		else if(leftOver.compareTo("!") == 0){
+			return 207;
+		}
+		else if(leftOver.compareTo("@") == 0){
+			return 208;
+		}
+		else if(leftOver.compareTo("#") == 0){
+			return 209;
+		}
+		else if(leftOver.compareTo("$") == 0){
+			return 210;
+		}
+		else if(leftOver.compareTo("%") == 0){
+			return 211;
+		}
+		else if(leftOver.compareTo("^") == 0){
+			return 212;
+		}
+		else if(leftOver.compareTo("&") == 0){
+			return 213;
+		}
+		else if(leftOver.compareTo("(") == 0){
+			return 214;
+		}
+		else if(leftOver.compareTo(")") == 0){
+			return 215;
+		}
+		else if(leftOver.compareTo("()") == 0){
+			return 216;
+		}
+		else if(leftOver.compareTo("_") == 0){
+			return 217;
+		}
+		else if(leftOver.compareTo("{") == 0){
+			return 218;
+		}
+		else if(leftOver.compareTo("}") == 0){
+			return 219;
+		}
+		else if(leftOver.compareTo("{}") == 0){
+			return 220;
+		}
+		else if(leftOver.compareTo("{}") == 0){
+			return 220;
+		}
+		else if(leftOver.compareTo("[") == 0){
+			return 221;
+		}
+		else if(leftOver.compareTo("]") == 0){
+			return 222;
+		}
+		else if(leftOver.compareTo("[]") == 0){
+			return 223;
+		}
+		else if(leftOver.compareTo("|") == 0){
+			return 224;
+		}
+		else if(leftOver.compareTo("\\") == 0){
+			return 225;
+		}
+		else if(leftOver.compareTo(":") == 0){
+			return 226;
+		}
+		else if(leftOver.compareTo(";") == 0){
+			return 227;
+		}
+		else if(leftOver.compareTo("\'") == 0){
+			return 228;
+		}
+		else if(leftOver.compareTo("\"") == 0){
+			return 229;
+		}
+		else if(leftOver.compareTo("<") == 0){
+			return 230;
+		}
+		else if(leftOver.compareTo(">") == 0){
+			return 231;
+		}
+		else if(leftOver.compareTo("<>") == 0){
+			return 232;
+		}
+		else if(leftOver.compareTo("?") == 0){
+			return 233;
+		}
+		else if(leftOver.compareTo(",") == 0){
+			return 234;
+		}
+		else if(leftOver.compareTo(".") == 0){
+			return 235;
+		}
+		else if(leftOver.compareTo("==") == 0){
+			return 236;
+		}
+		else if(leftOver.compareTo("+=") == 0){
+			return 237;
+		}
+		else if(leftOver.compareTo("-=") == 0){
+			return 238;
+		}
+		else if(leftOver.compareTo("*=") == 0){
+			return 239;
+		}
+		else if(leftOver.compareTo("/=") == 0){
+			return 240;
+		}
+		else if(leftOver.compareTo("%=") == 0){
+			return 241;
+		}
+		else if(leftOver.compareTo("!=") == 0){
+			return 242;
+		}
+		else if(leftOver.compareTo("&=") == 0){
+			return 243;
+		}
+		else if(leftOver.compareTo("|=") == 0){
+			return 244;
+		}
+		else if(leftOver.compareTo("^=") == 0){
+			return 245;
+		}
+		else if(leftOver.compareTo("~=") == 0){
+			return 246;
+		}
+		else if(leftOver.compareTo("++") == 0){
+			return 247;
+		}
+		else if(leftOver.compareTo("--") == 0){
+			return 248;
+		}
+		else if(leftOver.compareTo("&&") == 0){
+			return 249;
+		}
+		else if(leftOver.compareTo("||") == 0){
+			return 250;
+		}
+		else if(leftOver.compareTo(">=") == 0){
+			return 251;
+		}
+		else if(leftOver.compareTo("<=") == 0){
+			return 252;
+		}
+		else if(Config.JavaKeywords.isKeyWord(leftOver)){
+			return Config.JavaKeywords.getKeyWordType(leftOver);
+		}
+		else{
+			//Util.log(leftOver);
+			return Config.ASTTYPE_TAG.REST_OF_LEFTOVER;
+		}
+	}
+	
+public static int getNodeTypeFromLeftOver(String leftOver) {
 		
 		if(leftOver.compareTo("+") == 0){
 			return 200;
