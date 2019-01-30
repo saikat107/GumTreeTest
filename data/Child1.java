@@ -5,7 +5,6 @@ class B{
 			res + = 9;
 		}
 		String s = "ggf";
-		Class p = B class;
 		return res;
 	}
 }

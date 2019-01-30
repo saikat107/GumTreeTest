@@ -366,9 +366,27 @@ public class Util {
 			}
 			List<NodeForIcseData> children = curr.children;
 			int cz = children.size();
-			for(int idx = 0 ;  idx < cz; idx ++){
-				NodeForIcseData child = children.get(idx);
-				nodes.push(child);
+			if(cz > 0) {
+				for(int idx = 0 ;  idx < cz; idx ++){
+					NodeForIcseData child = children.get(idx);
+					nodes.push(child);
+				}
+			}
+			else {
+				if(curr.nodeTypeOriginal == 76) {
+					curr.text = "?";
+				}
+				/*if(curr.nodeTypeOriginal == Config.ASTTYPE_TAG.STRING_CONSTANT) {
+					curr.text = "STRING";
+				}
+				else if(curr.nodeTypeOriginal == Config.ASTTYPE_TAG.NUMBER_CONSTANT) {
+					curr.text = "NUMBER";
+				}*/
+				else {
+					if(curr.text == "") {
+						curr.text = "<EMPTY>";
+					}
+				}
 			}
 		}
 	}
