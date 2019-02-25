@@ -494,7 +494,7 @@ public class DiffParser {
 	}
 
 	
-	private static List<NodePair> getMethodPairs(ITree srcTree, ITree destTree, String srcText, String destText) {
+	public static List<NodePair> getMethodPairs(ITree srcTree, ITree destTree, String srcText, String destText) {
 		Matcher m = Matchers.getInstance().getMatcher(srcTree, destTree);
 		m.match();
 		MappingStore store = m.getMappings();

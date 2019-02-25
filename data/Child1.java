@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 class B{
 	
-	public int a = 0, b = 9;
+	public int a = 9, b = 9;
 	private static double d = 0.4;
 	boolean p = true;
 	
@@ -51,7 +51,7 @@ class B{
 			try{
 				args = new String[4];
 				do{
-					i++;
+					i--;
 				}while(n < 100);
 			}catch(Exception ex){
 				args = null;
