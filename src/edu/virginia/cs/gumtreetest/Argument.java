@@ -18,6 +18,8 @@ public class Argument {
 	private boolean exclStringChg = false;
 	private boolean astOnly = false;
 	
+	private int maxMethodSize = 50;
+	
 	public String allPathsFile(){
 		return this.allPathsFile;
 	}
@@ -56,6 +58,10 @@ public class Argument {
 	
 	public boolean astOnly(){
 		return this.astOnly;
+	}
+	
+	public int maximumMethodSize() {
+		return maxMethodSize; 
 	}
 	
 	public String toString(){
@@ -123,6 +129,9 @@ public class Argument {
 			case "-mo":
 				arg.onlyMethod = true;
 				break;
+				
+			case "-mms":
+				arg.maxMethodSize = Integer.parseInt(args[i+1]);
 			default:
 				System.out.println("Invalid Command Line Argument : " + command);
 				System.exit(-1);			

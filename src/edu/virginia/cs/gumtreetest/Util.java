@@ -302,7 +302,7 @@ public class Util {
 			for(int i = 0; i < l; i++){
 				System.out.print('\t');
 			}
-			System.out.println(curr.getLabel() + " " + curr.getType());
+			System.out.println(curr.getType() + " " + curr.getLabel());
 			List<ITree> children = curr.getChildren();
 			int cz = children.size();
 			for(int idx = cz-1;  idx >=0; idx --){

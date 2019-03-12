@@ -111,4 +111,9 @@ public class VariableVisitor {
 		return null;
 	}
 
+	public static void extendSymbolTable(Map<String, String> sTable, ITree destTree) {
+		
+		
+	}
+
 }

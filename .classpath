@@ -82,5 +82,9 @@
 	<classpathentry kind="lib" path="lib/lib/websocket-common-9.4.4.v20170414.jar"/>
 	<classpathentry kind="lib" path="lib/lib/websocket-server-9.4.4.v20170414.jar"/>
 	<classpathentry kind="lib" path="lib/lib/websocket-servlet-9.4.4.v20170414.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/codemining-core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/codemining-sequencelm"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/codemining-treelm"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/codemining-utils"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
