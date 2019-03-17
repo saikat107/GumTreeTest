@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import com.github.gumtreediff.gen.jdt.JdtTreeGenerator;
 import com.github.gumtreediff.tree.ITree;
@@ -45,10 +47,14 @@ public class CoditJavaParser {
 		int totalFileCount = 0;
 		int totalMethodCount = 0;
 		Scanner allFilePathsScanner = new Scanner(new File(arg.allPathsFile()));
-		
+		Set<String> fileSet = new HashSet<String>();
 		while (allFilePathsScanner.hasNextLine()) {
-			try {
 				String filePath = allFilePathsScanner.nextLine().trim();
+				fileSet.add(filePath);		
+		}
+		allFilePathsScanner.close();
+		Util.logln("Total file count : " + fileSet.size());
+		for(String filePath:fileSet) {
 				try {
 					String parentFile = filePath;
 					String childFile = filePath.replace("/parent/", "/child/");
@@ -82,10 +88,8 @@ public class CoditJavaParser {
 					}
 				} catch (Exception localException) {
 				}
-			} catch (Exception localException1) {
-			}
 		}
-		allFilePathsScanner.close();
+		
 	}
 
 }
