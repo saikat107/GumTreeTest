@@ -1222,8 +1222,8 @@ public class DiffParser {
 					String parentFile = null;
 					if (filePath.contains("\t")) {
 						String[] parts = filePath.split("\t");
-						parentFile = parts[1];
-						childFile = parts[2];
+						parentFile = parts[0];
+						childFile = parts[1];
 					}
 					else {
 						parentFile = filePath;

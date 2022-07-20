@@ -3,7 +3,6 @@ package edu.columbia.cs.dataset;
 import com.github.gumtreediff.actions.ActionGenerator;
 import com.github.gumtreediff.actions.model.Action;
 import com.github.gumtreediff.client.Run;
-import com.github.gumtreediff.gen.c.CTreeGenerator;
 import com.github.gumtreediff.gen.jdt.JdtTreeGenerator;
 import com.github.gumtreediff.matchers.MappingStore;
 import com.github.gumtreediff.matchers.Matcher;
@@ -15,7 +14,6 @@ import edu.virginia.cs.gumtreetest.Argument;
 import edu.virginia.cs.gumtreetest.Config;
 import edu.virginia.cs.gumtreetest.TreeUtil;
 import edu.virginia.cs.gumtreetest.Util;
-import edu.virginia.cs.gumtreetest.visitors.DataTypeVisitor;
 import edu.virginia.cs.gumtreetest.visitors.VariableVisitor;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,23 +25,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 
-import javax.naming.ldap.Rdn;
-
-import org.hamcrest.core.IsInstanceOf;
 
 public class IcseDatasetParser {
 	private static Argument arg;
 	private int nonLeafIdx = 200;
 	private int currentIdx = 0;
 	private String srcPath;
-	private String destPath;
 	private String srcFileText;
 	private String destFileText;
 	private String allowedTokensString = "";
@@ -67,7 +60,6 @@ public class IcseDatasetParser {
 	public IcseDatasetParser(String srcPath, String destPath, String srcText, String destText) throws IOException {
 		Run.initGenerators();
 		this.srcPath = srcPath;
-		this.destPath = destPath;
 		this.currentIdx = 0;
 		this.nonLeafIdx = 200;
 		this.srcFileText = srcText;
@@ -203,7 +195,7 @@ public class IcseDatasetParser {
 		TreeUtil.fixAST(this.cParentDest, this.destFileText, arg.astOnly());
 		TreeUtil.removeEmptyNode(this.cParentOrg);
 		TreeUtil.removeEmptyNode(this.cParentDest);
-		List<String> allVariablesInMethod = new ArrayList<String>(Util.extractAllVariablesInScope(this.cParentSrc));
+		List<String> allVariablesInMethod = new ArrayList<String>(Util.extractAllVariablesInScope(srcTree));
 		for (String token : allVariablesInMethod) {
 			this.allowedTokensString = (this.allowedTokensString + token + " ");
 		}
@@ -450,10 +442,6 @@ public class IcseDatasetParser {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
-		
-		DateFormat stfmt = new SimpleDateFormat("MM/dd/yy hh:mm:ss");
-		Date start = new Date();
-		String startTime = stfmt.format(start);
 		arg = Argument.preprocessArgument(args);
 		Util.logln(arg);
 		File outputFile = new File(arg.outputFilePath());
@@ -464,29 +452,22 @@ public class IcseDatasetParser {
 
 		DateFormat fmt = new SimpleDateFormat("HH-mm-ss");
 		Date d = new Date();
-		//PrintStream debugStream = new PrintStream(new File("debug-" + arg.maxChangeSize() + "-" + arg.maxTreeSize()
-		//		+ "-" + arg.replace() + "-" + arg.astOnly() + "-" + fmt.format(d) + ".txt"));
 		Util.logln(fmt.format(d));
 		String allFileDirectory = arg.outputFilePath();
-		//+ "/all";
 		File allFile = new File(allFileDirectory);
 		if (!allFile.exists()) {
 			allFile.mkdirs();
 		}
 		int totalFileCount = 0;
 		Scanner allFilePathsScanner = new Scanner(new File(arg.allPathsFile()));
-		Map<String, List<IcseDatasetParser>> allParsedResults = new HashMap<String, List<IcseDatasetParser>>();
 		while (allFilePathsScanner.hasNextLine()) {
 			try {
-				//Scanner filePathScanner = new Scanner(new File(filePath));
 				List<IcseDatasetParser> parserList = new ArrayList<IcseDatasetParser>();
-				//while (filePathScanner.hasNextLine()) {
 				try {
 					String bothPath = allFilePathsScanner.nextLine().trim();
 					String[] filePathParts = bothPath.split("\t");
 					String parentFile = filePathParts[0];
 					String childFile = filePathParts[1];
-					//Util.logln(parentFile + " " + childFile);
 					String srcText = Util.readFile(parentFile);
 					String destText = Util.readFile(childFile);
 					srcText = srcText.replaceAll(" class", " . class");
@@ -503,44 +484,31 @@ public class IcseDatasetParser {
 							destText = destText.replaceAll(rFStre, punc);
 						}
 					}
-					//Util.logln(srcText);
 					TreeContext srcContext = new JdtTreeGenerator().generateFromString(srcText);
 					TreeContext destContext = new JdtTreeGenerator().generateFromString(destText);
 					ITree srcTree = srcContext.getRoot();
 					ITree destTree = destContext.getRoot();
-					//Util.dfsPrint(srcTree);
-					//Util.dfsPrint(destTree);
+
 					List<NodePair> methodPairs = getMethodPairs(srcTree, destTree, srcText, destText);
 					for (NodePair pair : methodPairs) {
 						IcseDatasetParser parser = new IcseDatasetParser(parentFile, childFile, srcText, destText);
-						boolean original = true;//!arg.replace();
+						boolean original = false;
 						boolean successfullyParsed = parser.checkSuccessFullParse(pair.srcNode, pair.tgtNode,
 								original, arg.excludeStringChange(), arg.replace());
 						if (successfullyParsed) {
-							//Date current = new Date();
-							//String cTime = stfmt.format(current);
 							Util.logln(totalFileCount);
 							printDataToDirectory(allFileDirectory, Arrays.asList(new IcseDatasetParser[] { parser }));
-							//Util.logln(parser.parentCodeString);
 							Util.logln(parser.childCodeString);
 							totalFileCount++;
 							parserList.add(parser);
 						}
-						/*else {
-							System.out.println("git diff " + parentFile + " " + childFile);
-						}*/
 					}
 				} catch (Exception localException) {
 				}
-				
-				//Util.logln(filePath);
-				//printTrainAndTestData(parserList);
-				//allParsedResults.put(filePath, parserList);
 			} catch (Exception localException1) {
 			}
 		}
 		allFilePathsScanner.close();
-		//debugStream.close();
 	}
 
 	private static List<NodePair> getMethodPairs(ITree srcTree, ITree destTree, String srcText, String destText) {
@@ -578,25 +546,6 @@ public class IcseDatasetParser {
 				} else {
 					testParsers.add(parsers.get(i));
 				}
-			}
-		}
-		printDataToDirectory(trainDirectory, trainParsers);
-		printDataToDirectory(testDirectory, testParsers);
-	}
-
-	private static void printTrainAndTestData(List<IcseDatasetParser> parsers) {
-		String trainDirectory = arg.outputFilePath() + "/train";
-		String testDirectory = arg.outputFilePath() + "/test";
-		List<IcseDatasetParser> trainParsers = new ArrayList<IcseDatasetParser>();
-		List<IcseDatasetParser> testParsers = new ArrayList<IcseDatasetParser>();
-		int totalNumber = parsers.size();
-		int testNumber = (int) Math.ceil(totalNumber * testPercentage);
-		int trainNumber = totalNumber - testNumber;
-		for (int i = 0; i < totalNumber; i++) {
-			if (i < trainNumber) {
-				trainParsers.add((IcseDatasetParser) parsers.get(i));
-			} else {
-				testParsers.add((IcseDatasetParser) parsers.get(i));
 			}
 		}
 		printDataToDirectory(trainDirectory, trainParsers);
@@ -685,8 +634,6 @@ public class IcseDatasetParser {
 		return true;
 	}
 
-	
-
 	private static void closeAllPrintStreams(PrintStream parentCode, PrintStream parentTree, PrintStream childCode,
 			PrintStream childTree, PrintStream parentOrgTree, PrintStream parentTypeCode, PrintStream childTypeCode,
 			PrintStream parentTypeTree, PrintStream childTypeTree, PrintStream alloedTokens) {
@@ -715,34 +662,6 @@ public class IcseDatasetParser {
 		parentTypeTree.flush();
 		childTypeTree.flush();
 		alloedTokens.flush();
-	}
-
-	private String getParentOriginalTypeTreeString() {
-		if (!this.alreadyParsed) {
-			return null;
-		}
-		return Util.getDestTypeTree(this.cParentOrg);
-	}
-
-	private String getChildTypeTreeString() {
-		if (!this.alreadyParsed) {
-			return null;
-		}
-		return Util.getDestTypeTree(this.cParentDest);
-	}
-
-	private String getChildTypeCodeString() {
-		if (!this.alreadyParsed) {
-			return null;
-		}
-		return Util.getTypedCodeRecusrsive(this.cParentDest);
-	}
-
-	private String getParentTypeCodeString() {
-		if (!this.alreadyParsed) {
-			return null;
-		}
-		return Util.getTypedCodeRecusrsive(this.cParentSrc);
 	}
 
 	private String getChildTreeString(boolean replace) {

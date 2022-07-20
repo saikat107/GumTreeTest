@@ -8,9 +8,9 @@ public class Argument {
 	private String allPathsFile = "data/all.txt";
 	private String sFilePath = null;
 	private String dFilePath = null;
-	private String oPath = "data/out_data";
-	private int mChangeSize = 100;
-	private int mTreeSize = 250;
+	private String oPath = "data/demo_data";
+	private int mChangeSize = 5;
+	private int mTreeSize = 10;
 	private int defaultMc = 100;
 	private int defaultMt = 250;
 	private boolean r = false;
