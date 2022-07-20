@@ -80,6 +80,7 @@ public class GeneratedPatchEntry{
 			}
 			skipLine(patchScanner, 3);
 			example.generateChildFilePath();
+			
 			patches.add(example);
 		}
 		patchScanner.close();
@@ -97,9 +98,7 @@ public class GeneratedPatchEntry{
 		String outputPath = args[1];
 		PrintWriter out = new PrintWriter(new File(outputPath));
 		List<GeneratedPatchEntry> patches = parsePatchResults(parseFilePath, 200);
-		int i = 0;
 		for (GeneratedPatchEntry en : patches){
-			//if(en.verdict != 1) continue;
 			String childFilePath = en.childFilePath;
 			String chidlTreeStr = en.childTreeStr;
 			chidlTreeStr = TreeUtil.reFormatTreeStr(chidlTreeStr);
@@ -109,18 +108,16 @@ public class GeneratedPatchEntry{
 							childFilePath, chidlTreeStr, patchCodes);
 			String originalFileText = Util.readFile(en.javaChildFilePath);
 			String output = en.project + "\t" + en.bugId ;
-			int k = 0;
 			Util.logln(en.project + " " + en.bugId);
 			for(String newCode: modifiedCodes) {
-				k++;
 				boolean successfullyWritten = Util.writeFile(en.javaChildFilePath, newCode);
-				String status = Util.executeProgram(en.project, en.bugId, en.checkedOutProjectDirectory);
+				String status = Util.executeProgram(
+						en.project, en.bugId, en.checkedOutProjectDirectory);
 				output += ("\t" + status);
 				System.out.print(status + " ");
 			}
 			output += "\n";
 			Util.writeFile(en.javaChildFilePath, originalFileText);
-			i++;
 			Util.logln("\n" + output);
 			out.println(output);
 		}
@@ -129,8 +126,6 @@ public class GeneratedPatchEntry{
 		Process p1 = Runtime.getRuntime().exec(command);*/
 		
 		//String command = "/home/sc2nf/defects4j/framework/bin/defects4j compile -w /home/sc2nf/Desktop/Math1f";
-		//System.out.println(Util.getCommandExecutionResult(command));
-		
-				
+		//System.out.println(Util.getCommandExecutionResult(command));			
 	}
 }

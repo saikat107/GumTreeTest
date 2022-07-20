@@ -5,20 +5,30 @@ package edu.virginia.cs.gumtreetest;
 //import java.util.List;
 
 public class Argument {
-	private String allPathsFile = "data/paths.txt";
+	private String allPathsFile = "data/all.txt";
 	private String sFilePath = null;
 	private String dFilePath = null;
-	private String oPath = "data/out.txt";
-	private int mChangeSize = 10000;
-	private int mTreeSize = 20000;
-	private int defaultMc = 20;
-	private int defaultMt = 50;
+	private String oPath = "data/out_data";
+	private int mChangeSize = 100;
+	private int mTreeSize = 250;
+	private int defaultMc = 100;
+	private int defaultMt = 250;
 	private boolean r = false;
 	private boolean onlyMethod = false;
 	private boolean exclStringChg = false;
 	private boolean astOnly = false;
+	private String buggyCommitFile = null;
+	private String exceptionFile = "exceptions.txt";
 	
 	private int maxMethodSize = 50;
+	
+	public String getCommitFile() {
+		return this.buggyCommitFile;
+	}
+	
+	public String getExceptionFile() {
+		return exceptionFile;
+	}
 	
 	public String allPathsFile(){
 		return this.allPathsFile;
@@ -132,10 +142,20 @@ public class Argument {
 				
 			case "-mms":
 				arg.maxMethodSize = Integer.parseInt(args[i+1]);
+				break;
+			case "--commit_file":
+			case "-cf":
+				arg.buggyCommitFile = args[i+1];
+				i++;
+				break;
+			case "--exception_file":
+			case "-ex":
+				arg.exceptionFile = args[i+1];
+				i++;
+				break;
 			default:
 				System.out.println("Invalid Command Line Argument : " + command);
 				System.exit(-1);			
-
 			}
 		}
 		if(arg.mChangeSize == -1){

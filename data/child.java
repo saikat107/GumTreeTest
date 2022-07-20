@@ -30,9 +30,13 @@ public class DetectMotionExample extends JFrame implements Runnable {
 	private int threshold = WebcamMotionDetector.DEFAULT_THREASHOLD;
 	private int inertia = 1000; // how long motion is valid
 
+	
 	public DetectMotionExample() {
 
 		try {
+			/**
+			 * This is a javadoc
+			 */
 			motion = new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/me-gusta.png")));
 			nothing = new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/forever-alone.png")));
 		} catch (IOException e) {
@@ -53,13 +57,21 @@ public class DetectMotionExample extends JFrame implements Runnable {
 
 		WebcamPanel panel = new WebcamPanel(webcam);
 
-		add(panel);
+		add(label);
+		/* How is the effect of this comment*/
+		
 		add(label);
 
 		pack();
 		setVisible(true);
 	}
 
+	
+	/**
+	 * 
+	 * @param args Named
+	 * @throws InterruptedException
+	 */
 	public static void main(String[] args) throws InterruptedException {
 		new DetectMotionExample();
 	}
@@ -68,10 +80,10 @@ public class DetectMotionExample extends JFrame implements Runnable {
 	public void run() {
 
 		WebcamMotionDetector detector = new WebcamMotionDetector(webcam, threshold, inertia);
-		detector.setInterval(INTERVAL);
+		detector.setCheckInterval(INTERVAL);
 		detector.start();
 
-		while (true) {
+		while (false) {
 
 			Icon icon = label.getIcon();
 			if (detector.isMotion()) {

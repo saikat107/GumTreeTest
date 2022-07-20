@@ -25,11 +25,11 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 
 import com.github.gumtreediff.tree.ITree;
 
-import codemining.ast.AstNodeSymbol;
-import codemining.ast.TreeNode;
-import codemining.ast.java.AbstractJavaTreeExtractor;
-import codemining.ast.java.BinaryJavaAstTreeExtractor;
-import codemining.ast.java.JavaAstTreeExtractor;
+//import codemining.ast.AstNodeSymbol;
+//import codemining.ast.TreeNode;
+//import codemining.ast.java.AbstractJavaTreeExtractor;
+//import codemining.ast.java.BinaryJavaAstTreeExtractor;
+//import codemining.ast.java.JavaAstTreeExtractor;
 import edu.virginia.cs.gumtreetest.Argument;
 import edu.virginia.cs.gumtreetest.Config;
 import edu.virginia.cs.gumtreetest.DiffParser;
@@ -88,85 +88,86 @@ public class IcseDatasetParserWithCodeminingTool {
 	}
 	
 	private NodeForIcseData processFileExtractTree(String filePath, String documentText) {
-		ASTParser parser = ASTParser.newParser(AST.JLS8);
-		Map<String, String> options = JavaCore.getOptions();
-		options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_8);
-		parser.setCompilerOptions(options);
-		parser.setKind(ASTParser.K_COMPILATION_UNIT);
-		parser.setSource(documentText.toCharArray());
-		parser.setResolveBindings(true);
-		parser.setBindingsRecovery(true);
-		String[] sources = { "" };
-		String[] classpath = { System.getProperty("java.home") + "/lib/rt.jar" };
-		parser.setUnitName(filePath);
-		parser.setEnvironment(classpath, sources, new String[] { "UTF-8" }, true);
-		CompilationUnit cu = (CompilationUnit) parser.createAST(null);
-		ASTNode root = cu.getRoot();
-		JavaAstTreeExtractor extractorBase = new JavaAstTreeExtractor();
-		BinaryJavaAstTreeExtractor extractorBinary = new BinaryJavaAstTreeExtractor(extractorBase);
-		AbstractJavaTreeExtractor ext = extractorBinary;
-		TreeNode<Integer> finalTree = ext.getTree(root);
-		NodeForIcseData rootNode = new NodeForIcseData();
-		rootNode.parentNodeTypeOriginal = -9999999;
-		Stack<NodeForIcseData> myStack = new Stack<NodeForIcseData>();
-		myStack.push(rootNode);
-		Stack<TreeNode<Integer>> nodes = new Stack<>();
-		nodes.push(finalTree);
-		while(!nodes.isEmpty()){
-			TreeNode<Integer> curr = nodes.pop();
-			int nt = curr.getData();
-			AstNodeSymbol sym = ext.getSymbol(nt);
-			String value = "";
-			for(String proName : sym.getSimpleProperties()){
-				if (proName == "booleanValue" || !(sym.getSimpleProperty(proName) instanceof Boolean)){
-					value += sym.getSimpleProperty(proName);
-				}
-			}
-			NodeForIcseData currNode = myStack.pop();
-			currNode.nodeTypeOriginal = sym.nodeType;
-			currNode.selfNode = curr;
-			currNode.text = value;
-			List<List<TreeNode<Integer>>> children =  curr.getChildrenByProperty();
-			int sz = children.size();
-			currNode.children = new ArrayList<NodeForIcseData>();
-			for(int cid = sz -1; cid >= 0; cid--){
-				List<TreeNode<Integer>> ch  = children.get(cid);
-				int cz = ch.size();
-				for(int idx = cz -1;  idx >= 0; idx--){
-					TreeNode<Integer> child = ch.get(idx);
-					nodes.push(child);
-					NodeForIcseData childNode = new NodeForIcseData();
-					childNode.parentNodeTypeOriginal = sym.nodeType;
-					childNode.parentNode = curr;
-					childNode.parent = currNode;
-					currNode.children.add(childNode);
-					myStack.push(childNode);
-				}
-			}
-		}
-		//Util.dfsPrint(rootNode);
-		Util.fixBinaryAST(rootNode);
-		NodeForIcseData retNode = rootNode.children.get(0).children.get(0);
-		int type = retNode.nodeTypeOriginal;
-		if(type != 31) {
-			everythingFine = false;
-			//Util.dfsPrint(rootNode);
-		}
+//		ASTParser parser = ASTParser.newParser(AST.JLS8);
+//		Map<String, String> options = JavaCore.getOptions();
+//		options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_8);
+//		parser.setCompilerOptions(options);
+//		parser.setKind(ASTParser.K_COMPILATION_UNIT);
+//		parser.setSource(documentText.toCharArray());
+//		parser.setResolveBindings(true);
+//		parser.setBindingsRecovery(true);
+//		String[] sources = { "" };
+//		String[] classpath = { System.getProperty("java.home") + "/lib/rt.jar" };
+//		parser.setUnitName(filePath);
+//		parser.setEnvironment(classpath, sources, new String[] { "UTF-8" }, true);
+//		CompilationUnit cu = (CompilationUnit) parser.createAST(null);
+//		ASTNode root = cu.getRoot();
+//		JavaAstTreeExtractor extractorBase = new JavaAstTreeExtractor();
+//		BinaryJavaAstTreeExtractor extractorBinary = new BinaryJavaAstTreeExtractor(extractorBase);
+//		AbstractJavaTreeExtractor ext = extractorBinary;
+//		TreeNode<Integer> finalTree = ext.getTree(root);
+//		NodeForIcseData rootNode = new NodeForIcseData();
+//		rootNode.parentNodeTypeOriginal = -9999999;
+//		Stack<NodeForIcseData> myStack = new Stack<NodeForIcseData>();
+//		myStack.push(rootNode);
+//		Stack<TreeNode<Integer>> nodes = new Stack<>();
+//		nodes.push(finalTree);
+//		while(!nodes.isEmpty()){
+//			TreeNode<Integer> curr = nodes.pop();
+//			int nt = curr.getData();
+//			AstNodeSymbol sym = ext.getSymbol(nt);
+//			String value = "";
+//			for(String proName : sym.getSimpleProperties()){
+//				if (proName == "booleanValue" || !(sym.getSimpleProperty(proName) instanceof Boolean)){
+//					value += sym.getSimpleProperty(proName);
+//				}
+//			}
+//			NodeForIcseData currNode = myStack.pop();
+//			currNode.nodeTypeOriginal = sym.nodeType;
+//			currNode.selfNode = curr;
+//			currNode.text = value;
+//			List<List<TreeNode<Integer>>> children =  curr.getChildrenByProperty();
+//			int sz = children.size();
+//			currNode.children = new ArrayList<NodeForIcseData>();
+//			for(int cid = sz -1; cid >= 0; cid--){
+//				List<TreeNode<Integer>> ch  = children.get(cid);
+//				int cz = ch.size();
+//				for(int idx = cz -1;  idx >= 0; idx--){
+//					TreeNode<Integer> child = ch.get(idx);
+//					nodes.push(child);
+//					NodeForIcseData childNode = new NodeForIcseData();
+//					childNode.parentNodeTypeOriginal = sym.nodeType;
+//					childNode.parentNode = curr;
+//					childNode.parent = currNode;
+//					currNode.children.add(childNode);
+//					myStack.push(childNode);
+//				}
+//			}
+//		}
+//		//Util.dfsPrint(rootNode);
+//		Util.fixBinaryAST(rootNode);
+//		NodeForIcseData retNode = rootNode.children.get(0).children.get(0);
+//		int type = retNode.nodeTypeOriginal;
+//		if(type != 31) {
+//			everythingFine = false;
+//			//Util.dfsPrint(rootNode);
+//		}
 		//Util.dfsPrint(retNode);
-		return retNode;
+//		return retNode;
+		return null;
 	}
 	
 	private void setIndices(NodeForIcseData root) {
-		if (root.children.size() == 0) {
-			root.id = this.currentIdx;
-			this.currentIdx += 1;
-		} else {
-			root.id = this.nonLeafIdx;
-			this.nonLeafIdx += 1;
-			for (NodeForIcseData child : root.children) {
-				setIndices(child);
-			}
-		}
+//		if (root.children.size() == 0) {
+//			root.id = this.currentIdx;
+//			this.currentIdx += 1;
+//		} else {
+//			root.id = this.nonLeafIdx;
+//			this.nonLeafIdx += 1;
+//			for (NodeForIcseData child : root.children) {
+//				setIndices(child);
+//			}
+//		}
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {
@@ -390,20 +391,20 @@ public class IcseDatasetParserWithCodeminingTool {
 	
 	public Set<String> extractAllVariablesInScope() {
 		Set<String> variables = new HashSet<String>();
-			Stack<NodeForIcseData> st = new Stack<NodeForIcseData>();
-			st.push(parentNode);
-			st.push(childNode);
-			while(!st.isEmpty()){
-				NodeForIcseData curr = st.pop();
-				if(curr.nodeTypeOriginal == Config.ASTTYPE_TAG.SIMPLE_NAME || 
-						((curr.nodeTypeOriginal == Config.ASTTYPE_TAG.COMPLEX_NAME) && curr.children.size() == 0)){
-					String var = curr.text;
-					variables.add(var);
-				}
-				for(NodeForIcseData child : curr.children){
-					st.push(child);
-				}
-			}
+//			Stack<NodeForIcseData> st = new Stack<NodeForIcseData>();
+//			st.push(parentNode);
+//			st.push(childNode);
+//			while(!st.isEmpty()){
+//				NodeForIcseData curr = st.pop();
+//				if(curr.nodeTypeOriginal == Config.ASTTYPE_TAG.SIMPLE_NAME || 
+//						((curr.nodeTypeOriginal == Config.ASTTYPE_TAG.COMPLEX_NAME) && curr.children.size() == 0)){
+//					String var = curr.text;
+//					variables.add(var);
+//				}
+//				for(NodeForIcseData child : curr.children){
+//					st.push(child);
+//				}
+//			}
 		
 		return variables;
 	}

@@ -53,14 +53,20 @@ public class DetectMotionExample extends JFrame implements Runnable {
 
 		WebcamPanel panel = new WebcamPanel(webcam);
 
-		add(panel);
+		add(label);
 		add(label);
 
 		pack();
 		setVisible(true);
 	}
 
+	/**
+	 * 
+	 * @param args
+	 * @throws InterruptedException
+	 */
 	public static void main(String[] args) throws InterruptedException {
+		String p = "Hello \n world \t this is okay \r\n\t how you doing";
 		new DetectMotionExample();
 	}
 

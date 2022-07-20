@@ -58,12 +58,14 @@ public class Util {
 		if(!successfullyCompiled) {
 			return "FAIL:C";
 		}
-		String testPass = "";
-		try {
-			testPass = TCRunUtil.checkTriggerTestCasePassing(project, bugId, projectPath);
-		} catch (IOException e) {
-			return "FAIL:E"; 
-		}
+		String testPass = "FAIL";
+		// try {
+			if(TCRunUtil.checkAllTestCasePassing(projectPath)) {
+				testPass = "PASS";
+			}
+		//} catch (IOException e) {
+		//	return "FAIL:E"; 
+		//}
 		/*if(testPass) {
 			return "PASS";
 		}
@@ -329,100 +331,101 @@ public class Util {
 			for(int i = 0; i < l; i++){
 				System.out.print('\t');
 			}
-			System.out.println(curr.nodeTypeOriginal + " "  + curr.text);
-			List<NodeForIcseData> children = curr.children;
-			int cz = children.size();
-			for(int idx = 0;  idx < cz; idx ++){
-				NodeForIcseData child = children.get(idx);
-				nodes.push(child);
-				level.push(l+1);
-			}
+//			System.out.println(curr.nodeTypeOriginal + " "  + curr.text);
+//			List<NodeForIcseData> children = curr.children;
+//			int cz = children.size();
+//			for(int idx = 0;  idx < cz; idx ++){
+//				NodeForIcseData child = children.get(idx);
+//				nodes.push(child);
+//				level.push(l+1);
+//			}
 		}
 	}
 	
 	public static void fixBinaryAST(NodeForIcseData root){
-		Stack<NodeForIcseData> nodes = new Stack<>();
-		nodes.push(root);
-		while(!nodes.isEmpty()){
-			NodeForIcseData curr = nodes.pop();
-			
-			if(curr.nodeTypeOriginal == -1){
-				if(curr.parentNodeTypeOriginal == -1){
-					curr.nodeTypeOriginal = curr.parent.nodeTypeOriginal;
-				}
-				else{
-					curr.nodeTypeOriginal = 1000 + curr.parent.nodeTypeOriginal;
-				}
-			}
-			if(curr.nodeTypeOriginal == Config.ASTTYPE_TAG.COMPLEX_NAME) {
-				curr.text = getFullComplexName(curr);
-				curr.children = new ArrayList<>();
-			}
-			if(curr.children.size() > 0){ //Non-terminal Node
-				if(curr.text != ""){//text is not empty
-					NodeForIcseData newNode = new NodeForIcseData();
-					int type = Util.getNodeTypeFromLeftOver(curr.text.trim());
-					newNode.nodeTypeOriginal = type;
-					newNode.text = curr.text;
-					curr.text = "";
-					newNode.parentNodeTypeOriginal = curr.nodeTypeOriginal;
-					newNode.parentNode = curr.selfNode;
-					curr.children.add(newNode);
-				}
-			}
-			List<NodeForIcseData> children = curr.children;
-			int cz = children.size();
-			if(cz > 0) {
-				for(int idx = 0 ;  idx < cz; idx ++){
-					NodeForIcseData child = children.get(idx);
-					nodes.push(child);
-				}
-			}
-			else {
-				if(curr.nodeTypeOriginal == 76) {
-					curr.text = "?";
-				}
-				/*if(curr.nodeTypeOriginal == Config.ASTTYPE_TAG.STRING_CONSTANT) {
-					curr.text = "STRING";
-				}
-				else if(curr.nodeTypeOriginal == Config.ASTTYPE_TAG.NUMBER_CONSTANT) {
-					curr.text = "NUMBER";
-				}*/
-				else {
-					if(curr.text == "") {
-						IcseDatasetParserWithCodeminingTool.emptyNodeSet.add(curr.nodeTypeOriginal);
-						curr.text = "<EMPTY>";
-					}
-				}
-			}
-		}
+//		Stack<NodeForIcseData> nodes = new Stack<>();
+//		nodes.push(root);
+//		while(!nodes.isEmpty()){
+//			NodeForIcseData curr = nodes.pop();
+//			
+//			if(curr.nodeTypeOriginal == -1){
+//				if(curr.parentNodeTypeOriginal == -1){
+//					curr.nodeTypeOriginal = curr.parent.nodeTypeOriginal;
+//				}
+//				else{
+//					curr.nodeTypeOriginal = 1000 + curr.parent.nodeTypeOriginal;
+//				}
+//			}
+//			if(curr.nodeTypeOriginal == Config.ASTTYPE_TAG.COMPLEX_NAME) {
+//				curr.text = getFullComplexName(curr);
+//				curr.children = new ArrayList<>();
+//			}
+//			if(curr.children.size() > 0){ //Non-terminal Node
+//				if(curr.text != ""){//text is not empty
+//					NodeForIcseData newNode = new NodeForIcseData();
+//					int type = Util.getNodeTypeFromLeftOver(curr.text.trim());
+//					newNode.nodeTypeOriginal = type;
+//					newNode.text = curr.text;
+//					curr.text = "";
+//					newNode.parentNodeTypeOriginal = curr.nodeTypeOriginal;
+//					newNode.parentNode = curr.selfNode;
+//					curr.children.add(newNode);
+//				}
+//			}
+//			List<NodeForIcseData> children = curr.children;
+//			int cz = children.size();
+//			if(cz > 0) {
+//				for(int idx = 0 ;  idx < cz; idx ++){
+//					NodeForIcseData child = children.get(idx);
+//					nodes.push(child);
+//				}
+//			}
+//			else {
+//				if(curr.nodeTypeOriginal == 76) {
+//					curr.text = "?";
+//				}
+//				/*if(curr.nodeTypeOriginal == Config.ASTTYPE_TAG.STRING_CONSTANT) {
+//					curr.text = "STRING";
+//				}
+//				else if(curr.nodeTypeOriginal == Config.ASTTYPE_TAG.NUMBER_CONSTANT) {
+//					curr.text = "NUMBER";
+//				}*/
+//				else {
+//					if(curr.text == "") {
+//						IcseDatasetParserWithCodeminingTool.emptyNodeSet.add(curr.nodeTypeOriginal);
+//						curr.text = "<EMPTY>";
+//					}
+//				}
+//			}
+//		}
 	}
 
 	private static String getFullComplexName(NodeForIcseData root) {
-		List<String> parts = new ArrayList<String>();
-		Stack<NodeForIcseData> st =  new Stack<NodeForIcseData>();
-		st.push(root);
-		while(!st.isEmpty()) {
-			NodeForIcseData curr = st.pop();
-			if(curr.children.size() == 0) {
-				parts.add(curr.text);
-			}
-			else {
-				for(NodeForIcseData child : curr.children) {
-					st.push(child);
-				}
-			}
-		}
-		String name = "";
-		int sz = parts.size();
-		for(int i = 0; i< sz; i++) {
-			if(i != 0) {
-				name += ".";
-			}
-			name += parts.get(i);
-		}
-		
-		return name;
+//		List<String> parts = new ArrayList<String>();
+//		Stack<NodeForIcseData> st =  new Stack<NodeForIcseData>();
+//		st.push(root);
+//		while(!st.isEmpty()) {
+//			NodeForIcseData curr = st.pop();
+//			if(curr.children.size() == 0) {
+//				parts.add(curr.text);
+//			}
+//			else {
+//				for(NodeForIcseData child : curr.children) {
+//					st.push(child);
+//				}
+//			}
+//		}
+//		String name = "";
+//		int sz = parts.size();
+//		for(int i = 0; i< sz; i++) {
+//			if(i != 0) {
+//				name += ".";
+//			}
+//			name += parts.get(i);
+//		}
+//		
+//		return name;
+		return "";
 	}
 
 	/**
@@ -530,27 +533,28 @@ public class Util {
 	 * @return
 	 */
 	public static String getCodeRecusrsive(NodeForIcseData root, boolean replace){
-		if(root.children.size() == 0){
-			Object name = null;
-			if(replace){
-				name = root.text;
-			}
-			if(name == null){
-				name = root.text;
-			}
-//			Util.logln(name);
-			return  name.toString().trim() + " ";
-			//return root.getLabel().trim() + " ";
-		}
-		else{
-			String code = "";
-			int cz = root.children.size();
-			for(int i = cz - 1; i >= 0; i--){
-				NodeForIcseData child = root.children.get(i);
-				code += getCodeRecusrsive(child, replace);
-			}
-			return code;
-		}
+//		if(root.children.size() == 0){
+//			Object name = null;
+//			if(replace){
+//				name = root.text;
+//			}
+//			if(name == null){
+//				name = root.text;
+//			}
+////			Util.logln(name);
+//			return  name.toString().trim() + " ";
+//			//return root.getLabel().trim() + " ";
+//		}
+//		else{
+//			String code = "";
+//			int cz = root.children.size();
+//			for(int i = cz - 1; i >= 0; i--){
+//				NodeForIcseData child = root.children.get(i);
+//				code += getCodeRecusrsive(child, replace);
+//			}
+//			return code;
+//		}
+		return "";
 	}
 	
 	
@@ -623,18 +627,18 @@ public class Util {
 	 * @return
 	 */
 	public static String getSourceTree(NodeForIcseData root){
-		if(root == null || root.children.size() == 0){
-			return "";
-		}
-		if(root.children.size() == 2){
-			String treeStr = "";
-			NodeForIcseData leftChild = root.children.get(0);
-			NodeForIcseData rightChild = root.children.get(1);
-			treeStr += getSourceTree(leftChild);
-			treeStr += getSourceTree(rightChild);
-			treeStr += ("[" + leftChild.id + "," + rightChild.id + "," + root.id + "] ");
-			return treeStr;
-		}
+//		if(root == null || root.children.size() == 0){
+//			return "";
+//		}
+//		if(root.children.size() == 2){
+//			String treeStr = "";
+//			NodeForIcseData leftChild = root.children.get(0);
+//			NodeForIcseData rightChild = root.children.get(1);
+//			treeStr += getSourceTree(leftChild);
+//			treeStr += getSourceTree(rightChild);
+//			treeStr += ("[" + leftChild.id + "," + rightChild.id + "," + root.id + "] ");
+//			return treeStr;
+//		}
 		return null;
 	}
 	
@@ -657,7 +661,7 @@ public class Util {
 	 * @param destFile
 	 */
 	public static void printDestTree(ITree root, PrintStream destFile) {
-		destFile.print("AST_ROOT_SC2NF ");
+		//destFile.print("AST_ROOT_SC2NF ");
 		Util.printRecuriveTree(root, destFile);
 	}
 	
@@ -667,7 +671,7 @@ public class Util {
 	 * @return
 	 */
 	public static String getDestTree(ITree root, boolean replace){
-		return "AST_ROOT_SC2NF " + getDestTreeRecursive(root, replace);
+		return getDestTreeRecursive(root, replace);
 	}
 	
 	/**
@@ -676,7 +680,7 @@ public class Util {
 	 * @return
 	 */
 	public static String getDestTree(NodeForIcseData root, boolean replace){
-		return "AST_ROOT_SC2NF " + getDestTreeRecursive(root, replace);
+		return getDestTreeRecursive(root, replace);
 	}
 	
 	/**
@@ -685,7 +689,7 @@ public class Util {
 	 * @return
 	 */
 	public static String getDestTypeTree(ITree root){
-		return "AST_ROOT_SC2NF " + getDestTypeTreeRecursive(root);
+		return getDestTypeTreeRecursive(root);
 	}
 
 	/**
@@ -694,9 +698,16 @@ public class Util {
 	 * @return
 	 */
 	private static String getDestTreeRecursive(ITree root, boolean replace) {
-		String returnStr = "";
+		String returnStr = "{";
 		List<ITree> children = root.getChildren();
-		returnStr += ("` " + root.getType() + " ");
+		Object name = null;
+		if(replace) {
+			name = root.getMetadata("subs_name");
+		}
+		if(name == null){
+			name = root.getLabel();
+		}
+		/*returnStr += ("` " + root.getType() + " ");
 		if(children.size() == 0){
 			Object name = null;
 			if(replace) {
@@ -712,7 +723,16 @@ public class Util {
 				returnStr += getDestTreeRecursive(child, replace);
 			}
 			returnStr += " `` ";
+		}*/
+		returnStr += ("\"type\": \"" + root.getType() + "\", \"value\": \"" + name + "\", \"children\": [");
+		for (int i = 0; i < children.size(); i++) {
+			String childJson = getDestTreeRecursive(children.get(i), replace);
+			if (i != 0) {
+				returnStr += ", ";
+			}
+			returnStr += childJson;
 		}
+		returnStr += ("]}");
 		return returnStr;
 	}
 	
@@ -723,26 +743,26 @@ public class Util {
 	 */
 	private static String getDestTreeRecursive(NodeForIcseData root, boolean replace) {
 		String returnStr = "";
-		List<NodeForIcseData> children = root.children;
-		returnStr += ("` " + root.nodeTypeOriginal + " ");
-		if(children.size() == 0){
-			Object name = null;
-			if(replace) {
-				name = root.text;
-			}
-			if(name == null){
-				name = root.text;
-			}
-			returnStr += ("` " + name + " `` `` ");
-		}
-		else{
-			int cz = children.size();
-			for(int i = cz -1; i >= 0; i--){
-				NodeForIcseData child = children.get(i);
-				returnStr += getDestTreeRecursive(child, replace);
-			}
-			returnStr += " `` ";
-		}
+//		List<NodeForIcseData> children = root.children;
+//		returnStr += ("` " + root.nodeTypeOriginal + " ");
+//		if(children.size() == 0){
+//			Object name = null;
+//			if(replace) {
+//				name = root.text;
+//			}
+//			if(name == null){
+//				name = root.text;
+//			}
+//			returnStr += ("` " + name + " `` `` ");
+//		}
+//		else{
+//			int cz = children.size();
+//			for(int i = cz -1; i >= 0; i--){
+//				NodeForIcseData child = children.get(i);
+//				returnStr += getDestTreeRecursive(child, replace);
+//			}
+//			returnStr += " `` ";
+//		}
 		return returnStr;
 	}
 	
