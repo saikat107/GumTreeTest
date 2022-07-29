@@ -9,8 +9,8 @@ public class Argument {
 	private String sFilePath = null;
 	private String dFilePath = null;
 	private String oPath = "data/demo_data";
-	private int mChangeSize = 5;
-	private int mTreeSize = 10;
+	private int mChangeSize = 50;
+	private int mTreeSize = 100;
 	private int defaultMc = 100;
 	private int defaultMt = 250;
 	private boolean r = false;

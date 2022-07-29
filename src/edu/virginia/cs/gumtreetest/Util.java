@@ -1359,6 +1359,7 @@ public static int getNodeTypeFromLeftOver(String leftOver) {
 	public static Set<String> extractAllVariablesInScope(ITree root) {
 		Set<String> variables = new HashSet<String>();
 		List<ITree> parents = root.getParents();
+		parents.add(0, root);
 		ITree methodNode = null;
 		for(ITree parent : parents){
 			if(parent.getType() == Config.ASTTYPE_TAG.METHOD_DECLARATION){
